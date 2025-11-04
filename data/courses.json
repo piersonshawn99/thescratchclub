@@ -1,0 +1,32 @@
+{
+  "courses": [
+    {
+      "name": "Chemung Hills",
+      "city": "Howell",
+      "distance_miles": 5.2,
+      "url": "https://www.chemunghills.com/",
+      "image": "/images/courses/chemung.jpg"
+    },
+    {
+      "name": "Ironwood Golf Club",
+      "city": "Howell",
+      "distance_miles": 6.8,
+      "url": "https://www.golfinironwood.com/",
+      "image": "/images/courses/ironwood.jpg"
+    },
+    {
+      "name": "Lakelands Golf & Country Club",
+      "city": "Brighton",
+      "distance_miles": 13.4,
+      "url": "https://www.lakelandsgolf.com/",
+      "image": "/images/courses/lakelands.jpg"
+    },
+    {
+      "name": "The Majestic at Lake Walden",
+      "city": "Hartland",
+      "distance_miles": 14.9,
+      "url": "https://www.majesticgolf.com/",
+      "image": "/images/courses/majestic.jpg"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+export default function MembershipsPage(){return (<main className='mx-auto max-w-5xl px-6 py-16'><h1 className='text-3xl font-semibold tracking-tight'>Memberships</h1><p className='mt-4 text-neutral-600'>Tiers, pricing, and benefits coming soon.</p></main>);}
