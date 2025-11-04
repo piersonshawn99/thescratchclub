@@ -1,3 +1,6 @@
+export const runtime = "nodejs";      // ensure Node runtime on Vercel
+export const dynamic = "force-dynamic"; // (optional) avoid static optimization
+
 import { NextResponse } from "next/server";
 type Payload = { firstName:string; lastName:string; email:string; topic?:string; message:string; };
 export async function POST(req:Request){
