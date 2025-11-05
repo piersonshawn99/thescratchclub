@@ -69,7 +69,15 @@ export default function ScratchClubLandingPage(){
             </ul>
             <a href={LINKS.courses} onClick={()=>track('view_courses_clicked',{location:'courses'})} className="mt-8 inline-flex items-center gap-2 rounded-xl border border-neutral-300 bg-white px-5 py-3 text-sm font-medium shadow-sm hover:border-emerald-500 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30">View Partner Courses<ArrowRight/></a>
           </div>
-          <div className="aspect-[4/3] w-full rounded-3xl bg-gradient-to-br from-neutral-200 to-neutral-100 shadow-inner"><div className="flex h-full items-center justify-center text-neutral-500">Map / Carousel Placeholder</div></div>
+          <div className="aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-inner">
+            <Image
+              src="/images/courses/timbertrace2.jpg"
+              alt="Michigan golf courses"
+              width={800}
+              height={600}
+              className="h-full w-full object-cover"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -82,7 +90,15 @@ export default function ScratchClubLandingPage(){
               <p className="mt-4 text-lg text-neutral-700">Golf shouldn’t compete with what matters — it should connect you to it. Sharpen your game and your balance: more time with family, smarter spending, less rush, and a better way to unwind.</p>
               <a href="/golf-and-life" onClick={()=>track('golf_life_read_more_clicked',{location:'golf_life'})} className="mt-8 inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-5 py-3 text-white shadow-sm transition hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-neutral-900/20">Learn how to keep your priorities straight<ArrowRight/></a>
             </div>
-            <div className="aspect-[4/3] w-full rounded-3xl bg-neutral-100"><div className="flex h-full items-center justify-center text-neutral-500">Image Placeholder</div></div>
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-inner">
+              <Image
+                src="/images/sim.jpg"
+                alt="Golfer enjoying simulator and lifestyle balance"
+                width={800}
+                height={600}
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </div>
