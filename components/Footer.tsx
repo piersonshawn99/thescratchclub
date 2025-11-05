@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { LINKS } from "./links";
 import { track } from "@/lib/analytics";
