@@ -65,9 +65,9 @@ export default function Header() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-9 items-center justify-between text-xs text-neutral-600">
           <div className="flex items-center gap-4">
             <span className="hidden lg:inline">Open daily • 7am–11pm</span>
-            <a href="tel:+1-555-555-5555" className="hover:text-emerald-700">Call: (555) 555-5555</a>
+            <a href="tel:+18018303401" className="hover:text-emerald-700">Call: (801) 830-3401</a>
             <span className="hidden sm:inline">•</span>
-            <Link href={LINKS.contact} className="hidden sm:inline hover:text-emerald-700">Howell, MI</Link>
+            <Link href={LINKS.contact} className="hidden sm:inline hover:text-emerald-700">Pinckney, MI</Link>
           </div>
           <div className="flex items-center gap-3">
             {SOCIAL.map(({ label, href, icon: Icon }) => (

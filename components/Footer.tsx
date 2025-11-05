@@ -39,7 +39,7 @@ export default function Footer() {
               coaches who actually coach.
             </p>
             <div className="mt-4 text-sm text-neutral-700">
-              <a className="block hover:text-emerald-700" href="tel:+1-555-555-5555">(555) 555-5555</a>
+              <a className="block hover:text-emerald-700" href="tel:+18018303401">(801) 830-3401</a>
               <a className="block hover:text-emerald-700" href="mailto:info@scratchclubgolf.com">info@scratchclubgolf.com</a>
               <span className="block">Howell, MI</span>
             </div>
