@@ -20,18 +20,18 @@ const SMTP_PASS = process.env.SMTP_PASS;
 
 export async function sendContact(payload: ContactPayload) {
   // 1) Prefer Resend if configured
-  if (RESEND_KEY) {
+    if (RESEND_KEY) {
     const resend = new Resend(RESEND_KEY);
     const { error } = await resend.emails.send({
-      from: FROM,
-      to: [TO],
-      subject: `New contact form: ${payload.name}`,
-      html: renderHtml(payload),
-      replyTo: payload.email,
-    });
+        from: FROM,
+        to: [TO],
+        subject: `New contact form: ${payload.name}`,
+        html: renderHtml(payload),
+        reply_to: payload.email,   // <-- change this line
+});
     if (error) throw new Error(error.message);
     return { ok: true as const, provider: "resend" as const };
-  }
+    }
 
   // 2) Fallback to SMTP (Office 365)
   if (SMTP_HOST && SMTP_PORT && SMTP_USER && SMTP_PASS) {
