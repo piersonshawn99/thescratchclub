@@ -22,13 +22,12 @@
       "image": "/images/courses/mooseridge.jpg"
     },
     {
-    "slug": "timber-trace",
-    "name": "Timber Trace Golf Club",
-    "city": "Pinckney, MI",
-    "distanceMiles": "9.2",
-    "image": "/images/courses/timbertrace.jpg",
-    "site": "https://www.playtimbertrace.com",
-    "teeTimes": "https://foreupsoftware.com/index.php/booking/19743/2386#!/teetimes"
+      "slug": "timber-trace",
+      "name": "Timber Trace Golf Club",
+      "city": "Pinckney, MI",
+      "distance_miles": "9.2",
+      "url": "https://www.playtimbertrace.com",
+      "image": "/images/courses/timbertrace.jpg"
     },
     {
       "name": "Whitmore Lake Golf Links",
