@@ -38,7 +38,14 @@ export default function ScratchClubLandingPage(){
     </section>
     <section id="memberships" className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24">
       <div className="grid items-center gap-12 lg:grid-cols-2">
-        <div className="aspect-[4/3] w-full rounded-3xl bg-gradient-to-br from-neutral-200 to-neutral-100 shadow-inner"><div className="flex h-full items-center justify-center text-neutral-500">Image Placeholder</div></div>
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-inner">
+          <Image
+            src="/images/hero/memberships.jpg"
+            alt="Member practicing in a Trackman bay"
+            fill
+            className="object-cover"
+          />
+        </div>
         <div>
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">Make Practice a Habit — Not a Hassle</h2>
           <p className="mt-4 text-lg text-neutral-600">Memberships give you consistent access, exclusive rates, and progress that sticks. Add coaching for a personal touch that accelerates everything.</p>
@@ -84,23 +91,63 @@ export default function ScratchClubLandingPage(){
 }
 
 function Hero(){
-  return (<section className="relative isolate">
-    <div className="grid h-[72vh] min-h-[520px] w-full grid-cols-2">
-      <div className="relative h-full w-full overflow-hidden"><div className="absolute inset-0 bg-[linear-gradient(120deg,#d4d4d4,transparent),radial-gradient(60%_100%_at_30%_30%,#e5e5e5,transparent)]"/></div>
-      <div className="relative h-full w-full overflow-hidden"><div className="absolute inset-0 bg-[linear-gradient(120deg,#e5e5e5,transparent),radial-gradient(60%_100%_at_70%_70%,#d4d4d4,transparent)]"/></div>
-    </div>
-    <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-      <div className="pointer-events-auto mx-auto max-w-3xl px-6 text-center">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight drop-shadow-sm">Train Smarter. Play Better.</h1>
-        <p className="mt-4 text-lg sm:text-xl text-neutral-700">Powered by Trackman and real coaching, The Scratch Club turns practice into confidence that carries onto the course.</p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <a href={LINKS.bookNow} onClick={()=>track('book_now_clicked',{location:'hero'})} className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-6 py-3 text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30">Book Simulator Time</a>
-          <a href={LINKS.memberships} onClick={()=>track('explore_memberships_clicked',{location:'hero'})} className="inline-flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-6 py-3 text-neutral-900 shadow-sm transition hover:border-emerald-500 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30">Explore Memberships</a>
+  return (
+    <section className="relative isolate">
+      <div className="grid h-[72vh] min-h-[520px] w-full grid-cols-2">
+        {/* Left: Simulator */}
+        <div className="relative h-full w-full overflow-hidden">
+          <Image
+            src="/images/hero/sim.jpg"
+            alt="Trackman bay at The Scratch Club"
+            fill
+            priority
+            className="object-cover"
+          />
+        </div>
+        {/* Right: Course */}
+        <div className="relative h-full w-full overflow-hidden">
+          <Image
+            src="/images/hero/course.jpg"
+            alt="Michigan golf course fairway"
+            fill
+            priority
+            className="object-cover"
+          />
         </div>
       </div>
-    </div>
-  </section>);
+
+      {/* Copy overlay */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+        <div className="pointer-events-auto mx-auto max-w-3xl px-6 text-center">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight drop-shadow-sm">
+            Train Smarter. Play Better.
+          </h1>
+          <p className="mt-4 text-lg sm:text-xl text-neutral-700">
+            Powered by Trackman and real coaching, The Scratch Club turns
+            practice into confidence that carries onto the course.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <a
+              href={LINKS.bookNow}
+              onClick={()=>track('book_now_clicked',{location:'hero'})}
+              className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-6 py-3 text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+            >
+              Book Simulator Time
+            </a>
+            <a
+              href={LINKS.memberships}
+              onClick={()=>track('explore_memberships_clicked',{location:'hero'})}
+              className="inline-flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-6 py-3 text-neutral-900 shadow-sm transition hover:border-emerald-500 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+            >
+              Explore Memberships
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
+
 
 function FeatureCard({title,body,icon:Icon}:{title:string;body:string;icon:React.FC<React.SVGProps<SVGSVGElement>>}){
   return (<div className="group rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:shadow-md">
