@@ -1,3 +1,5 @@
+"use client";
+
 export default function SignInPage() {
   return (
     <main className="mx-auto max-w-md px-6 py-16">
