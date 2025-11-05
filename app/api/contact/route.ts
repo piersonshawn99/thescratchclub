@@ -1,27 +1,42 @@
-export const runtime = "nodejs";      // ensure Node runtime on Vercel
-export const dynamic = "force-dynamic"; // (optional) avoid static optimization
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
-type Payload = { firstName:string; lastName:string; email:string; topic?:string; message:string; };
-export async function POST(req:Request){
-  try{
-    const body=(await req.json()) as Partial<Payload>; const {firstName,lastName,email,topic,message}=body;
-    if(!firstName||!lastName||!email||!message){ return NextResponse.json({ok:false,error:"Missing required fields."},{status:400}); }
-    const subject=`[Scratch Club] Contact: ${topic||"General"} — ${firstName} ${lastName}`;
-    const text=`From: ${firstName} ${lastName} <${email}>
-Topic: ${topic||"General"}
+import { z } from "zod";
+import { sendContact } from "@/lib/mailer";
 
-${message}`;
-    const RESEND_API_KEY=process.env.RESEND_API_KEY; const CONTACT_TO=process.env.CONTACT_TO||"hello@scratchclubgolf.com"; const CONTACT_FROM=process.env.CONTACT_FROM||"noreply@scratchclubgolf.com";
-    if(RESEND_API_KEY){
-      const { Resend } = await import("resend"); const resend=new Resend(RESEND_API_KEY);
-      try{ await resend.emails.send({from:CONTACT_FROM,to:CONTACT_TO,subject,text}); }catch(err){ console.error("Resend send failed:",err); }
-    } else if(process.env.SMTP_HOST){
-      const nodemailer = await import("nodemailer"); const transporter=nodemailer.createTransport({ host:process.env.SMTP_HOST, port:Number(process.env.SMTP_PORT||587), secure:process.env.SMTP_SECURE==="true", auth:(process.env.SMTP_USER&&process.env.SMTP_PASS)?{user:process.env.SMTP_USER,pass:process.env.SMTP_PASS}:undefined });
-      try{ await transporter.sendMail({from:CONTACT_FROM,to:CONTACT_TO,subject,text}); }catch(err){ console.error("SMTP send failed:",err); }
-    } else {
-      console.log("[contact:log]",{firstName,lastName,email,topic,message});
+const Schema = z.object({
+  name: z.string().min(2).max(120),
+  email: z.string().email().max(200),
+  phone: z.string().max(60).optional().or(z.literal("")),
+  message: z.string().min(10).max(4000),
+  // honeypot field (bot trap). Add a hidden input named "company" in the form if desired.
+  company: z.string().optional(),
+});
+
+export async function POST(req: Request) {
+  try {
+    const json = await req.json();
+    const parsed = Schema.safeParse(json);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Invalid form data" }, { status: 400 });
     }
-    return NextResponse.json({ok:true});
-  }catch(e){ console.error("Contact API error:",e); return NextResponse.json({ok:false,error:"Server error."},{status:500}); }
+
+    // very light anti-spam: if honeypot present and filled, drop
+    if (parsed.data.company && parsed.data.company.trim().length > 0) {
+      return NextResponse.json({ ok: true });
+    }
+
+    await sendContact({
+      name: parsed.data.name,
+      email: parsed.data.email,
+      phone: parsed.data.phone || undefined,
+      message: parsed.data.message,
+    });
+
+    return NextResponse.json({ ok: true });
+  } catch (err: any) {
+    console.error("/api/contact error", err);
+    return NextResponse.json({ error: err.message ?? "Server error" }, { status: 500 });
+  }
 }
