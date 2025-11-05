@@ -1,4 +1,4 @@
-
+import type { z } from "zod";
 
 const TO = process.env.CONTACT_TO!; // required
 const FROM = process.env.CONTACT_FROM || "noreply@scratchclub.app"; // default ok for Resend (use your domain)
