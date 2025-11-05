@@ -90,10 +90,11 @@ export default function ScratchClubLandingPage(){
   </main>);
 }
 
-function Hero(){
+function Hero() {
   return (
     <section className="relative isolate">
-      <div className="grid h-[72vh] min-h-[520px] w-full grid-cols-2">
+      {/* Split visual */}
+      <div className="grid h-[72vh] min-h-[520px] w-full grid-cols-1 md:grid-cols-2">
         {/* Left: Simulator */}
         <div className="relative h-full w-full overflow-hidden">
           <Image
@@ -101,9 +102,13 @@ function Hero(){
             alt="Trackman bay at The Scratch Club"
             fill
             priority
-            className="object-cover"
+            className="object-cover object-[30%_50%]" // <-- nudge focus left photo
+            sizes="(min-width: 768px) 50vw, 100vw"
           />
+          {/* scrim to improve text contrast on left */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent" />
         </div>
+
         {/* Right: Course */}
         <div className="relative h-full w-full overflow-hidden">
           <Image
@@ -111,33 +116,39 @@ function Hero(){
             alt="Michigan golf course fairway"
             fill
             priority
-            className="object-cover"
+            className="object-cover object-[55%_50%]" // <-- center-right focus
+            sizes="(min-width: 768px) 50vw, 100vw"
           />
+          {/* scrim to balance brightness on right */}
+          <div className="absolute inset-0 bg-gradient-to-l from-black/30 via-black/10 to-transparent md:from-black/20" />
         </div>
       </div>
+
+      {/* Vertical seam (hidden on mobile) */}
+      <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 bg-white/40 md:block" />
 
       {/* Copy overlay */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <div className="pointer-events-auto mx-auto max-w-3xl px-6 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight drop-shadow-sm">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
             Train Smarter. Play Better.
           </h1>
-          <p className="mt-4 text-lg sm:text-xl text-neutral-700">
+          <p className="mt-4 text-lg sm:text-xl text-white/90 drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)]">
             Powered by Trackman and real coaching, The Scratch Club turns
             practice into confidence that carries onto the course.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <a
               href={LINKS.bookNow}
-              onClick={()=>track('book_now_clicked',{location:'hero'})}
+              onClick={() => track('book_now_clicked', { location: 'hero' })}
               className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-6 py-3 text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
             >
               Book Simulator Time
             </a>
             <a
               href={LINKS.memberships}
-              onClick={()=>track('explore_memberships_clicked',{location:'hero'})}
-              className="inline-flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-6 py-3 text-neutral-900 shadow-sm transition hover:border-emerald-500 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+              onClick={() => track('explore_memberships_clicked', { location: 'hero' })}
+              className="inline-flex items-center justify-center rounded-xl border border-white/60 bg-white/90 px-6 py-3 text-neutral-900 shadow-sm backdrop-blur transition hover:bg-white"
             >
               Explore Memberships
             </a>
@@ -147,6 +158,7 @@ function Hero(){
     </section>
   );
 }
+
 
 
 function FeatureCard({title,body,icon:Icon}:{title:string;body:string;icon:React.FC<React.SVGProps<SVGSVGElement>>}){
