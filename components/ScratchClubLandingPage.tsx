@@ -92,7 +92,7 @@ export default function ScratchClubLandingPage(){
             </div>
             <div className="aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-inner">
               <Image
-                src="/images/sim.jpg"
+                src="/images/family.jpg"
                 alt="Golfer enjoying simulator and lifestyle balance"
                 width={800}
                 height={600}
