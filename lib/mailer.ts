@@ -28,7 +28,7 @@ export async function sendContact(payload: ContactPayload) {
         subject: `New contact form: ${payload.name}`,
         html: renderHtml(payload),
         reply_to: payload.email,   // <-- change this line
-});
+        });
     if (error) throw new Error(error.message);
     return { ok: true as const, provider: "resend" as const };
     }
