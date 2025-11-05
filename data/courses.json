@@ -3,30 +3,39 @@
     {
       "name": "Chemung Hills",
       "city": "Howell",
-      "distance_miles": 5.2,
+      "distance_miles": 11.8,
       "url": "https://www.chemunghills.com/",
       "image": "/images/courses/chemung.jpg"
     },
     {
-      "name": "Ironwood Golf Club",
-      "city": "Howell",
-      "distance_miles": 6.8,
-      "url": "https://www.golfinironwood.com/",
-      "image": "/images/courses/ironwood.jpg"
-    },
-    {
       "name": "Lakelands Golf & Country Club",
       "city": "Brighton",
-      "distance_miles": 13.4,
+      "distance_miles": 0.8,
       "url": "https://www.lakelandsgolf.com/",
       "image": "/images/courses/lakelands.jpg"
     },
     {
-      "name": "The Majestic at Lake Walden",
-      "city": "Hartland",
-      "distance_miles": 14.9,
-      "url": "https://www.majesticgolf.com/",
-      "image": "/images/courses/majestic.jpg"
+      "name": "Moose Ridge Golf Course",
+      "city": "South Lyon",
+      "distance_miles": 8,
+      "url": "https://mooseridgegolf.com/",
+      "image": "/images/courses/mooseridge.jpg"
+    },
+    {
+    "slug": "timber-trace",
+    "name": "Timber Trace Golf Club",
+    "city": "Pinckney, MI",
+    "distanceMiles": "9.2",
+    "image": "/images/courses/timbertrace.jpg",
+    "site": "https://www.playtimbertrace.com",
+    "teeTimes": "https://foreupsoftware.com/index.php/booking/19743/2386#!/teetimes"
+    },
+    {
+      "name": "Whitmore Lake Golf Links",
+      "city": "Whitmore Lake",
+      "distance_miles": 8.9,
+      "url": "https://www.whitmorelakegolflinks.com//",
+      "image": "/images/courses/whitmorelakegolflinks.jpg"
     }
   ]
 }

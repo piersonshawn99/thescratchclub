@@ -63,7 +63,7 @@ export default function ScratchClubLandingPage(){
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">Train Indoors. Shine Outdoors.</h2>
             <p className="mt-4 text-lg text-neutral-600">Explore Michigan favorites and plan your next round. Your simulator work pays off where it counts.</p>
             <ul className="mt-8 space-y-4 text-neutral-700">
-              <li className="flex items-start gap-3"><Bullet/>Brighton · Howell · Ann Arbor · Novi — curated nearby courses</li>
+              <li className="flex items-start gap-3"><Bullet/>Pinckney · Brighton · Dexter · Whitmore Lake — curated nearby courses</li>
               <li className="flex items-start gap-3"><Bullet/>Clickable course cards with distance & tee-time links</li>
               <li className="flex items-start gap-3"><Bullet/>Member events, leagues, and on-course meetups</li>
             </ul>
