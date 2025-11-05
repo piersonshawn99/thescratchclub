@@ -21,7 +21,7 @@ export default function ContactForm() {
     const json = await res.json();
     if (res.ok) {
       setStatus("sent");
-      setMessage("Thanks—got it. We’ll be in touch.");
+      setMessage("Thanks—got it. We’ll be in touch soon.");
       e.currentTarget.reset();
     } else {
       setStatus("error");
@@ -35,9 +35,12 @@ export default function ContactForm() {
         <label className="block text-sm font-medium">Name</label>
         <input
           name="name"
+          placeholder="John Smith"
           required
+          minLength={2}
           className="mt-1 w-full rounded-lg border border-neutral-300 p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
         />
+        <p className="mt-1 text-xs text-neutral-500">Please enter your full name.</p>
       </div>
 
       <div>
@@ -45,15 +48,19 @@ export default function ContactForm() {
         <input
           name="email"
           type="email"
+          placeholder="you@example.com"
           required
           className="mt-1 w-full rounded-lg border border-neutral-300 p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
         />
+        <p className="mt-1 text-xs text-neutral-500">We’ll only use this to reply to you.</p>
       </div>
 
       <div>
         <label className="block text-sm font-medium">Phone (optional)</label>
         <input
           name="phone"
+          placeholder="(555) 123-4567"
+          pattern="^[0-9 ()+-]*$"
           className="mt-1 w-full rounded-lg border border-neutral-300 p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
         />
       </div>
@@ -63,12 +70,17 @@ export default function ContactForm() {
         <textarea
           name="message"
           rows={6}
+          placeholder="Tell us what’s on your mind..."
           required
+          minLength={10}
           className="mt-1 w-full rounded-lg border border-neutral-300 p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
         />
+        <p className="mt-1 text-xs text-neutral-500">
+          Please include any details that help us understand your question.
+        </p>
       </div>
 
-      {/* Honeypot to trip bots */}
+      {/* Honeypot for spam bots */}
       <input name="company" tabIndex={-1} autoComplete="off" className="hidden" />
 
       <button
@@ -80,7 +92,9 @@ export default function ContactForm() {
       </button>
 
       {status !== "idle" && (
-        <p className={status === "error" ? "text-red-600" : "text-emerald-700"}>{message}</p>
+        <p className={`pt-2 text-sm ${status === "error" ? "text-red-600" : "text-emerald-700"}`}>
+          {message}
+        </p>
       )}
     </form>
   );
