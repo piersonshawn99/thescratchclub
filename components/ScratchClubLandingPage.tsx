@@ -116,7 +116,7 @@ function Hero() {
             alt="Michigan golf course fairway"
             fill
             priority
-            className="object-cover object-[55%_50%]" // <-- center-right focus
+            className="object-cover object-[45%_50%]" // <-- center-right focus
             sizes="(min-width: 768px) 50vw, 100vw"
           />
           {/* scrim to balance brightness on right */}
