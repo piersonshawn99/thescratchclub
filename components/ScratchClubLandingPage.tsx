@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { LINKS } from "@/components/links";
 import { track } from "@/lib/analytics";
+import Image from "next/image";
 
 export default function ScratchClubLandingPage(){
   return (<main className="min-h-screen bg-white text-neutral-900 selection:bg-emerald-200/60">
