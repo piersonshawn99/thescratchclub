@@ -19,14 +19,14 @@
       "city": "South Lyon",
       "distance_miles": 8,
       "url": "https://mooseridgegolf.com/",
-      "image": "/images/courses/mooseridge.jpg"
+      "image": "/images/courses/mooseridgegolfcourse.jpg"
     },
     {
       "slug": "timber-trace",
       "name": "Timber Trace Golf Club",
       "city": "Pinckney, MI",
       "distance_miles": "9.2",
-      "url": "https://www.playtimbertrace.com",
+      "url": "https://timbertracegolf.com/",
       "image": "/images/courses/timbertrace.jpg"
     },
     {
