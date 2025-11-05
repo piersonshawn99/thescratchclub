@@ -26,7 +26,7 @@ export default function ScratchClubLandingPage(){
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">The Scratch Club Formula: Train · Learn · Play</h2>
           <p className="mt-4 text-lg text-neutral-600">Data turns into insight. Insight turns into confidence. Confidence wins rounds.</p>
         </div>
-        <ol className="mt-12 grid gap-6 sm:grid-cols-3">
+        <ol className="mt-12 grid gap-6 sm:grid-cols-3 list-none pl-0">
           <FlowItem index={1} title="Trackman Data" body="Know your numbers — speed, face, path, launch, spin."/>
           <FlowItem index={2} title="Coaching Insight" body="Turn metrics into moves with practical, personalized cues."/>
           <FlowItem index={3} title="Course Confidence" body="Take it outside. Hit the shots you trained for."/>
@@ -116,7 +116,7 @@ function Hero() {
             alt="Michigan golf course fairway"
             fill
             priority
-            className="object-cover object-[45%_50%]" // <-- center-right focus
+            className="object-cover object-[42%_50%]" // <-- center-right focus
             sizes="(min-width: 768px) 50vw, 100vw"
           />
           {/* scrim to balance brightness on right */}
