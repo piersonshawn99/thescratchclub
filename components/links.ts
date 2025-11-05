@@ -1,1 +1,10 @@
-export const LINKS={bookNow:"https://login.trackmangolf.com/Account/Login?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Ddr-web.4633fada-3b16-490f-8de7-2aa67158a1d6%26scope%3Dopenid%2520profile%2520email%2520offline_access%2520https%253A%252F%252Fauth.trackman.com%252Fdr%252Fcloud%2520https%253A%252F%252Fauth.trackman.com%252Fauthorization%2520https%253A%252F%252Fauth.trackman.com%252Fproamevent%26response_type%3Dcode%26redirect_uri%3Dhttps%253A%252F%252Fportal.trackmangolf.com%252Faccount%252Fcallback%26nonce%3De7QuwGbMqW4WpvH0cr4_tP36feUrLGPG_Ca26wcbjWI%26state%3DeyJyZXR1cm5UbyI6Ii8ifQ%26code_challenge_method%3DS256%26code_challenge%3Def7pcry8Q4S6xvMMVma1nqOeEueRkBHGwTkxHNVOJqs",memberships:"/memberships",coaching:"/coaching",courses:"/courses",about:"/about",signIn:"/signin",golfAndLife:"/golf-and-life"};
+export const LINKS = {
+  bookNow: "https://login.trackmangolf.com/Account/Login?...",
+  about: "/about",
+  memberships: "/memberships",
+  coaching: "/coaching",
+  courses: "/courses",
+  contact: "/contact",
+  golfAndLife: "/golf-and-life",
+  signIn: "/signin",
+};
