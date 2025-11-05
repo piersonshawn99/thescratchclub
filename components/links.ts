@@ -1,10 +1,10 @@
 export const LINKS = {
-  bookNow: "https://login.trackmangolf.com/Account/Login?...",
   about: "/about",
   memberships: "/memberships",
   coaching: "/coaching",
   courses: "/courses",
-  contact: "/contact",
+  contact: "/contact", // 👈 add this
   golfAndLife: "/golf-and-life",
   signIn: "/signin",
+  bookNow: "https://scratchclubgolf.com/book", // or whatever link you use
 };
