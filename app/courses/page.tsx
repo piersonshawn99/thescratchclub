@@ -64,3 +64,4 @@ export default function CoursesPage() {
     </main>
   );
 }
+// End of file: app/courses/page.tsx
