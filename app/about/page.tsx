@@ -71,7 +71,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="rounded-xl border border-neutral-200 bg-white p-5 shadow-xs">
-              <h3 className="font-medium">[Your Name] Pierson</h3>
+              <h3 className="font-medium">Shawn Pierson</h3>
               <p className="mt-2 text-neutral-700">
                 [Short credential line: e.g., “Decades in business leadership, lifelong student of performance and applied learning.”]
                 Around here, that means simple systems, measurable progress, and coaches who actually coach.
