@@ -1,6 +1,4 @@
 "use client";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { LINKS } from "@/components/links";
 import { track } from "@/lib/analytics";
 import Image from "next/image";
