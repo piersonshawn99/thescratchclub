@@ -1,8 +1,6 @@
-"use client";
-
 import Link from "next/link";
+import ClientLink from "./ClientLink";
 import { LINKS } from "./links";
-import { track } from "@/lib/analytics";
 
 const YEAR = new Date().getFullYear();
 
@@ -53,15 +51,16 @@ export default function Footer() {
             <ul className="mt-3 space-y-2 text-sm">
               {PRIMARY.map((i) => (
                 <li key={i.label}>
-                  <Link
-                    href={i.href}
-                    className={i.isCta
-                      ? "inline-flex items-center rounded-lg border border-emerald-600 bg-emerald-600 px-3 py-1.5 font-semibold text-white hover:bg-emerald-700"
-                      : "hover:text-emerald-700"}
-                    onClick={() => track("footer_click", { label: i.label })}
-                  >
-                    {i.label}
-                  </Link>
+                  <ClientLink
+                        href={i.href}
+                        className={i.isCta
+                          ? "inline-flex items-center rounded-lg border border-emerald-600 bg-emerald-600 px-3 py-1.5 font-semibold text-white hover:bg-emerald-700"
+                          : "hover:text-emerald-700"}
+                        trackEvent="footer_click"
+                        trackPayload={{ label: i.label }}
+                      >
+                        {i.label}
+                      </ClientLink>
                 </li>
               ))}
             </ul>
@@ -73,13 +72,9 @@ export default function Footer() {
             <ul className="mt-3 space-y-2 text-sm">
               {SECONDARY.map((i) => (
                 <li key={i.label}>
-                  <Link
-                    href={i.href}
-                    className="hover:text-emerald-700"
-                    onClick={() => track("footer_click", { label: i.label })}
-                  >
+                  <ClientLink href={i.href} className="hover:text-emerald-700" trackEvent="footer_click" trackPayload={{ label: i.label }}>
                     {i.label}
-                  </Link>
+                  </ClientLink>
                 </li>
               ))}
             </ul>
@@ -102,9 +97,9 @@ export default function Footer() {
           <p>© {YEAR} The Scratch Club. All rights reserved.</p>
           <nav className="flex items-center gap-4">
             {LEGAL.map((i) => (
-              <Link key={i.label} href={i.href} className="hover:text-emerald-700" onClick={() => track("footer_click", { label: i.label })}>
+              <ClientLink key={i.label} href={i.href} className="hover:text-emerald-700" trackEvent="footer_click" trackPayload={{ label: i.label }}>
                 {i.label}
-              </Link>
+              </ClientLink>
             ))}
           </nav>
         </div>
