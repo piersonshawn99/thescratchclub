@@ -57,7 +57,10 @@ export default function Header() {
  return (
   <>
   
-  <AnnouncementBar config={announcement} />
+  {/* hide announcement on small screens to keep header compact on mobile */}
+  <div className="hidden sm:block">
+    <AnnouncementBar config={announcement} />
+  </div>
 
   <header className="sticky top-0 z-40 w-full border-b border-neutral-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-t-0">
       {/* Utility strip */}
@@ -89,7 +92,7 @@ export default function Header() {
 
       {/* Main bar */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+  <div className="flex h-12 md:h-16 items-center justify-between">
           <Link
             href="/"
             className="flex items-center gap-2"
@@ -205,7 +208,7 @@ export default function Header() {
 /** ---------- Icons (inline, no external deps) ---------- */
 function Logo(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 32 32" aria-hidden="true" className="h-6 w-6" {...props}>
+    <svg viewBox="0 0 32 32" aria-hidden="true" className="h-5 w-5 md:h-6 md:w-6" {...props}>
       <circle cx="16" cy="16" r="15" className="fill-emerald-600" />
       <path d="M10 20c4-2 8-2 12 0" className="stroke-white" strokeWidth="2" fill="none" />
       <circle cx="16" cy="12" r="3" className="fill-white" />
