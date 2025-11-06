@@ -7,6 +7,28 @@ export const metadata: Metadata = {
   title: "About — The Scratch Club",
   description:
     "The story, mission, and people behind The Scratch Club — a locally owned, technology-forward golf club built on community, coaching, and measurable progress.",
+  openGraph: {
+    title: "About — The Scratch Club",
+    description:
+      "The story, mission, and people behind The Scratch Club — locally owned, tech-forward, community-driven.",
+    type: "website",
+    url: "https://scratchclubgolf.com/about",
+    images: [
+      {
+        url: "/og/about.png",
+        width: 1200,
+        height: 630,
+        alt: "The Scratch Club — About",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About — The Scratch Club",
+    description:
+      "Locally owned, tech-forward, community-driven golf club in Livingston County.",
+    images: ["/og/about.png"],
+  },
 };
 
 export default function AboutPage() {
@@ -28,7 +50,7 @@ export default function AboutPage() {
           {/* Example path: /public/images/about/founders.jpg */}
           <Image
             src="/images/about/founders.jpg"
-            alt="Julie and [Your Name] Pierson standing together by the water — the founders of The Scratch Club"
+            alt="Julie and Shawn Pierson standing together by the water — the founders of The Scratch Club"
             fill
             className="object-cover"
             priority
@@ -37,7 +59,7 @@ export default function AboutPage() {
         <div className="space-y-6">
           <h2 className="text-2xl font-semibold">Meet the Founders</h2>
           <p className="text-neutral-700">
-            We’re Julie &amp; [Your Name] Pierson. Golf has been our shared language for growth — a mix of patience, feedback,
+            We’re Julie &amp; Shawn Pierson. Golf has been our shared language for growth — a mix of patience, feedback,
             and a little healthy competition. The Scratch Club is our way of giving that back to the community we love.
           </p>
           <div className="grid gap-4">
