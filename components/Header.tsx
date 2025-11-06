@@ -48,6 +48,60 @@ export default function Header() {
     };
   }, []);
 
+  // Focus management: when mobile menu opens, trap focus inside and restore on close
+  useEffect(() => {
+    if (!open) return;
+
+    const prevActive = document.activeElement as HTMLElement | null;
+
+    const container = menuRef.current;
+    if (!container) return;
+
+    const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    const nodes = Array.from(container.querySelectorAll<HTMLElement>(focusableSelector)).filter((n) => n.offsetParent !== null);
+
+    const first = nodes[0];
+    const last = nodes[nodes.length - 1];
+
+    // focus first focusable element in the menu (or the container as fallback)
+    if (first) {
+      first.focus();
+    } else {
+      // make container focusable temporarily
+      container.setAttribute("tabindex", "-1");
+      container.focus();
+    }
+
+    function onKey(e: KeyboardEvent) {
+      if (e.key !== "Tab") return;
+      // shift+tab
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          (last || first)!.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          (first || last)!.focus();
+        }
+      }
+    }
+
+    document.addEventListener("keydown", onKey);
+
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      // restore focus to the menu button or previous active element
+      try {
+        if (menuButtonRef.current) menuButtonRef.current.focus();
+        else if (prevActive) prevActive.focus();
+      } catch {}
+      // cleanup temporary tabindex
+      if (container.getAttribute("tabindex") === "-1") container.removeAttribute("tabindex");
+    };
+  }, [open]);
+
   const nav = [
     { label: "About", href: LINKS.about },
     { label: "Memberships", href: LINKS.memberships },

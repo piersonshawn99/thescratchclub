@@ -89,13 +89,13 @@ export default function CoachingPage() {
           >
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-6 items-center">
               <div className="md:col-span-2">
-                <div className="aspect-[4/3] w-full overflow-hidden rounded-xl bg-neutral-100">
+                <div className="aspect-[5/4] w-full overflow-hidden rounded-xl bg-neutral-100">
                   <Image
                     src={coach.image}
                     alt={`${coach.name} headshot`}
                     width={960}
                     height={720}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain object-center"
                     priority={false}
                   />
                 </div>
