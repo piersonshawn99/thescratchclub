@@ -73,7 +73,7 @@ export default function AboutPage() {
             <div className="rounded-xl border border-neutral-200 bg-white p-5 shadow-xs">
               <h3 className="font-medium">Shawn Pierson</h3>
               <p className="mt-2 text-neutral-700">
-                “Decades in business leadership, lifelong student of performance and applied learning.”]
+                Decades in business leadership, lifelong student of performance and applied learning.
                 Around here, that means simple systems, measurable progress, and coaches who actually coach.
               </p>
             </div>
