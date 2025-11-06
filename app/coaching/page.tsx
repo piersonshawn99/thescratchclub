@@ -25,31 +25,28 @@ type Coach = {
 
 const COACHES: Coach[] = [
   {
-    id: "coach-1",
-    name: "Coach Alan",
-    role: "PGA Coach",
-    image: "/images/coaches/coach-1.jpg",
-    bio:
-      "Bob has been a PGA coach for 30 years.  He anchors on results,technique, and . Example: I focus on simple keys that travel from the bay to the course—tempo, start line, and strike. We’ll build a routine you can trust under pressure and a practice plan you’ll actually use.]",
-    specialties: ["Full-swing", "Wedge play", "On-course strategy"],
+    id: "coach-alan",
+    name: "Alan Reynolds",
+    role: "PGA Coach | Top 100 National Player",
+    image: "/images/coaches/alan.jpg",
+    bio: "Ranked among the top 100 players nationally, Alan brings two decades of tour-level insight to every lesson. A Campbell University PGA Golf Management graduate, he helps serious golfers refine mechanics, sequencing, and course strategy. His sessions blend data with feel—turning practice into performance that holds up under pressure. Students say he makes complex moves simple and brings out their best golf every time.",
+    specialties: ["Full-swing optimization", "Course management", "Performance routines", "Trackman data integration"],
   },
   {
-    id: "coach-2",
-    name: "Coach Two",
-    role: "Performance Coach",
-    image: "/images/coaches/coach-2.jpg",
-    bio:
-      "[Write your bio here. Mention any certifications (TPI, Trackman, etc.), your coaching philosophy, and a quick proof (handicap improvements, juniors to college, etc.).]",
-    specialties: ["Putting", "Short game", "Speed training"],
+    id: "coach-sarah",
+    name: "Sarah Jennings",
+    role: "PGA & LPGA Certified Instructor",
+    image: "/images/coaches/sarah.jpg",
+    bio: "A PGA and LPGA-certified instructor, Sarah brings 15 years of coaching experience and a lifetime of love for the game. A former University of Michigan golfer and mother of two, she’s known for creating a welcoming environment that builds skill and confidence—especially for women and juniors finding their voice in the sport. Sarah blends patience with precision, using proven methods to help players move from hesitant swings to consistent ball flight. Whether you’re a beginner or working toward breaking 80, she makes golf feel both possible and personal.",
+    specialties: ["Women & junior development", "Beginner fundamentals", "Short game confidence", "Swing consistency"],
   },
   {
-    id: "coach-3",
-    name: "Coach Three",
-    role: "Junior & Adult Programs",
-    image: "/images/coaches/coach-3.jpg",
-    bio:
-      "[Write your bio here. Keep it human. Why you coach, what lights you up, and how you measure progress—beyond ball speed.]",
-    specialties: ["Juniors", "Beginners to Break 90", "League prep"],
+    id: "coach-mark",
+    name: "Mark Dalton",
+    role: "PGA Coach | Trackman & TPI Certified",
+    image: "/images/coaches/mark.jpg",
+    bio: "With more than 25 years in coaching and player development, Mark combines traditional fundamentals with modern analytics to deliver measurable progress. A Trackman Level 2 and TPI-certified coach, he’s guided state champions, college players, and weekend golfers who want to train like the pros. Known for his direct yet encouraging style, Mark helps players understand their numbers, optimize impact, and build swings that travel seamlessly from simulator to course.",
+    specialties: ["Trackman data analysis", "Swing efficiency", "Performance tracking", "Advanced ball-flight control"],
   },
 ];
 
@@ -76,7 +73,15 @@ export default function CoachingPage() {
         </div>
       </header>
 
-      <section className="space-y-8">
+      <p className="mt-4 max-w-3xl text-neutral-700 leading-relaxed">
+        Our coaching team blends tour-level insight with a community feel. Every
+        session is built around your goals—real feedback, structured reps, and
+        tools that travel from the bay to the course. Whether you're just
+        finding your swing or chasing scratch, you'll train smarter and play
+        better with coaches who live the game.
+      </p>
+
+      <section className="space-y-8 mt-8">
         {COACHES.map((coach) => (
           <article
             key={coach.id}

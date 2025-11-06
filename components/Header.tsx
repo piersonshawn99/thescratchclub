@@ -152,8 +152,10 @@ export default function Header() {
       <div
         ref={menuRef}
         className={cx(
-          "md:hidden border-t border-neutral-200 bg-white shadow-lg transition-all",
-          open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+          "md:hidden border-t border-neutral-200 bg-white shadow-lg transform transition-all duration-300 ease-in-out origin-top",
+          open
+            ? "pointer-events-auto opacity-100 translate-y-0 max-h-[800px]"
+            : "pointer-events-none opacity-0 -translate-y-2 max-h-0 overflow-hidden"
         )}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">

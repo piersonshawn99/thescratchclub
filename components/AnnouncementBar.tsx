@@ -99,19 +99,15 @@ export default function AnnouncementBar({
     </div>
   );
 
-  // Collapsed mobile bar
+  // Collapsed mobile bar (single-line teaser)
   const mobileCollapsed = (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="flex items-center justify-between gap-3 py-2 text-sm">
+      <div className="flex items-center justify-between gap-3 py-1 text-xs">
         <div className="flex-1 min-w-0">
           <p className="truncate">{message}</p>
         </div>
         <div className="flex items-center gap-2">
-          {href && (
-            <Link href={href} className="text-sm font-semibold underline">
-              {ctaLabel}
-            </Link>
-          )}
+          {/* compact teaser: hide CTA on the single-line teaser to keep it short */}
           <button
             aria-expanded={expanded}
             aria-label={expanded ? "Collapse announcement" : "Expand announcement"}
@@ -127,7 +123,14 @@ export default function AnnouncementBar({
       {expanded && (
         <div className="pt-2">
           <div className="rounded-md bg-white/5 p-3 text-sm">
-            <p className="whitespace-normal">{message}</p>
+            <p className="whitespace-normal mb-3">{message}</p>
+            {href && (
+              <div className="mb-3">
+                <Link href={href} className="inline-flex items-center rounded-md bg-white/10 px-3 py-1.5 text-sm font-semibold hover:bg-white/20">
+                  {ctaLabel}
+                </Link>
+              </div>
+            )}
             {dismissible && (
               <div className="mt-2 text-right">
                 <button
