@@ -23,6 +23,7 @@ export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     setOpen(false); // close on route change
@@ -34,7 +35,10 @@ export default function Header() {
     }
     function onClick(e: MouseEvent) {
       if (!menuRef.current) return;
-      if (!menuRef.current.contains(e.target as Node)) setOpen(false);
+      const target = e.target as Node;
+      // ignore clicks on the menu button so toggling works without immediate close
+      if (menuButtonRef.current && menuButtonRef.current.contains(target)) return;
+      if (!menuRef.current.contains(target)) setOpen(false);
     }
     document.addEventListener("keydown", onKey);
     document.addEventListener("click", onClick);
@@ -57,10 +61,7 @@ export default function Header() {
  return (
   <>
   
-  {/* hide announcement on small screens to keep header compact on mobile */}
-  <div className="hidden sm:block">
-    <AnnouncementBar config={announcement} />
-  </div>
+  <AnnouncementBar config={announcement} />
 
   <header className="sticky top-0 z-40 w-full border-b border-neutral-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-t-0">
       {/* Utility strip */}
@@ -136,6 +137,7 @@ export default function Header() {
 
           {/* Mobile toggles */}
           <button
+            ref={menuButtonRef}
             className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-neutral-700 hover:bg-neutral-100"
             aria-label="Open menu"
             aria-expanded={open}

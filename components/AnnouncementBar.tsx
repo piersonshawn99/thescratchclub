@@ -38,6 +38,7 @@ export default function AnnouncementBar({
   config: AnnouncementConfig | null;
 }) {
   const [visible, setVisible] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const key = useMemo(() => {
     if (!config) return null;
@@ -63,39 +64,96 @@ export default function AnnouncementBar({
 
   const { message, href, ctaLabel = "Learn more", variant = "emerald", dismissible = true } = config;
 
-  return (
-    <div className={`${classesFor(variant)} print:hidden`}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-4 py-2.5 text-sm">
-          <div className="flex-1 min-w-0">
-            <p className="truncate">{message}</p>
-          </div>
-          <div className="flex items-center gap-3">
-            {href && (
-              <Link
-                href={href}
-                className="inline-flex items-center rounded-md bg-white/10 px-3 py-1.5 text-sm font-semibold hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/60"
-              >
-                {ctaLabel}
-              </Link>
-            )}
+  // Full announcement (desktop)
+  const full = (
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="flex items-center justify-between gap-4 py-2.5 text-sm">
+        <div className="flex-1 min-w-0">
+          <p className="truncate">{message}</p>
+        </div>
+        <div className="flex items-center gap-3">
+          {href && (
+            <Link
+              href={href}
+              className="inline-flex items-center rounded-md bg-white/10 px-3 py-1.5 text-sm font-semibold hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/60"
+            >
+              {ctaLabel}
+            </Link>
+          )}
+          {dismissible && (
+            <button
+              aria-label="Dismiss announcement"
+              className="rounded p-1 hover:bg-white/10"
+              onClick={() => {
+                if (key) localStorage.setItem(key, "1");
+                setVisible(false);
+              }}
+            >
+              <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
+                <path fill="currentColor" d="M6 6l12 12m0-12L6 18" stroke="currentColor" strokeWidth="2" />
+              </svg>
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
+  // Collapsed mobile bar
+  const mobileCollapsed = (
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="flex items-center justify-between gap-3 py-2 text-sm">
+        <div className="flex-1 min-w-0">
+          <p className="truncate">{message}</p>
+        </div>
+        <div className="flex items-center gap-2">
+          {href && (
+            <Link href={href} className="text-sm font-semibold underline">
+              {ctaLabel}
+            </Link>
+          )}
+          <button
+            aria-expanded={expanded}
+            aria-label={expanded ? "Collapse announcement" : "Expand announcement"}
+            className="rounded p-1 hover:bg-white/10"
+            onClick={() => setExpanded((v) => !v)}
+          >
+            <svg viewBox="0 0 24 24" className={`h-5 w-5 transform ${expanded ? "rotate-180" : ""}`} aria-hidden="true">
+              <path fill="currentColor" d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      {expanded && (
+        <div className="pt-2">
+          <div className="rounded-md bg-white/5 p-3 text-sm">
+            <p className="whitespace-normal">{message}</p>
             {dismissible && (
-              <button
-                aria-label="Dismiss announcement"
-                className="rounded p-1 hover:bg-white/10"
-                onClick={() => {
-                  if (key) localStorage.setItem(key, "1");
-                  setVisible(false);
-                }}
-              >
-                <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-                  <path fill="currentColor" d="M6 6l12 12m0-12L6 18" stroke="currentColor" strokeWidth="2" />
-                </svg>
-              </button>
+              <div className="mt-2 text-right">
+                <button
+                  aria-label="Dismiss announcement"
+                  className="rounded p-1 hover:bg-white/10"
+                  onClick={() => {
+                    if (key) localStorage.setItem(key, "1");
+                    setVisible(false);
+                  }}
+                >
+                  Dismiss
+                </button>
+              </div>
             )}
           </div>
         </div>
-      </div>
+      )}
+    </div>
+  );
+
+  return (
+    <div className={`${classesFor(variant)} print:hidden`}>
+      {/* Mobile: collapsed with toggle */}
+      <div className="block sm:hidden">{mobileCollapsed}</div>
+      {/* Desktop: full */}
+      <div className="hidden sm:block">{full}</div>
     </div>
   );
 }
