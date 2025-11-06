@@ -25,30 +25,29 @@ type Coach = {
 
 const COACHES: Coach[] = [
   {
-  id: "coach-alan",
-  name: "Future PGA Coach",
-  role: "Performance & Advanced Player Development",
-  image: "/images/coaches/alan.jpg",
-  bio: "We're seeking a high-level PGA Professional to lead advanced player development and performance training. This coach should bring proven experience working with competitive golfers—combining data-driven insight, precise swing analysis, and practical on-course strategy. If you’re passionate about turning strong swings into scoring results and thrive on helping players reach their next level, we’d love to meet you.",
-  specialties: ["Elite player development", "Course management", "Performance routines", "Trackman data integration"],
-},
-{
-  id: "coach-sarah",
-  name: "Future LPGA / PGA Instructor",
-  role: "Women & Junior Golf Development",
-  image: "/images/coaches/sarah.jpg",
-  bio: "We’re looking for an instructor who connects deeply with players and creates an environment of confidence and fun. Ideal candidates bring LPGA or PGA certification and a strong record of teaching women, juniors, and families. You’ll help new and returning golfers build strong fundamentals and a lifelong love for the game—right here in our community.",
-  specialties: ["Women & junior development", "Beginner fundamentals", "Short game confidence", "Swing consistency"],
-},
-{
-  id: "coach-mark",
-  name: "Future PGA Coach",
-  role: "Technology & Data-Driven Training",
-  image: "/images/coaches/mark.jpg",
-  bio: "We’re searching for a coach who thrives on precision and performance data. A Trackman-certified or analytics-minded PGA instructor who knows how to translate numbers into results. You’ll help golfers understand their swings through measurable feedback, efficient movement patterns, and training programs that carry from simulator to course.",
-  specialties: ["Trackman data analysis", "Swing efficiency", "Performance tracking", "Advanced ball-flight control"],
-},
-
+    id: "coach-alan",
+    name: "Future PGA Coach",
+    role: "Performance & Advanced Player Development",
+    image: "/images/coaches/alan.jpg",
+    bio: "We're seeking a high-level PGA Professional to lead advanced player development and performance training. This coach should bring proven experience working with competitive golfers—combining data-driven insight, precise swing analysis, and practical on-course strategy. If you’re passionate about turning strong swings into scoring results and thrive on helping players reach their next level, we’d love to meet you.",
+    specialties: ["Elite player development", "Course management", "Performance routines", "Trackman data integration"],
+  },
+  {
+    id: "coach-sarah",
+    name: "Future LPGA / PGA Instructor",
+    role: "Women & Junior Golf Development",
+    image: "/images/coaches/sarah.jpg",
+    bio: "We’re looking for an instructor who connects deeply with players and creates an environment of confidence and fun. Ideal candidates bring LPGA or PGA certification and a strong record of teaching women, juniors, and families. You’ll help new and returning golfers build strong fundamentals and a lifelong love for the game—right here in our community.",
+    specialties: ["Women & junior development", "Beginner fundamentals", "Short game confidence", "Swing consistency"],
+  },
+  {
+    id: "coach-mark",
+    name: "Future PGA Coach",
+    role: "Technology & Data-Driven Training",
+    image: "/images/coaches/mark.jpg",
+    bio: "We’re searching for a coach who thrives on precision and performance data. A Trackman-certified or analytics-minded PGA instructor who knows how to translate numbers into results. You’ll help golfers understand their swings through measurable feedback, efficient movement patterns, and training programs that carry from simulator to course.",
+    specialties: ["Trackman data analysis", "Swing efficiency", "Performance tracking", "Advanced ball-flight control"],
+  },
 ];
 
 export default function CoachingPage() {
@@ -146,20 +145,28 @@ export default function CoachingPage() {
                 <p className="mt-4 text-neutral-700 leading-relaxed whitespace-pre-line">
                   {coach.bio}
                 </p>
-
-                <div className="mt-6">
-                  <Link
-                    href="/booking"
-                    className="inline-flex items-center rounded-xl bg-emerald-700 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
-                  >
-                    Work with {coach.name.split(" ")[0]}
-                  </Link>
-                </div>
               </div>
             </div>
           </article>
         ))}
       </section>
+
+      <div className="mt-16 rounded-2xl border border-neutral-200 bg-emerald-50 p-6 text-center">
+        <h3 className="text-xl font-semibold text-neutral-900">
+          Interested in Coaching at The Scratch Club?
+        </h3>
+        <p className="mt-2 max-w-2xl mx-auto text-neutral-700">
+          We’re building a team of instructors who love the game, live for
+          progress, and bring out the best in every golfer they meet. If that
+          sounds like you, we’d like to connect.
+        </p>
+        <Link
+          href="/contact"
+          className="inline-flex mt-4 rounded-xl bg-emerald-700 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
+        >
+          Contact Us
+        </Link>
+      </div>
 
       <div className="sm:hidden mt-10">
         <Link

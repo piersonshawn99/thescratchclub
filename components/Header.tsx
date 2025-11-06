@@ -1,303 +1,200 @@
-"use client";
-
-import AnnouncementBar from "./AnnouncementBar";
-import { announcement } from "@/lib/site-config";
-
+// app/coaching/page.tsx
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { LINKS } from "./links";
-import { track } from "@/lib/analytics";
-import { useState, useEffect, useRef } from "react";
 
-function cx(...classes: (string | false | undefined)[]) {
-  return classes.filter(Boolean).join(" ");
-}
+export const metadata: Metadata = {
+  title: "Coaching | The Scratch Club",
+  description: "Meet our coaches — real humans who turn practice into progress.",
+  openGraph: {
+    title: "Coaching | The Scratch Club",
+    description: "Meet our coaches — real humans who turn practice into progress.",
+    type: "website",
+  },
+};
 
-const SOCIAL = [
-  { label: "Instagram", href: "https://instagram.com/scratchclubgolf", icon: InstagramIcon },
-  { label: "Facebook", href: "https://facebook.com/scratchclubgolf", icon: FacebookIcon },
-  { label: "YouTube", href: "https://youtube.com/@scratchclubgolf", icon: YoutubeIcon },
+type Coach = {
+  id: string;
+  name: string;
+  role?: string;
+  image: string;
+  bio: string;
+  specialties?: string[];
+  links?: { label: string; href: string }[];
+};
+
+const COACHES: Coach[] = [
+  {
+    id: "coach-alan",
+    name: "Future PGA Coach",
+    role: "Performance & Advanced Player Development",
+    image: "/images/coaches/alan.jpg",
+    bio: "We're seeking a high-level PGA Professional to lead advanced player development and performance training. This coach should bring proven experience working with competitive golfers—combining data-driven insight, precise swing analysis, and practical on-course strategy. If you’re passionate about turning strong swings into scoring results and thrive on helping players reach their next level, we’d love to meet you.",
+    specialties: ["Elite player development", "Course management", "Performance routines", "Trackman data integration"],
+  },
+  {
+    id: "coach-sarah",
+    name: "Future LPGA / PGA Instructor",
+    role: "Women & Junior Golf Development",
+    image: "/images/coaches/sarah.jpg",
+    bio: "We’re looking for an instructor who connects deeply with players and creates an environment of confidence and fun. Ideal candidates bring LPGA or PGA certification and a strong record of teaching women, juniors, and families. You’ll help new and returning golfers build strong fundamentals and a lifelong love for the game—right here in our community.",
+    specialties: ["Women & junior development", "Beginner fundamentals", "Short game confidence", "Swing consistency"],
+  },
+  {
+    id: "coach-mark",
+    name: "Future PGA Coach",
+    role: "Technology & Data-Driven Training",
+    image: "/images/coaches/mark.jpg",
+    bio: "We’re searching for a coach who thrives on precision and performance data. A Trackman-certified or analytics-minded PGA instructor who knows how to translate numbers into results. You’ll help golfers understand their swings through measurable feedback, efficient movement patterns, and training programs that carry from simulator to course.",
+    specialties: ["Trackman data analysis", "Swing efficiency", "Performance tracking", "Advanced ball-flight control"],
+  },
 ];
 
-export default function Header() {
-  const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
-
-  useEffect(() => {
-    setOpen(false); // close on route change
-  }, [pathname]);
-
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setOpen(false);
-    }
-    function onClick(e: MouseEvent) {
-      if (!menuRef.current) return;
-      const target = e.target as Node;
-      // ignore clicks on the menu button so toggling works without immediate close
-      if (menuButtonRef.current && menuButtonRef.current.contains(target)) return;
-      if (!menuRef.current.contains(target)) setOpen(false);
-    }
-    document.addEventListener("keydown", onKey);
-    document.addEventListener("click", onClick);
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.removeEventListener("click", onClick);
-    };
-  }, []);
-
-  // Focus management: when mobile menu opens, trap focus inside and restore on close
-  useEffect(() => {
-    if (!open) return;
-
-    const prevActive = document.activeElement as HTMLElement | null;
-
-    const container = menuRef.current;
-    if (!container) return;
-
-    const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
-    const nodes = Array.from(container.querySelectorAll<HTMLElement>(focusableSelector)).filter((n) => n.offsetParent !== null);
-
-    const first = nodes[0];
-    const last = nodes[nodes.length - 1];
-
-    // focus first focusable element in the menu (or the container as fallback)
-    if (first) {
-      first.focus();
-    } else {
-      // make container focusable temporarily
-      container.setAttribute("tabindex", "-1");
-      container.focus();
-    }
-
-    function onKey(e: KeyboardEvent) {
-      if (e.key !== "Tab") return;
-      // shift+tab
-      if (e.shiftKey) {
-        if (document.activeElement === first) {
-          e.preventDefault();
-          (last || first)!.focus();
-        }
-      } else {
-        if (document.activeElement === last) {
-          e.preventDefault();
-          (first || last)!.focus();
-        }
-      }
-    }
-
-    document.addEventListener("keydown", onKey);
-
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      // restore focus to the menu button or previous active element
-      try {
-        if (menuButtonRef.current) menuButtonRef.current.focus();
-        else if (prevActive) prevActive.focus();
-      } catch {}
-      // cleanup temporary tabindex
-      if (container.getAttribute("tabindex") === "-1") container.removeAttribute("tabindex");
-    };
-  }, [open]);
-
-  const nav = [
-    { label: "About", href: LINKS.about },
-    { label: "Memberships", href: LINKS.memberships },
-    { label: "Coaching", href: LINKS.coaching },
-    { label: "Courses", href: LINKS.courses },
-    { label: "Contact", href: LINKS.contact },
-  ];
-
-  const ctaHref = LINKS.bookNow ?? LINKS.memberships ?? LINKS.contact;
-
- return (
-  <>
-  
-  <AnnouncementBar config={announcement} />
-
-  <header className="sticky top-0 z-40 w-full border-b border-neutral-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-t-0">
-      {/* Utility strip */}
-      <div className="hidden md:block border-b border-neutral-200/70 bg-neutral-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-9 items-center justify-between text-xs text-neutral-600">
-          <div className="flex items-center gap-4">
-            <span className="hidden lg:inline">Open daily • 7am–11pm</span>
-            <a href="tel:+18018303401" className="hover:text-emerald-700">Call: (801) 830-3401</a>
-            <span className="hidden sm:inline">•</span>
-            <Link href={LINKS.contact} className="hidden sm:inline hover:text-emerald-700">Pinckney, MI</Link>
+export default function CoachingPage() {
+  return (
+    <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+      <header className="mb-10">
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900">
+              Coaching
+            </h1>
+            <p className="mt-2 max-w-2xl text-neutral-600">
+              Coaching that travels from the bay to the course. Real feedback,
+              real reps, real results.
+            </p>
           </div>
-          <div className="flex items-center gap-3">
-            {SOCIAL.map(({ label, href, icon: Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="p-1 rounded hover:text-emerald-700"
-                onClick={() => track("social_click", { label, location: "header_top" })}
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Main bar */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-  <div className="flex h-12 md:h-16 items-center justify-between">
           <Link
-            href="/"
-            className="flex items-center gap-2"
-            onClick={() => track("nav_logo_click")}
+            href="/booking"
+            className="hidden sm:inline-flex items-center rounded-xl border border-emerald-700 px-4 py-2 text-sm font-medium text-emerald-800 hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
           >
-            <Logo />
-            <span className="font-semibold tracking-tight">The Scratch Club</span>
+            Book a session
           </Link>
+        </div>
+      </header>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8 text-sm text-neutral-700">
-            {nav.map((item) => {
-              const active = pathname === item.href;
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  className={cx(
-                    "transition-colors hover:text-emerald-700",
-                    active && "text-emerald-700 font-medium"
-                  )}
-                  onClick={() => track("nav_click", { label: item.label })}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+      <p className="mt-4 max-w-3xl text-neutral-700 leading-relaxed">
+        Our coaching team blends tour-level insight with a community feel. Every
+        session is built around your goals—real feedback, structured reps, and
+        tools that travel from the bay to the course. Whether you're just
+        finding your swing or chasing scratch, you'll train smarter and play
+        better with coaches who live the game.
+      </p>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-3">
-            <Link
-              href={ctaHref}
-              className="inline-flex items-center rounded-xl border border-emerald-600 bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2"
-              onClick={() => track("cta_click", { label: "Book a Bay", location: "header" })}
-            >
-              Book a Bay
-            </Link>
-          </div>
-
-          {/* Mobile toggles */}
-          <button
-            ref={menuButtonRef}
-            className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-neutral-700 hover:bg-neutral-100"
-            aria-label="Open menu"
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
+      <section className="space-y-8 mt-8">
+        {COACHES.map((coach) => (
+          <article
+            key={coach.id}
+            className="rounded-2xl border border-neutral-200 bg-white/70 p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow"
           >
-            <MenuIcon className="h-6 w-6" />
-          </button>
-        </div>
-      </div>
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-6 items-center">
+              <div className="md:col-span-2">
+                <div className="aspect-[5/4] w-full overflow-hidden rounded-xl bg-neutral-100">
+                  <Image
+                    src={coach.image}
+                    alt={`${coach.name} headshot`}
+                    width={960}
+                    height={720}
+                    className="h-full w-full object-contain object-center"
+                    priority={false}
+                  />
+                </div>
+              </div>
 
-      {/* Mobile menu */}
-      <div
-        ref={menuRef}
-        className={cx(
-          "md:hidden border-t border-neutral-200 bg-white shadow-lg transform transition-all duration-300 ease-in-out origin-top",
-          open
-            ? "pointer-events-auto opacity-100 translate-y-0 max-h-[800px]"
-            : "pointer-events-none opacity-0 -translate-y-2 max-h-0 overflow-hidden"
-        )}
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex gap-3">
-              {SOCIAL.map(({ label, href, icon: Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="p-2 rounded hover:bg-neutral-100"
-                  onClick={() => track("social_click", { label, location: "header_mobile" })}
-                >
-                  <Icon className="h-5 w-5" />
-                </a>
-              ))}
-            </div>
-            <Link
-              href={ctaHref}
-              className="inline-flex items-center rounded-xl border border-emerald-600 bg-emerald-600 px-3 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
-              onClick={() => track("cta_click", { label: "Book a Bay", location: "header_mobile" })}
-            >
-              Book a Bay
-            </Link>
-          </div>
-          <nav className="mt-4 grid gap-2">
-            {nav.map((item) => {
-              const active = pathname === item.href;
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  className={cx(
-                    "rounded-lg px-3 py-2 text-sm hover:bg-neutral-100",
-                    active && "bg-neutral-100 font-medium text-emerald-700"
+              <div className="md:col-span-3">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h2 className="text-xl font-semibold tracking-tight text-neutral-900">
+                      {coach.name}
+                    </h2>
+                    {coach.role && (
+                      <p className="mt-0.5 text-sm text-emerald-800">
+                        {coach.role}
+                      </p>
+                    )}
+                  </div>
+
+                  {coach.links && coach.links.length > 0 && (
+                    <div className="flex shrink-0 items-center gap-3">
+                      {coach.links.map((l) => (
+                        <Link
+                          key={`${coach.id}-${l.href}`}
+                          href={l.href}
+                          className="text-sm text-emerald-800 hover:underline"
+                        >
+                          {l.label}
+                        </Link>
+                      ))}
+                    </div>
                   )}
-                  onClick={() => track("nav_click", { label: item.label, location: "header_mobile" })}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+                </div>
+
+                {coach.specialties && coach.specialties.length > 0 && (
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {coach.specialties.map((tag) => (
+                      <li
+                        key={`${coach.id}-${tag}`}
+                        className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs text-neutral-700"
+                      >
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                <p className="mt-4 text-neutral-700 leading-relaxed whitespace-pre-line">
+                  {coach.bio}
+                </p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </section>
+
+      <div className="mt-16 rounded-2xl border border-neutral-200 bg-emerald-50 p-6">
+        <h3 className="text-center text-xl font-semibold text-neutral-900">
+          Interested in Coaching at The Scratch Club?
+        </h3>
+        <p className="mt-2 max-w-2xl mx-auto text-neutral-700 text-center">
+          We're building a team of instructors who love the game, live for progress, and
+          bring out the best in every golfer they meet. If that sounds like you, send us your
+          resume and a quick note.
+        </p>
+
+        <div className="mt-4 mx-auto max-w-xl text-left text-sm text-neutral-700">
+          <p className="font-medium">Include:</p>
+          <ul className="mt-2 list-disc pl-5 space-y-1">
+            <li>PDF resume with coaching history and certifications (PGA/LPGA, TPI, Trackman, etc.)</li>
+            <li>1–2 paragraphs on your coaching approach and ideal player</li>
+            <li>Any public links (website, Instagram, CoachNow, tournament record)</li>
+            <li>General availability (evenings/weekends, seasonal)</li>
+          </ul>
+        </div>
+
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <Link
+            href={`mailto:coaching@scratchclubgolf.com?subject=${encodeURIComponent("Coaching Application – The Scratch Club")}&body=${encodeURIComponent("Hi Scratch Club team,%0D%0A%0D%0AMy name is [Your Name]. I'm interested in coaching at The Scratch Club.%0D%0A%0D%0AHighlights:%0D%0A• Certifications: [PGA/LPGA, TPI, Trackman]%0D%0A• Coaching focus: [e.g., women & juniors, advanced player development]%0D%0A• Availability: [e.g., evenings/weekends]%0D%0A%0D%0AResume attached.%0D%0A%0D%0AThanks!%0D%0A[Your Name]%0D%0A[Phone]")}`}
+            className="inline-flex rounded-xl bg-emerald-700 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
+          >
+            Email Your Resume
+          </Link>
+          <Link
+            href="/contact"
+            className="inline-flex rounded-xl border border-emerald-700 px-6 py-2 text-sm font-medium text-emerald-800 hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
+          >
+            Questions? Contact Us
+          </Link>
         </div>
       </div>
-    </header>
-  </>
-  );
-}
 
-/** ---------- Icons (inline, no external deps) ---------- */
-function Logo(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 32 32" aria-hidden="true" className="h-5 w-5 md:h-6 md:w-6" {...props}>
-      <circle cx="16" cy="16" r="15" className="fill-emerald-600" />
-      <path d="M10 20c4-2 8-2 12 0" className="stroke-white" strokeWidth="2" fill="none" />
-      <circle cx="16" cy="12" r="3" className="fill-white" />
-    </svg>
-  );
-}
-function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7m5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10m6.5-.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/>
-    </svg>
-  );
-}
-function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path fill="currentColor" d="M13 3h4a1 1 0 0 1 1 1v4h-3a2 2 0 0 0-2 2v3h5l-1 4h-4v6h-4v-6H6v-4h3V9a5 5 0 0 1 5-5Z"/>
-    </svg>
-  );
-}
-function YoutubeIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path fill="currentColor" d="M23 12s0-3.4-.4-4.9c-.2-.8-.8-1.5-1.6-1.7C19 4 12 4 12 4s-7 0-9 .4c-.8.2-1.4.9-1.6 1.7C1 8.6 1 12 1 12s0 3.4.4 4.9c.2.8.8 1.5 1.6 1.7C5 20 12 20 12 20s7 0 9-.4c.8-.2 1.4-.9 1.6-1.7.4-1.5.4-4.9.4-4.9ZM10 15.5v-7l6 3.5-6 3.5Z"/>
-    </svg>
-  );
-}
-function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/>
-    </svg>
+      <div className="sm:hidden mt-10">
+        <Link
+          href="/booking"
+          className="block w-full text-center rounded-xl bg-emerald-700 px-4 py-3 text-sm font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
+        >
+          Book a session
+        </Link>
+      </div>
+    </main>
   );
 }
