@@ -25,29 +25,30 @@ type Coach = {
 
 const COACHES: Coach[] = [
   {
-    id: "coach-alan",
-    name: "Alan Reynolds",
-    role: "PGA Coach | Top 100 National Player",
-    image: "/images/coaches/alan.jpg",
-    bio: "Ranked among the top 100 players nationally, Alan brings two decades of tour-level insight to every lesson. A Campbell University PGA Golf Management graduate, he helps serious golfers refine mechanics, sequencing, and course strategy. His sessions blend data with feel—turning practice into performance that holds up under pressure. Students say he makes complex moves simple and brings out their best golf every time.",
-    specialties: ["Full-swing optimization", "Course management", "Performance routines", "Trackman data integration"],
-  },
-  {
-    id: "coach-sarah",
-    name: "Sarah Jennings",
-    role: "PGA & LPGA Certified Instructor",
-    image: "/images/coaches/sarah.jpg",
-    bio: "A PGA and LPGA-certified instructor, Sarah brings 15 years of coaching experience and a lifetime of love for the game. A former University of Michigan golfer and mother of two, she’s known for creating a welcoming environment that builds skill and confidence—especially for women and juniors finding their voice in the sport. Sarah blends patience with precision, using proven methods to help players move from hesitant swings to consistent ball flight. Whether you’re a beginner or working toward breaking 80, she makes golf feel both possible and personal.",
-    specialties: ["Women & junior development", "Beginner fundamentals", "Short game confidence", "Swing consistency"],
-  },
-  {
-    id: "coach-mark",
-    name: "Mark Dalton",
-    role: "PGA Coach | Trackman & TPI Certified",
-    image: "/images/coaches/mark.jpg",
-    bio: "With more than 25 years in coaching and player development, Mark combines traditional fundamentals with modern analytics to deliver measurable progress. A Trackman Level 2 and TPI-certified coach, he’s guided state champions, college players, and weekend golfers who want to train like the pros. Known for his direct yet encouraging style, Mark helps players understand their numbers, optimize impact, and build swings that travel seamlessly from simulator to course.",
-    specialties: ["Trackman data analysis", "Swing efficiency", "Performance tracking", "Advanced ball-flight control"],
-  },
+  id: "coach-alan",
+  name: "Future PGA Coach",
+  role: "Performance & Advanced Player Development",
+  image: "/images/coaches/alan.jpg",
+  bio: "We're seeking a high-level PGA Professional to lead advanced player development and performance training. This coach should bring proven experience working with competitive golfers—combining data-driven insight, precise swing analysis, and practical on-course strategy. If you’re passionate about turning strong swings into scoring results and thrive on helping players reach their next level, we’d love to meet you.",
+  specialties: ["Elite player development", "Course management", "Performance routines", "Trackman data integration"],
+},
+{
+  id: "coach-sarah",
+  name: "Future LPGA / PGA Instructor",
+  role: "Women & Junior Golf Development",
+  image: "/images/coaches/sarah.jpg",
+  bio: "We’re looking for an instructor who connects deeply with players and creates an environment of confidence and fun. Ideal candidates bring LPGA or PGA certification and a strong record of teaching women, juniors, and families. You’ll help new and returning golfers build strong fundamentals and a lifelong love for the game—right here in our community.",
+  specialties: ["Women & junior development", "Beginner fundamentals", "Short game confidence", "Swing consistency"],
+},
+{
+  id: "coach-mark",
+  name: "Future PGA Coach",
+  role: "Technology & Data-Driven Training",
+  image: "/images/coaches/mark.jpg",
+  bio: "We’re searching for a coach who thrives on precision and performance data. A Trackman-certified or analytics-minded PGA instructor who knows how to translate numbers into results. You’ll help golfers understand their swings through measurable feedback, efficient movement patterns, and training programs that carry from simulator to course.",
+  specialties: ["Trackman data analysis", "Swing efficiency", "Performance tracking", "Advanced ball-flight control"],
+},
+
 ];
 
 export default function CoachingPage() {
