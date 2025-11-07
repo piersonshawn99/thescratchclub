@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import CopyEmailButton from "@/components/CopyEmailButton";
 
 export const metadata: Metadata = {
   title: "Coaching | The Scratch Club",
@@ -216,13 +217,7 @@ export default function CoachingPage() {
         <div className="mt-4 text-center text-sm text-neutral-700">
           Or email us at
           <span className="mx-1 font-medium select-all">coaching@scratchclubgolf.com</span>
-          <button
-            type="button"
-            onClick={() => navigator.clipboard?.writeText("coaching@scratchclubgolf.com")}
-            className="ml-2 inline-flex items-center rounded-lg border border-neutral-300 px-3 py-1 hover:bg-neutral-50"
-          >
-            Copy email
-          </button>
+          <CopyEmailButton email="coaching@scratchclubgolf.com" />
         </div>
       </div>
 
