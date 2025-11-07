@@ -89,6 +89,7 @@ export default function MembershipsClient() {
   const [annual, setAnnual] = useState(false);
   const [loadingPlan, setLoadingPlan] = useState<PlanId | null>(null);
   const tiers = useMemo(() => TIERS, []);
+  const [hrsPerWeek, setHrsPerWeek] = useState<2 | 3>(2);
 
   async function startCheckout(plan: PlanId) {
     try {
@@ -113,16 +114,17 @@ export default function MembershipsClient() {
 
   return (
     <main>
+      {/* Pre-Launch badge + hero */}
       <section className="text-center mb-12">
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200/60 bg-emerald-50 px-3 py-1 text-sm text-emerald-700">
           <span className="h-2 w-2 rounded-full bg-emerald-500" />
-          Memberships now open
+          Pre-Launch Pricing • First 3 months • Limited quantity
         </div>
         <h1 className="mt-4 text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900">
           Train Smarter. <span className="text-emerald-700">Play Better.</span>
         </h1>
         <p className="mt-3 text-neutral-600 max-w-2xl mx-auto">
-          Pick the tier that fits your rhythm—casual reps, after-work rounds, or all-in performance. Upgrade anytime.
+          Join as a Founding Member and lock our best rate while your membership stays active.
         </p>
 
         <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-2 py-1">
@@ -139,8 +141,15 @@ export default function MembershipsClient() {
             Annual <span className="ml-1 opacity-75">(save)</span>
           </button>
         </div>
+
+        {/* Pre-launch fine print */}
+        <p className="mt-4 text-xs text-neutral-500 max-w-2xl mx-auto">
+          Pre-Launch pricing valid for the first 3 months after opening. Early members keep their plan’s monthly rate
+          while continuously active. Prices and access windows subject to seasonal adjustments.
+        </p>
       </section>
 
+      {/* Tiers */}
       <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {tiers.map((tier) => {
           const isFounders = tier.id === "founders";
@@ -199,6 +208,10 @@ export default function MembershipsClient() {
         })}
       </section>
 
+      {/* Value comparison / savings */}
+      <SavingsSection hrsPerWeek={hrsPerWeek} setHrsPerWeek={setHrsPerWeek} tiers={tiers} walkInRate={50} />
+
+      {/* Banners */}
       <section className="mt-12 grid gap-4 lg:grid-cols-3">
         <BannerCTA
           title="Just looking to try it?"
@@ -220,6 +233,7 @@ export default function MembershipsClient() {
         />
       </section>
 
+      {/* FAQ */}
       <section className="mt-16 border-t border-neutral-200 pt-10">
         <h2 className="text-xl font-semibold tracking-tight">Membership FAQ</h2>
         <dl className="mt-6 grid gap-6 md:grid-cols-2">
@@ -252,6 +266,102 @@ function Price({ annual, monthly, yearly }: { annual: boolean; monthly: number; 
         <span className="text-sm text-neutral-500">/mo</span>
       </div>
     </div>
+  );
+}
+
+function SavingsSection({
+  hrsPerWeek,
+  setHrsPerWeek,
+  tiers,
+  walkInRate,
+}: {
+  hrsPerWeek: 2 | 3;
+  setHrsPerWeek: (v: 2 | 3) => void;
+  tiers: Tier[];
+  walkInRate: number;
+}) {
+  const hoursPerMonth = hrsPerWeek * 4; // simple, clear
+  const walkInMonthly = hoursPerMonth * walkInRate;
+
+  const calc = (priceMonthly: number) => {
+    const savings = Math.max(walkInMonthly - priceMonthly, 0);
+    const pct = walkInMonthly > 0 ? Math.round((savings / walkInMonthly) * 100) : 0;
+    return { savings, pct };
+  };
+
+  const rows = tiers
+    .filter((t) => t.id !== "founders")
+    .map((t) => {
+      const { savings, pct } = calc(t.priceMonthly);
+      return { tier: t.name, memberPrice: t.priceMonthly, savings, pct };
+    });
+
+  return (
+    <section className="mt-14">
+      <div className="mx-auto max-w-4xl">
+        <div className="flex items-center justify-between flex-wrap gap-3">
+          <h2 className="text-xl font-semibold tracking-tight">Membership vs. Walk-In</h2>
+          <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-2 py-1">
+            <span className="text-sm text-neutral-600 mr-1">Compare at</span>
+            <button
+              onClick={() => setHrsPerWeek(2)}
+              className={`px-3 py-1.5 rounded-full text-sm ${hrsPerWeek === 2 ? "bg-emerald-600 text-white" : "text-neutral-700"}`}
+            >
+              2 hrs/wk
+            </button>
+            <button
+              onClick={() => setHrsPerWeek(3)}
+              className={`px-3 py-1.5 rounded-full text-sm ${hrsPerWeek === 3 ? "bg-emerald-600 text-white" : "text-neutral-700"}`}
+            >
+              3 hrs/wk
+            </button>
+          </div>
+        </div>
+
+        <p className="mt-2 text-sm text-neutral-600">
+          Walk-in at ${walkInRate}/hr × {hoursPerMonth} hrs/mo = <span className="font-medium">${walkInMonthly}</span>.
+          Memberships often pay for themselves even at low usage.
+        </p>
+
+        <div className="mt-4 overflow-hidden rounded-2xl border border-neutral-200">
+          <table className="w-full text-sm">
+            <thead className="bg-neutral-50 text-neutral-700">
+              <tr>
+                <th className="text-left p-3">Tier</th>
+                <th className="text-left p-3">Member Price / mo</th>
+                <th className="text-left p-3">You Save vs Walk-In</th>
+                <th className="text-left p-3">Savings %</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r) => (
+                <tr key={r.tier} className="border-t border-neutral-200">
+                  <td className="p-3">{r.tier}</td>
+                  <td className="p-3">${r.memberPrice}</td>
+                  <td className="p-3 font-medium text-emerald-700">${r.savings}</td>
+                  <td className="p-3">{r.pct}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p className="mt-3 text-xs text-neutral-500">
+          Assumes walk-in rate of ${walkInRate}/hr. Example usage only; actual savings vary with your hours and booking times.
+        </p>
+
+        <div className="mt-4 rounded-xl bg-emerald-50 border border-emerald-100 p-4 text-emerald-900">
+          <p className="text-sm">
+            <span className="font-medium">Bottom line:</span> At {hrsPerWeek} hrs/week, even{" "}
+            <span className="font-semibold">Off-Peak</span> membership typically saves{" "}
+            <span className="font-semibold">
+              {hrsPerWeek === 2 ? "$301 (≈75%)" : "$501 (≈84%)"}
+            </span>{" "}
+            per month vs walk-in. “Two hours a week” pays for itself.
+          </p>
+        </div>
+      </div>
+    </section>
   );
 }
 
