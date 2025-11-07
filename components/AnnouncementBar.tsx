@@ -6,13 +6,19 @@ import { useEffect, useMemo, useState } from "react";
 type Variant = "emerald" | "neutral" | "black";
 
 export type AnnouncementConfig = {
-  message: string;              // e.g., "Founder Memberships open now"
-  href?: string;                // e.g., "/memberships"
-  ctaLabel?: string;            // e.g., "Learn more"
-  variant?: Variant;            // color theme
-  dismissible?: boolean;        // show an X to dismiss
-  startAt?: string;             // ISO date, optional
-  endAt?: string;               // ISO date, optional
+  message: string;
+  href?: string;
+  ctaLabel?: string;
+  variant?: Variant;
+  dismissible?: boolean;
+  startAt?: string;
+  endAt?: string;
+};
+
+export const DEFAULT_ANNOUNCEMENT: AnnouncementConfig = {
+  message: "📍 Pinckney–Lakeland location opening early 2026!",
+  variant: "emerald",
+  dismissible: false,
 };
 
 function classesFor(variant: Variant = "emerald") {
@@ -22,7 +28,7 @@ function classesFor(variant: Variant = "emerald") {
     case "neutral":
       return "bg-neutral-900 text-white [--link:rgba(255,255,255,0.9)]";
     default:
-      return "bg-emerald-600 text-white [--link:rgba(255,255,255,0.95)]";
+      return "bg-emerald-700 text-white [--link:rgba(255,255,255,0.95)]";
   }
 }
 
@@ -33,17 +39,26 @@ function hashString(s: string) {
 }
 
 export default function AnnouncementBar({
-  config,
+  config = DEFAULT_ANNOUNCEMENT,
 }: {
-  config: AnnouncementConfig | null;
+  config?: AnnouncementConfig | null;
 }) {
   const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
   const key = useMemo(() => {
     if (!config) return null;
-    const { message, href = "", ctaLabel = "", variant = "emerald", startAt = "", endAt = "" } = config;
-    return `announce:${hashString([message, href, ctaLabel, variant, startAt, endAt].join("|"))}`;
+    const {
+      message,
+      href = "",
+      ctaLabel = "",
+      variant = "emerald",
+      startAt = "",
+      endAt = "",
+    } = config;
+    return `announce:${hashString(
+      [message, href, ctaLabel, variant, startAt, endAt].join("|")
+    )}`;
   }, [config]);
 
   useEffect(() => {
@@ -62,101 +77,59 @@ export default function AnnouncementBar({
 
   if (!config || !visible) return null;
 
-  const { message, href, ctaLabel = "Learn more", variant = "emerald", dismissible = true } = config;
+  const {
+    message,
+    href,
+    ctaLabel = "Learn more",
+    variant = "emerald",
+    dismissible = false,
+  } = config;
 
-  // Full announcement (desktop)
+  const pinIcon = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="h-4 w-4 text-amber-400 mr-2 inline-block"
+    >
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
+    </svg>
+  );
+
+  // Desktop full banner
   const full = (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="flex items-center justify-between gap-4 py-2.5 text-sm">
-        <div className="flex-1 min-w-0">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 border-b-2 border-amber-400/80">
+      <div className="flex items-center justify-center gap-4 py-2.5 text-sm font-medium tracking-wide">
+        <div className="flex items-center text-center">
+          {pinIcon}
           <p className="truncate">{message}</p>
         </div>
-        <div className="flex items-center gap-3">
-          {href && (
-            <Link
-              href={href}
-              className="inline-flex items-center rounded-md bg-white/10 px-3 py-1.5 text-sm font-semibold hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/60"
-            >
-              {ctaLabel}
-            </Link>
-          )}
-          {dismissible && (
-            <button
-              aria-label="Dismiss announcement"
-              className="rounded p-1 hover:bg-white/10"
-              onClick={() => {
-                if (key) localStorage.setItem(key, "1");
-                setVisible(false);
-              }}
-            >
-              <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-                <path fill="currentColor" d="M6 6l12 12m0-12L6 18" stroke="currentColor" strokeWidth="2" />
-              </svg>
-            </button>
-          )}
-        </div>
+        {href && (
+          <Link
+            href={href}
+            className="ml-3 inline-flex items-center rounded-md bg-white/10 px-3 py-1.5 text-sm font-semibold hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/60"
+          >
+            {ctaLabel}
+          </Link>
+        )}
       </div>
     </div>
   );
 
-  // Collapsed mobile bar (single-line teaser)
+  // Mobile collapsed bar
   const mobileCollapsed = (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="flex items-center justify-between gap-3 py-1 text-xs">
-        <div className="flex-1 min-w-0">
-          <p className="truncate">{message}</p>
-        </div>
-        <div className="flex items-center gap-2">
-          {/* compact teaser: hide CTA on the single-line teaser to keep it short */}
-          <button
-            aria-expanded={expanded}
-            aria-label={expanded ? "Collapse announcement" : "Expand announcement"}
-            className="rounded p-1 hover:bg-white/10"
-            onClick={() => setExpanded((v) => !v)}
-          >
-            <svg viewBox="0 0 24 24" className={`h-5 w-5 transform ${expanded ? "rotate-180" : ""}`} aria-hidden="true">
-              <path fill="currentColor" d="M6 9l6 6 6-6" />
-            </svg>
-          </button>
-        </div>
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 border-b border-amber-400/70">
+      <div className="flex items-center justify-center gap-2 py-1 text-xs font-medium tracking-wide">
+        {pinIcon}
+        <p className="truncate">{message}</p>
       </div>
-      {expanded && (
-        <div className="pt-2">
-          <div className="rounded-md bg-white/5 p-3 text-sm">
-            <p className="whitespace-normal mb-3">{message}</p>
-            {href && (
-              <div className="mb-3">
-                <Link href={href} className="inline-flex items-center rounded-md bg-white/10 px-3 py-1.5 text-sm font-semibold hover:bg-white/20">
-                  {ctaLabel}
-                </Link>
-              </div>
-            )}
-            {dismissible && (
-              <div className="mt-2 text-right">
-                <button
-                  aria-label="Dismiss announcement"
-                  className="rounded p-1 hover:bg-white/10"
-                  onClick={() => {
-                    if (key) localStorage.setItem(key, "1");
-                    setVisible(false);
-                  }}
-                >
-                  Dismiss
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 
   return (
     <div className={`${classesFor(variant)} print:hidden`}>
-      {/* Mobile: collapsed with toggle */}
-      <div className="block sm:hidden">{mobileCollapsed}</div>
-      {/* Desktop: full */}
       <div className="hidden sm:block">{full}</div>
+      <div className="block sm:hidden">{mobileCollapsed}</div>
     </div>
   );
 }

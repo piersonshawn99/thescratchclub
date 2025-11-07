@@ -5,7 +5,7 @@ export const LINKS = {
   leagues: "/leagues",
   courses: "/courses",
   contact: "/contact", // 👈 add this
-  golfAndLife: "/golf-and-life",
+  golfLife: "/golf-life",
   signIn: "/signin",
   bookNow: "https://scratchclubgolf.com/book", // or whatever link you use
 };

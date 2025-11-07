@@ -97,6 +97,7 @@ export default function Header() {
     { label: "About", href: LINKS.about },
     { label: "Memberships", href: LINKS.memberships },
     { label: "Coaching", href: LINKS.coaching },
+    { label: "Golf + Life", href: LINKS.golfLife }, 
     { label: "Courses", href: LINKS.courses },
     { label: "Contact", href: LINKS.contact },
   ];
