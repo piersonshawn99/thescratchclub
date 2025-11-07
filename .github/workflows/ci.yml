@@ -25,3 +25,19 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+      - name: Smoke test
+        # Start the built Next server and run the lightweight smoke check for /coaching
+        run: |
+          # start the server in the background
+          pnpm start &
+          # wait for the coaching route to become available (up to ~30s)
+          for i in $(seq 1 30); do
+            if curl -sSf http://localhost:3000/coaching >/dev/null 2>&1; then
+              echo "server ready"
+              break
+            fi
+            sleep 1
+          done
+          # run the smoke script (fails CI on non-2xx/3xx)
+          node ./scripts/smoke_coaching.js
