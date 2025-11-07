@@ -2,6 +2,7 @@ export const LINKS = {
   about: "/about",
   memberships: "/memberships",
   coaching: "/coaching",
+  leagues: "/leagues",
   courses: "/courses",
   contact: "/contact", // 👈 add this
   golfAndLife: "/golf-and-life",

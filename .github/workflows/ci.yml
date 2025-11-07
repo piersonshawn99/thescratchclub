@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      build-artifact: ${{ steps.build.outputs.artifact || '' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,20 +26,61 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build
+        id: build
         run: pnpm build
 
-      - name: Smoke test
-        # Start the built Next server and run the lightweight smoke check for /coaching
+  smoke:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        run: npm install -g pnpm@10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Start built server and run smoke check
         run: |
-          # start the server in the background
           pnpm start &
-          # wait for the coaching route to become available (up to ~30s)
-          for i in $(seq 1 30); do
-            if curl -sSf http://localhost:3000/coaching >/dev/null 2>&1; then
-              echo "server ready"
-              break
-            fi
-            sleep 1
-          done
-          # run the smoke script (fails CI on non-2xx/3xx)
+          # use pnpm dlx wait-on to wait for the route; avoids adding a permanent dependency
+          pnpm dlx wait-on http://localhost:3000/coaching --timeout 30000
           node ./scripts/smoke_coaching.js
+
+  e2e:
+    needs: smoke
+    runs-on: ubuntu-latest
+    services: {}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        run: npm install -g pnpm@10
+
+      - name: Install dependencies (including @playwright/test)
+        run: pnpm install --frozen-lockfile
+
+      - name: Start built server
+        run: pnpm start &
+
+      - name: Wait for server
+        run: pnpm dlx wait-on http://localhost:3000/coaching --timeout 30000
+
+      - name: Install Playwright browsers
+        run: pnpm dlx playwright install --with-deps
+
+      - name: Run Playwright E2E tests
+        run: pnpm test:e2e
