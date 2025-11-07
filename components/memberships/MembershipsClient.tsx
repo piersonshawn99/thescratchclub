@@ -121,8 +121,9 @@ export default function MembershipsClient() {
   const offPeakSavings = Math.max(walkInMonthly - offPeak.priceMonthly, 0);
   const offPeakPct = walkInMonthly ? Math.round((offPeakSavings / walkInMonthly) * 100) : 0;
 
-  return (
-    <main>
+ return (
+  <main>
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       {/* Pre-Launch hero */}
       <section className="text-center mb-12">
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200/60 bg-emerald-50 px-3 py-1 text-sm text-emerald-700">
@@ -257,9 +258,10 @@ export default function MembershipsClient() {
           <QA q="Coaching add-ons?" a="Yes—book 1:1 coaching or clinics at member pricing. VIP includes office hours access." />
         </dl>
       </section>
-    </main>
-  );
-}
+    </div>
+  </main>
+);
+
 
 function Price({ annual, monthly, yearly }: { annual: boolean; monthly: number; yearly?: number }) {
   if (annual && yearly) {
