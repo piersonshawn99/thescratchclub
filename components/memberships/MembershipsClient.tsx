@@ -18,6 +18,9 @@ type Tier = {
   finePrint?: string;
 };
 
+// Walk-in rate pulled from env (fallback to 50)
+const WALK_IN_RATE: number = Number(process.env.NEXT_PUBLIC_WALK_IN_RATE ?? 50);
+
 const TIERS: Tier[] = [
   {
     id: "off-peak",
@@ -88,8 +91,8 @@ const TIERS: Tier[] = [
 export default function MembershipsClient() {
   const [annual, setAnnual] = useState(false);
   const [loadingPlan, setLoadingPlan] = useState<PlanId | null>(null);
+  const [hoursPerMonth, setHoursPerMonth] = useState<number>(8); // default ~2 hrs/wk
   const tiers = useMemo(() => TIERS, []);
-  const [hrsPerWeek, setHrsPerWeek] = useState<2 | 3>(2);
 
   async function startCheckout(plan: PlanId) {
     try {
@@ -112,9 +115,15 @@ export default function MembershipsClient() {
     }
   }
 
+  // quick helpers for the savings section
+  const walkInMonthly = hoursPerMonth * WALK_IN_RATE;
+  const offPeak = tiers.find(t => t.id === "off-peak")!;
+  const offPeakSavings = Math.max(walkInMonthly - offPeak.priceMonthly, 0);
+  const offPeakPct = walkInMonthly ? Math.round((offPeakSavings / walkInMonthly) * 100) : 0;
+
   return (
     <main>
-      {/* Pre-Launch badge + hero */}
+      {/* Pre-Launch hero */}
       <section className="text-center mb-12">
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200/60 bg-emerald-50 px-3 py-1 text-sm text-emerald-700">
           <span className="h-2 w-2 rounded-full bg-emerald-500" />
@@ -209,7 +218,12 @@ export default function MembershipsClient() {
       </section>
 
       {/* Value comparison / savings */}
-      <SavingsSection hrsPerWeek={hrsPerWeek} setHrsPerWeek={setHrsPerWeek} tiers={tiers} walkInRate={50} />
+      <SavingsSection
+        hoursPerMonth={hoursPerMonth}
+        setHoursPerMonth={setHoursPerMonth}
+        tiers={tiers}
+        walkInRate={WALK_IN_RATE}
+      />
 
       {/* Banners */}
       <section className="mt-12 grid gap-4 lg:grid-cols-3">
@@ -270,22 +284,21 @@ function Price({ annual, monthly, yearly }: { annual: boolean; monthly: number; 
 }
 
 function SavingsSection({
-  hrsPerWeek,
-  setHrsPerWeek,
+  hoursPerMonth,
+  setHoursPerMonth,
   tiers,
   walkInRate,
 }: {
-  hrsPerWeek: 2 | 3;
-  setHrsPerWeek: (v: 2 | 3) => void;
+  hoursPerMonth: number;
+  setHoursPerMonth: (v: number) => void;
   tiers: Tier[];
   walkInRate: number;
 }) {
-  const hoursPerMonth = hrsPerWeek * 4; // simple, clear
   const walkInMonthly = hoursPerMonth * walkInRate;
 
   const calc = (priceMonthly: number) => {
     const savings = Math.max(walkInMonthly - priceMonthly, 0);
-    const pct = walkInMonthly > 0 ? Math.round((savings / walkInMonthly) * 100) : 0;
+    const pct = walkInMonthly ? Math.round((savings / walkInMonthly) * 100) : 0;
     return { savings, pct };
   };
 
@@ -296,31 +309,33 @@ function SavingsSection({
       return { tier: t.name, memberPrice: t.priceMonthly, savings, pct };
     });
 
+  const hrsPerWeek = (hoursPerMonth / 4).toFixed(1);
+
   return (
     <section className="mt-14">
       <div className="mx-auto max-w-4xl">
         <div className="flex items-center justify-between flex-wrap gap-3">
           <h2 className="text-xl font-semibold tracking-tight">Membership vs. Walk-In</h2>
-          <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-2 py-1">
-            <span className="text-sm text-neutral-600 mr-1">Compare at</span>
-            <button
-              onClick={() => setHrsPerWeek(2)}
-              className={`px-3 py-1.5 rounded-full text-sm ${hrsPerWeek === 2 ? "bg-emerald-600 text-white" : "text-neutral-700"}`}
-            >
-              2 hrs/wk
-            </button>
-            <button
-              onClick={() => setHrsPerWeek(3)}
-              className={`px-3 py-1.5 rounded-full text-sm ${hrsPerWeek === 3 ? "bg-emerald-600 text-white" : "text-neutral-700"}`}
-            >
-              3 hrs/wk
-            </button>
+          <div className="flex items-center gap-3">
+            <label htmlFor="hours" className="text-sm text-neutral-700">Hours / month</label>
+            <input
+              id="hours"
+              type="range"
+              min={4}
+              max={20}
+              step={1}
+              value={hoursPerMonth}
+              onChange={(e) => setHoursPerMonth(Number(e.target.value))}
+              className="w-48 accent-emerald-600"
+              aria-label="Hours per month"
+            />
+            <div className="text-sm tabular-nums font-medium text-neutral-900 w-10 text-right">{hoursPerMonth}</div>
           </div>
         </div>
 
         <p className="mt-2 text-sm text-neutral-600">
-          Walk-in at ${walkInRate}/hr × {hoursPerMonth} hrs/mo = <span className="font-medium">${walkInMonthly}</span>.
-          Memberships often pay for themselves even at low usage.
+          Walk-in at ${walkInRate}/hr × {hoursPerMonth} hrs/mo (~{hrsPerWeek} hrs/wk) ={" "}
+          <span className="font-medium">${walkInMonthly}</span>. Memberships often pay for themselves even at low usage.
         </p>
 
         <div className="mt-4 overflow-hidden rounded-2xl border border-neutral-200">
@@ -352,12 +367,8 @@ function SavingsSection({
 
         <div className="mt-4 rounded-xl bg-emerald-50 border border-emerald-100 p-4 text-emerald-900">
           <p className="text-sm">
-            <span className="font-medium">Bottom line:</span> At {hrsPerWeek} hrs/week, even{" "}
-            <span className="font-semibold">Off-Peak</span> membership typically saves{" "}
-            <span className="font-semibold">
-              {hrsPerWeek === 2 ? "$301 (≈75%)" : "$501 (≈84%)"}
-            </span>{" "}
-            per month vs walk-in. “Two hours a week” pays for itself.
+            <span className="font-medium">Bottom line:</span> At ~{hrsPerWeek} hrs/week,{" "}
+            <span className="font-semibold">membership typically saves big</span> versus walk-in—often hundreds per month.
           </p>
         </div>
       </div>
@@ -395,7 +406,7 @@ function QA({ q, a }: { q: string; a: string }) {
   return (
     <div>
       <dt className="font-medium text-neutral-900">{q}</dt>
-      <dd className="mt-1 text-neutral-700 text-sm">{a}</dd>
+      <dd className="mt1 text-neutral-700 text-sm">{a}</dd>
     </div>
   );
 }
