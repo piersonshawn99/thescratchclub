@@ -49,12 +49,14 @@ export default function Header() {
   }, []);
 
   const nav = [
+    { label: "Home", href: "/" },
     { label: "About", href: LINKS.about },
     { label: "Memberships", href: LINKS.memberships },
     { label: "Coaching", href: LINKS.coaching },
     { label: "Courses", href: LINKS.courses },
     { label: "Contact", href: LINKS.contact },
   ];
+
 
   const ctaHref = LINKS.bookNow ?? LINKS.memberships ?? LINKS.contact;
 
