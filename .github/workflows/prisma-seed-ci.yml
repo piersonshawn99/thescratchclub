@@ -1,3 +1,4 @@
+# --- FILE: .github/workflows/prisma-seed-ci.yml
 name: Prisma seed CI
 
 on:
@@ -10,33 +11,37 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+
+    # Set env once for the whole job
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL_SEED }}
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install pnpm
+          cache: 'pnpm'
+
+      - name: Enable pnpm via Corepack
         run: corepack enable && corepack prepare pnpm@latest --activate
+
       - name: Install dependencies
-        run: pnpm install
-      - name: Setup DATABASE_URL
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL_SEED }}
-        run: echo "DATABASE_URL is set"
+        run: pnpm install --frozen-lockfile
+
       - name: Generate Prisma client
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL_SEED }}
-        run: pnpm prisma:generate
-      - name: Push/Pull schema (optional)
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL_SEED }}
-        run: pnpm prisma:db:push
+        run: pnpm prisma:generate # or: pnpm prisma generate
+
+      - name: Push schema (optional)
+        run: pnpm prisma:db:push # or: pnpm prisma db push
+
       - name: Run seed script
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL_SEED }}
         run: node ./scripts/seed_memberships.js
+
       - name: Check seed
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL_SEED }}
         run: node ./scripts/check_seed.js
