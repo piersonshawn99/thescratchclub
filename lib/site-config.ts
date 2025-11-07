@@ -1,5 +1,5 @@
 export const announcement = {
-  message: "Founder Memberships: limited spots available in Howell.",
+  message: "Founder Memberships: limited spots available in Pinckney-Lakeland.",
   href: "/memberships",
   ctaLabel: "Reserve now",
   variant: "emerald",     // "emerald" | "neutral" | "black"
