@@ -1,0 +1,40 @@
+// Prisma schema for The Scratch Club
+// Provider: PlanetScale (MySQL-compatible)
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Minimal models to support memberships and purchases via Stripe.
+model User {
+  id        String                 @id @default(cuid())
+  name      String?
+  email     String                 @unique
+  createdAt DateTime               @default(now())
+  purchases MembershipPurchase[]
+}
+
+model Membership {
+  id         String                 @id @default(cuid())
+  name       String
+  priceCents Int
+  interval   String                 // e.g. "monthly", "yearly", "one-time"
+  createdAt  DateTime               @default(now())
+  purchases  MembershipPurchase[]
+}
+
+model MembershipPurchase {
+  id              String    @id @default(cuid())
+  user            User      @relation(fields: [userId], references: [id])
+  userId          String
+  membership      Membership @relation(fields: [membershipId], references: [id])
+  membershipId    String
+  stripeSessionId String?
+  status          String    @default("pending")
+  createdAt       DateTime  @default(now())
+}

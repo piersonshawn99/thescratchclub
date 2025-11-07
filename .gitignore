@@ -4,3 +4,7 @@ node_modules
 test-results/
 playwright-report/
 .cache/ms-playwright/
+# Environment files
+.env
+.env.local
+.env.*.local
