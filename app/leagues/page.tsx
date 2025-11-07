@@ -46,7 +46,8 @@ export default function LeaguesPage() {
             alt="Multiple indoor golf simulator bays in use by 4‑person teams"
             fill
             priority
-            className="object-cover"
+            // show the top of the image (faces) by anchoring the object position to the top
+            className="object-cover object-top"
           />
           {/* Emerald brand overlay for consistency */}
           <div className="absolute inset-0 bg-emerald-900/40 mix-blend-multiply" />
