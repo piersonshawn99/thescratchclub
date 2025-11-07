@@ -1,18 +1,24 @@
-import prisma from '@/lib/prisma';
+// --- FILE: app/api/memberships/route.ts ---
+import { NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
+
+export const runtime = "nodejs";        // Prisma requires Node runtime
+export const dynamic = "force-dynamic"; // don't cache this route
 
 export async function GET() {
   try {
-    // Guard: during local builds or environments without a database URL set,
-    // avoid initializing Prisma which would throw. Return an empty list so the
-    // build can proceed. In production (with DATABASE_URL set) this will hit
-    // the real database.
+    // In envs without a DB URL (local builds, preview w/o secrets), don't touch Prisma.
     if (!process.env.DATABASE_URL) {
-      return new Response(JSON.stringify({ memberships: [] }), { status: 200 });
+      return NextResponse.json({ memberships: [] }, { status: 200 });
     }
-    const memberships = await prisma.membership.findMany({ orderBy: { priceCents: 'asc' } });
-    return new Response(JSON.stringify({ memberships }), { status: 200 });
+
+    const memberships = await prisma.membership.findMany({
+      orderBy: { priceCents: "asc" },
+    });
+
+    return NextResponse.json({ memberships }, { status: 200 });
   } catch (err) {
-    console.error('Error fetching memberships', err);
-    return new Response(JSON.stringify({ error: 'server error' }), { status: 500 });
+    console.error("[/api/memberships] error:", err);
+    return NextResponse.json({ error: "server error" }, { status: 500 });
   }
 }
