@@ -98,7 +98,7 @@ export default function AnnouncementBar({
 
   // Desktop full banner
   const full = (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 border-b-2 border-amber-400/80">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="flex items-center justify-center gap-4 py-2.5 text-sm font-medium tracking-wide">
         <div className="flex items-center text-center">
           {pinIcon}
@@ -118,7 +118,7 @@ export default function AnnouncementBar({
 
   // Mobile collapsed bar
   const mobileCollapsed = (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 border-b border-amber-400/70">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="flex items-center justify-center gap-2 py-1 text-xs font-medium tracking-wide">
         {pinIcon}
         <p className="truncate">{message}</p>
@@ -127,8 +127,9 @@ export default function AnnouncementBar({
   );
 
   return (
-    <div className={`${classesFor(variant)} print:hidden`}>
-      <div className="hidden sm:block">{full}</div>
+  
+    <div className={`${classesFor(variant)} print:hidden border-b-2 border-amber-400/80`}>
+        <div className="hidden sm:block">{full}</div>
       <div className="block sm:hidden">{mobileCollapsed}</div>
     </div>
   );

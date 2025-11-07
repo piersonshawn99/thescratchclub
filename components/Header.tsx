@@ -1,7 +1,6 @@
 "use client";
 
 import AnnouncementBar from "./AnnouncementBar";
-import { announcement } from "@/lib/site-config";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -106,7 +105,7 @@ export default function Header() {
 
   return (
     <>
-      <AnnouncementBar config={announcement} />
+      <AnnouncementBar />
 
       <header className="sticky top-0 z-40 w-full border-b border-neutral-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
         {/* Utility strip */}
