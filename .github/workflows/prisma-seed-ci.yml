@@ -1,0 +1,42 @@
+name: Prisma seed CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  seed-and-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install pnpm
+        run: corepack enable && corepack prepare pnpm@latest --activate
+      - name: Install dependencies
+        run: pnpm install
+      - name: Setup DATABASE_URL
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL_SEED }}
+        run: echo "DATABASE_URL is set"
+      - name: Generate Prisma client
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL_SEED }}
+        run: pnpm prisma:generate
+      - name: Push/Pull schema (optional)
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL_SEED }}
+        run: pnpm prisma:db:push
+      - name: Run seed script
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL_SEED }}
+        run: node ./scripts/seed_memberships.js
+      - name: Check seed
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL_SEED }}
+        run: node ./scripts/check_seed.js
