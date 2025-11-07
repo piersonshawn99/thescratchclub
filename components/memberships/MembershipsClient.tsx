@@ -88,51 +88,49 @@ const TIERS: Tier[] = [
   },
 ];
 
-  export default function MembershipsClient() {
-    const [annual, setAnnual] = useState(false);
-    const [loadingPlan, setLoadingPlan] = useState<PlanId | null>(null);
-    const [hoursPerMonth, setHoursPerMonth] = useState<number>(8); // default ~2 hrs/wk
-    const tiers = useMemo(() => TIERS, []);
+ export default function MembershipsClient() {
+  const [annual, setAnnual] = useState(false);
+  const [loadingPlan, setLoadingPlan] = useState<PlanId | null>(null);
+  const [hoursPerMonth, setHoursPerMonth] = useState<number>(8); // default ~2 hrs/wk
+  const tiers = useMemo(() => TIERS, []);
 
-    const MEMBERSHIPS_OPEN =
-      process.env.NEXT_PUBLIC_MEMBERSHIPS_OPEN === "true";
+  const MEMBERSHIPS_OPEN =
+    process.env.NEXT_PUBLIC_MEMBERSHIPS_OPEN === "true";
 
-    async function startCheckout(plan: PlanId) {
-      try {
-        if (!MEMBERSHIPS_OPEN) {
-          alert("Memberships are coming soon. Join the waitlist and we’ll notify you.");
-          window.location.href = `/contact?interest=membership&plan=${encodeURIComponent(plan)}`;
-          return;
-        }
-
-        setLoadingPlan(plan);
-        const res = await fetch("/api/checkout", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ plan }),
-        });
-
-        if (!res.ok) {
-          const { error } = (await res.json().catch(() => null)) || {};
-          throw new Error(error || "Checkout failed");
-        }
-
-        const { url } = await res.json();
-        window.location.href = url; // redirect to Stripe
-      } catch (e) {
-        console.error("[checkout] error:", e);
-        alert(
-          e instanceof Error
-            ? e.message
-            : "We couldn’t start checkout. Please try again."
-        );
-        setLoadingPlan(null);
+  async function startCheckout(plan: PlanId) {
+    try {
+      if (!MEMBERSHIPS_OPEN) {
+        alert("Memberships are coming soon. Join the waitlist and we’ll notify you.");
+        window.location.href = `/contact?interest=membership&plan=${encodeURIComponent(
+          plan
+        )}`;
+        return;
       }
+
+      setLoadingPlan(plan);
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan }),
+      });
+
+      if (!res.ok) {
+        const { error } = (await res.json().catch(() => null)) || {};
+        throw new Error(error || "Checkout failed");
+      }
+
+      const { url } = await res.json();
+      window.location.href = url; // redirect to Stripe
+    } catch (e) {
+      console.error("[checkout] error:", e);
+      alert(
+        e instanceof Error
+          ? e.message
+          : "We couldn’t start checkout. Please try again."
+      );
+      setLoadingPlan(null);
     }
   }
-
-  // monthly walk-in comparator
-  const walkInMonthly = hoursPerMonth * WALK_IN_RATE;
 
   return (
     <main>
@@ -153,13 +151,17 @@ const TIERS: Tier[] = [
           <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-2 py-1">
             <button
               onClick={() => setAnnual(false)}
-              className={`px-3 py-1.5 rounded-full text-sm ${!annual ? "bg-emerald-600 text-white" : "text-neutral-700"}`}
+              className={`px-3 py-1.5 rounded-full text-sm ${
+                !annual ? "bg-emerald-600 text-white" : "text-neutral-700"
+              }`}
             >
               Monthly
             </button>
             <button
               onClick={() => setAnnual(true)}
-              className={`px-3 py-1.5 rounded-full text-sm ${annual ? "bg-emerald-600 text-white" : "text-neutral-700"}`}
+              className={`px-3 py-1.5 rounded-full text-sm ${
+                annual ? "bg-emerald-600 text-white" : "text-neutral-700"
+              }`}
             >
               Annual <span className="ml-1 opacity-75">(save)</span>
             </button>
@@ -181,7 +183,9 @@ const TIERS: Tier[] = [
             return (
               <div
                 key={tier.id}
-                className={`relative flex flex-col border border-neutral-200 rounded-2xl bg-white ${tier.popular ? "ring-2 ring-emerald-600" : ""}`}
+                className={`relative flex flex-col border border-neutral-200 rounded-2xl bg-white ${
+                  tier.popular ? "ring-2 ring-emerald-600" : ""
+                }`}
               >
                 {tier.popular && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-emerald-600 px-3 py-1 text-xs font-medium text-white shadow">
@@ -192,10 +196,20 @@ const TIERS: Tier[] = [
                 <div className="p-4">
                   <div className="flex items-baseline justify-between">
                     <div>
-                      <div className="text-lg font-semibold tracking-tight">{tier.name}</div>
-                      {tier.tagline && <p className="mt-1 text-sm text-neutral-600">{tier.tagline}</p>}
+                      <div className="text-lg font-semibold tracking-tight">
+                        {tier.name}
+                      </div>
+                      {tier.tagline && (
+                        <p className="mt-1 text-sm text-neutral-600">
+                          {tier.tagline}
+                        </p>
+                      )}
                     </div>
-                    <Price annual={annual} monthly={tier.priceMonthly} yearly={tier.priceYearly} />
+                    <Price
+                      annual={annual}
+                      monthly={tier.priceMonthly}
+                      yearly={tier.priceYearly}
+                    />
                   </div>
                 </div>
 
@@ -207,13 +221,19 @@ const TIERS: Tier[] = [
                       </li>
                     ))}
                   </ul>
-                  {tier.finePrint && <p className="mt-3 text-xs text-neutral-500">{tier.finePrint}</p>}
+                  {tier.finePrint && (
+                    <p className="mt-3 text-xs text-neutral-500">
+                      {tier.finePrint}
+                    </p>
+                  )}
                 </div>
 
                 <div className="p-4">
                   {isFounders ? (
                     <Link href={tier.ctaHref} className="w-full">
-                      <PrimaryButton className="w-full">{tier.cta}</PrimaryButton>
+                      <PrimaryButton className="w-full">
+                        {tier.cta}
+                      </PrimaryButton>
                     </Link>
                   ) : (
                     <PrimaryButton
@@ -222,7 +242,11 @@ const TIERS: Tier[] = [
                       onClick={() => startCheckout(tier.id as PlanId)}
                       aria-busy={isLoading}
                     >
-                      {isLoading ? "Starting checkout..." : tier.cta}
+                      {!MEMBERSHIPS_OPEN
+                        ? "Get Notified"
+                        : isLoading
+                        ? "Starting checkout..."
+                        : tier.cta}
                     </PrimaryButton>
                   )}
                 </div>
@@ -275,6 +299,7 @@ const TIERS: Tier[] = [
     </main>
   );
 }
+
 
 function Price({ annual, monthly, yearly }: { annual: boolean; monthly: number; yearly?: number }) {
   if (annual && yearly) {
