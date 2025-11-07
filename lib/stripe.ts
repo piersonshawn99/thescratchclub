@@ -4,6 +4,8 @@ import Stripe from "stripe";
 /**
  * Single Stripe instance for the whole app.
  * Always: import { stripe } from "@/lib/stripe";
+ * NOTE: We do NOT throw at import time. Missing keys are warned,
+ * and actual API calls will fail at runtime if unconfigured.
  */
 
 declare global {
@@ -13,27 +15,18 @@ declare global {
 
 const secretKey = process.env.STRIPE_SECRET_KEY;
 
-if (!secretKey && process.env.NODE_ENV === "production") {
-  throw new Error("Missing STRIPE_SECRET_KEY. Set it in your Vercel Environment Variables.");
-} else if (!secretKey) {
-  console.warn("[stripe] STRIPE_SECRET_KEY is not set (using undefined).");
+if (!secretKey) {
+  // Don't crash builds; just warn. Real calls will 401 at runtime if unconfigured.
+  console.warn("[stripe] STRIPE_SECRET_KEY is not set. Stripe calls will fail at runtime.");
 }
 
 export const stripe =
   globalThis.__stripe__ ??
+  // It's okay to pass an empty string here; Stripe SDK defers auth until a call.
   new Stripe((secretKey as string) || "");
 
 if (process.env.NODE_ENV !== "production") {
   globalThis.__stripe__ = stripe;
-}
-
-// Optional helper
-export function getWebhookSecret(): string {
-  const secret = process.env.STRIPE_WEBHOOK_SECRET;
-  if (!secret && process.env.NODE_ENV === "production") {
-    throw new Error("Missing STRIPE_WEBHOOK_SECRET. Set it in your Vercel Environment Variables.");
-  }
-  return (secret as string) || "";
 }
 
 export type { Stripe };
