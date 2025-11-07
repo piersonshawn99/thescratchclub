@@ -9,6 +9,51 @@ import { LINKS } from "./links";
 import { track } from "@/lib/analytics";
 import { useState, useEffect, useRef } from "react";
 
+/** ---------- Icons (inline, no external deps) ---------- */
+function Logo(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true" className="h-5 w-5 md:h-6 md:w-6" {...props}>
+      <circle cx="16" cy="16" r="15" className="fill-emerald-600" />
+      <path d="M10 20c4-2 8-2 12 0" className="stroke-white" strokeWidth="2" fill="none" />
+      <circle cx="16" cy="12" r="3" className="fill-white" />
+    </svg>
+  );
+}
+function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path
+        fill="currentColor"
+        d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7m5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10m6.5-.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"
+      />
+    </svg>
+  );
+}
+function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="M13 3h4a1 1 0 0 1 1 1v4h-3a2 2 0 0 0-2 2v3h5l-1 4h-4v6h-4v-6H6v-4h3V9a5 5 0 0 1 5-5Z" />
+    </svg>
+  );
+}
+function YoutubeIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path
+        fill="currentColor"
+        d="M23 12s0-3.4-.4-4.9c-.2-.8-.8-1.5-1.6-1.7C19 4 12 4 12 4s-7 0-9 .4c-.8.2-1.4.9-1.6 1.7C1 8.6 1 12 1 12s0 3.4.4 4.9c.2.8.8 1.5 1.6 1.7C5 20 12 20 12 20s7 0 9-.4c.8-.2 1.4-.9 1.6-1.7.4-1.5.4-4.9.4-4.9ZM10 15.5v-7l6 3.5-6 3.5Z"
+      />
+    </svg>
+  );
+}
+function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" />
+    </svg>
+  );
+}
+
 function cx(...classes: (string | false | undefined)[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -26,7 +71,7 @@ export default function Header() {
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    setOpen(false); // close on route change
+    setOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -62,7 +107,7 @@ export default function Header() {
     <>
       <AnnouncementBar config={announcement} />
 
-      <header className="sticky top-0 z-40 w-full border-b border-neutral-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-t-0">
+      <header className="sticky top-0 z-40 w-full border-b border-neutral-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
         {/* Utility strip */}
         <div className="hidden md:block border-b border-neutral-200/70 bg-neutral-50">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-9 items-center justify-between text-xs text-neutral-600">
@@ -92,18 +137,12 @@ export default function Header() {
 
         {/* Main bar */}
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* compact height on mobile */}
           <div className="flex h-12 md:h-16 items-center justify-between">
-            <Link
-              href="/"
-              className="flex items-center gap-2"
-              onClick={() => track("nav_logo_click")}
-            >
+            <Link href="/" className="flex items-center gap-2" onClick={() => track("nav_logo_click")}>
               <Logo />
               <span className="font-semibold tracking-tight">The Scratch Club</span>
             </Link>
 
-            {/* Desktop nav */}
             <nav className="hidden md:flex items-center gap-8 text-sm text-neutral-700">
               {nav.map((item) => {
                 const active = pathname === item.href;
@@ -112,10 +151,7 @@ export default function Header() {
                     key={item.label}
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    className={cx(
-                      "transition-colors hover:text-emerald-700",
-                      active && "text-emerald-700 font-medium"
-                    )}
+                    className={cx("transition-colors hover:text-emerald-700", active && "text-emerald-700 font-medium")}
                     onClick={() => track("nav_click", { label: item.label })}
                   >
                     {item.label}
@@ -124,7 +160,6 @@ export default function Header() {
               })}
             </nav>
 
-            {/* Desktop CTA */}
             <div className="hidden md:flex items-center gap-3">
               <Link
                 href={ctaHref}
@@ -135,7 +170,6 @@ export default function Header() {
               </Link>
             </div>
 
-            {/* Mobile toggle */}
             <button
               ref={menuButtonRef}
               className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-neutral-700 hover:bg-neutral-100"
@@ -152,7 +186,7 @@ export default function Header() {
         <div
           ref={menuRef}
           className={cx(
-            "md:hidden border-t border-neutral-200 bg-white shadow-lg overflow-hidden transition-[max-height,opacity] duration-300",
+            "md:hidden border-top border-neutral-200 bg-white shadow-lg overflow-hidden transition-[max-height,opacity] duration-300",
             open ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0"
           )}
         >
@@ -189,10 +223,7 @@ export default function Header() {
                     key={item.label}
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    className={cx(
-                      "rounded-lg px-3 py-2 text-sm hover:bg-neutral-100",
-                      active && "bg-neutral-100 font-medium text-emerald-700"
-                    )}
+                    className={cx("rounded-lg px-3 py-2 text-sm hover:bg-neutral-100", active && "bg-neutral-100 font-medium text-emerald-700")}
                     onClick={() => track("nav_click", { label: item.label, location: "header_mobile" })}
                   >
                     {item.label}
@@ -206,18 +237,3 @@ export default function Header() {
     </>
   );
 }
-
-/** ---------- Icons (inline, no external deps) ---------- */
-function Logo(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 32 32" aria-hidden="true" className="h-5 w-5 md:h-6 md:w-6" {...props}>
-      <circle cx="16" cy="16" r="15" className="fill-emerald-600" />
-      <path d="M10 20c4-2 8-2 12 0" className="stroke-white" strokeWidth="2" fill="none" />
-      <circle cx="16" cy="12" r="3" className="fill-white" />
-    </svg>
-  );
-}
-function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7m5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10m6.5-.75a1.25 1.25
