@@ -1,4 +1,4 @@
-// app/coaching/page.tsx
+// Final clean coaching page
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -51,20 +51,43 @@ const COACHES: Coach[] = [
   },
 ];
 
+function mailtoForRole(role?: string) {
+  const subject = `Coaching Application – ${role ?? "The Scratch Club"}`;
+  const lines = [
+    "Hi Scratch Club team:",
+    "",
+    role ? `I'd like to apply for the role: ${role}.` : "My name is [Your Name]. I'm interested in coaching at The Scratch Club.",
+    "",
+    "Highlights:",
+    "• Certifications: [PGA/LPGA, TPI, Trackman]",
+    "• Coaching focus: [e.g., women & juniors, advanced player development]",
+    "• Availability: [e.g., evenings/weekends]",
+    "",
+    "Resume attached.",
+    "",
+    "Thanks!",
+    "[Your Name]",
+    "[Phone]",
+  ];
+
+  return `mailto:coaching@scratchclubgolf.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+    lines.join("\r\n")
+  )}`;
+}
+
 export default function CoachingPage() {
   return (
     <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
       <header className="mb-10">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900">
-              Coaching
-            </h1>
+            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900">Coaching</h1>
             <p className="mt-2 max-w-2xl text-neutral-600">
               Coaching that travels from the bay to the course. Real feedback,
               real reps, real results.
             </p>
           </div>
+
           <Link
             href="/booking"
             className="hidden sm:inline-flex items-center rounded-xl border border-emerald-700 px-4 py-2 text-sm font-medium text-emerald-800 hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
@@ -107,69 +130,18 @@ export default function CoachingPage() {
                 <div className="md:col-span-3">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <h2 className="text-xl font-semibold tracking-tight text-neutral-900">
-                        {coach.name}
-                      </h2>
-                      {coach.role && (
-                        <p className="mt-0.5 text-sm text-emerald-800">
-                          {coach.role}
-                        </p>
-                      )}
+                      <h2 className="text-xl font-semibold tracking-tight text-neutral-900">{coach.name}</h2>
+                      {coach.role && <p className="mt-0.5 text-sm text-emerald-800">{coach.role}</p>}
                     </div>
 
                     {coach.links && coach.links.length > 0 && (
                       <div className="flex shrink-0 items-center gap-3">
                         {coach.links.map((l) => (
-                          <Link
-                            key={`${coach.id}-${l.href}`}
-                            href={l.href}
-                            className="text-sm text-emerald-800 hover:underline"
-                          >
+                          <Link key={`${coach.id}-${l.href}`} href={l.href} className="text-sm text-emerald-800 hover:underline">
                             {l.label}
                           </Link>
                         ))}
                       </div>
-                    )}
-                  </div>
-
-                  {coach.specialties && coach.specialties.length > 0 && (
-                    <ul className="mt-3 flex flex-wrap gap-2">
-                      {coach.specialties.map((tag) => (
-                        <li
-                          key={`${coach.id}-${tag}`}
-                          className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs text-neutral-700"
-                        >
-                          {tag}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-
-                  <p className="mt-4 text-neutral-700 leading-relaxed whitespace-pre-line">
-                    {coach.bio}
-                  </p>
-
-                  <div className="mt-6">
-                    {isFuture ? (
-                      <a
-                        href={`mailto:coaching@scratchclubgolf.com?subject=${encodeURIComponent(
-                          "Coaching Application – " + coach.role
-                        )}&body=${encodeURIComponent(
-                          "Hi Scratch Club team,%0D%0A%0D%0AI'd like to apply for the role: " +
-                            coach.role +
-                            ".%0D%0A%0D%0AHighlights:%0D%0A• Certifications: [PGA/LPGA, TPI, Trackman]%0D%0A• Coaching focus: [e.g., women & juniors, advanced player development]%0D%0A• Availability: [e.g., evenings/weekends]%0D%0A%0D%0AResume attached.%0D%0A%0D%0AThanks!%0D%0A[Your Name]%0D%0A[Phone]"
-                        )}`}
-                        className="inline-flex items-center rounded-xl bg-emerald-700 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
-                      >
-                        Apply for This Role
-                      </a>
-                    ) : (
-                      <Link
-                        href="/booking"
-                        className="inline-flex items-center rounded-xl bg-emerald-700 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
-                      >
-                        Work with {coach.name.split(" ")[0]}
-                      </Link>
                     )}
                   </div>
                 </div>
