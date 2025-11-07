@@ -82,90 +82,148 @@ export default function CoachingPage() {
       </p>
 
       <section className="space-y-8 mt-8">
-        {COACHES.map((coach) => (
-          <article
-            key={coach.id}
-            className="rounded-2xl border border-neutral-200 bg-white/70 p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-6 items-center">
-              <div className="md:col-span-2">
-                <div className="aspect-[5/4] w-full overflow-hidden rounded-xl bg-neutral-100">
-                  <Image
-                    src={coach.image}
-                    alt={`${coach.name} headshot`}
-                    width={960}
-                    height={720}
-                    className="h-full w-full object-contain object-center"
-                    priority={false}
-                  />
+        {COACHES.map((coach) => {
+          const isFuture = coach.name.startsWith("Future");
+          return (
+            <article
+              key={coach.id}
+              className="rounded-2xl border border-neutral-200 bg-white/70 p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-6 items-center">
+                <div className="md:col-span-2">
+                  <div className="aspect-[5/4] w-full overflow-hidden rounded-xl bg-neutral-100">
+                    <Image
+                      src={coach.image}
+                      alt={`${coach.name} headshot`}
+                      width={960}
+                      height={720}
+                      className="h-full w-full object-contain object-center"
+                      priority={false}
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div className="md:col-span-3">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h2 className="text-xl font-semibold tracking-tight text-neutral-900">
-                      {coach.name}
-                    </h2>
-                    {coach.role && (
-                      <p className="mt-0.5 text-sm text-emerald-800">
-                        {coach.role}
-                      </p>
+                <div className="md:col-span-3">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h2 className="text-xl font-semibold tracking-tight text-neutral-900">
+                        {coach.name}
+                      </h2>
+                      {coach.role && (
+                        <p className="mt-0.5 text-sm text-emerald-800">
+                          {coach.role}
+                        </p>
+                      )}
+                    </div>
+
+                    {coach.links && coach.links.length > 0 && (
+                      <div className="flex shrink-0 items-center gap-3">
+                        {coach.links.map((l) => (
+                          <Link
+                            key={`${coach.id}-${l.href}`}
+                            href={l.href}
+                            className="text-sm text-emerald-800 hover:underline"
+                          >
+                            {l.label}
+                          </Link>
+                        ))}
+                      </div>
                     )}
                   </div>
 
-                  {coach.links && coach.links.length > 0 && (
-                    <div className="flex shrink-0 items-center gap-3">
-                      {coach.links.map((l) => (
-                        <Link
-                          key={`${coach.id}-${l.href}`}
-                          href={l.href}
-                          className="text-sm text-emerald-800 hover:underline"
+                  {coach.specialties && coach.specialties.length > 0 && (
+                    <ul className="mt-3 flex flex-wrap gap-2">
+                      {coach.specialties.map((tag) => (
+                        <li
+                          key={`${coach.id}-${tag}`}
+                          className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs text-neutral-700"
                         >
-                          {l.label}
-                        </Link>
+                          {tag}
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   )}
-                </div>
 
-                {coach.specialties && coach.specialties.length > 0 && (
-                  <ul className="mt-3 flex flex-wrap gap-2">
-                    {coach.specialties.map((tag) => (
-                      <li
-                        key={`${coach.id}-${tag}`}
-                        className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs text-neutral-700"
+                  <p className="mt-4 text-neutral-700 leading-relaxed whitespace-pre-line">
+                    {coach.bio}
+                  </p>
+
+                  <div className="mt-6">
+                    {isFuture ? (
+                      <a
+                        href={`mailto:coaching@scratchclubgolf.com?subject=${encodeURIComponent(
+                          "Coaching Application – " + coach.role
+                        )}&body=${encodeURIComponent(
+                          "Hi Scratch Club team,%0D%0A%0D%0AI'd like to apply for the role: " +
+                            coach.role +
+                            ".%0D%0A%0D%0AHighlights:%0D%0A• Certifications: [PGA/LPGA, TPI, Trackman]%0D%0A• Coaching focus: [e.g., women & juniors, advanced player development]%0D%0A• Availability: [e.g., evenings/weekends]%0D%0A%0D%0AResume attached.%0D%0A%0D%0AThanks!%0D%0A[Your Name]%0D%0A[Phone]"
+                        )}`}
+                        className="inline-flex items-center rounded-xl bg-emerald-700 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
                       >
-                        {tag}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                <p className="mt-4 text-neutral-700 leading-relaxed whitespace-pre-line">
-                  {coach.bio}
-                </p>
+                        Apply for This Role
+                      </a>
+                    ) : (
+                      <Link
+                        href="/booking"
+                        className="inline-flex items-center rounded-xl bg-emerald-700 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
+                      >
+                        Work with {coach.name.split(" ")[0]}
+                      </Link>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </section>
 
-      <div className="mt-16 rounded-2xl border border-neutral-200 bg-emerald-50 p-6 text-center">
-        <h3 className="text-xl font-semibold text-neutral-900">
+      <div className="mt-16 rounded-2xl border border-neutral-200 bg-emerald-50 p-6">
+        <h3 className="text-center text-xl font-semibold text-neutral-900">
           Interested in Coaching at The Scratch Club?
         </h3>
-        <p className="mt-2 max-w-2xl mx-auto text-neutral-700">
-          We’re building a team of instructors who love the game, live for
-          progress, and bring out the best in every golfer they meet. If that
-          sounds like you, we’d like to connect.
+        <p className="mt-2 max-w-2xl mx-auto text-neutral-700 text-center">
+          We're building a team of instructors who love the game, live for progress, and
+          bring out the best in every golfer they meet. If that sounds like you, send us your
+          resume and a quick note.
         </p>
-        <Link
-          href="/contact"
-          className="inline-flex mt-4 rounded-xl bg-emerald-700 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
-        >
-          Contact Us
-        </Link>
+
+        <div className="mt-4 mx-auto max-w-xl text-left text-sm text-neutral-700">
+          <p className="font-medium">Include:</p>
+          <ul className="mt-2 list-disc pl-5 space-y-1">
+            <li>PDF resume with coaching history and certifications (PGA/LPGA, TPI, Trackman, etc.)</li>
+            <li>1–2 paragraphs on your coaching approach and ideal player</li>
+            <li>Any public links (website, Instagram, CoachNow, tournament record)</li>
+            <li>General availability (evenings/weekends, seasonal)</li>
+          </ul>
+        </div>
+
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a
+            href={`mailto:coaching@scratchclubgolf.com?subject=${encodeURIComponent("Coaching Application – The Scratch Club")}&body=${encodeURIComponent("Hi Scratch Club team,%0D%0A%0D%0AMy name is [Your Name]. I'm interested in coaching at The Scratch Club.%0D%0A%0D%0AHighlights:%0D%0A• Certifications: [PGA/LPGA, TPI, Trackman]%0D%0A• Coaching focus: [e.g., women & juniors, advanced player development]%0D%0A• Availability: [e.g., evenings/weekends]%0D%0A%0D%0AResume attached.%0D%0A%0D%0AThanks!%0D%0A[Your Name]%0D%0A[Phone]")}`}
+            className="inline-flex rounded-xl bg-emerald-700 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
+          >
+            Email Your Resume
+          </a>
+          <Link
+            href="/contact"
+            className="inline-flex rounded-xl border border-emerald-700 px-6 py-2 text-sm font-medium text-emerald-800 hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
+          >
+            Questions? Contact Us
+          </Link>
+        </div>
+
+        <div className="mt-4 text-center text-sm text-neutral-700">
+          Or email us at
+          <span className="mx-1 font-medium select-all">coaching@scratchclubgolf.com</span>
+          <button
+            type="button"
+            onClick={() => navigator.clipboard?.writeText("coaching@scratchclubgolf.com")}
+            className="ml-2 inline-flex items-center rounded-lg border border-neutral-300 px-3 py-1 hover:bg-neutral-50"
+          >
+            Copy email
+          </button>
+        </div>
       </div>
 
       <div className="sm:hidden mt-10">
