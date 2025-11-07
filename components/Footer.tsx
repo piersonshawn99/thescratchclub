@@ -13,7 +13,7 @@ const PRIMARY = [
 
 const SECONDARY = [
   { label: "About", href: LINKS.about },
-  { label: "Leagues", href: LINKS.leagues },
+  { label: "Leagues", href: "/leagues" },
   { label: "Gift Cards", href: LINKS.courses },
   { label: "Contact", href: LINKS.contact },
 ];
