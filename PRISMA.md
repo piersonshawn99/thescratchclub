@@ -52,5 +52,6 @@ const users = await prisma.user.findMany();
 
 If you'd like, I can:
  - Add initial seed data for memberships,
- - Create a tiny server route that creates a membership and exercise the client,
+ - Create a tiny server route that creates a membership and exercise the client (added at `GET /api/debug/prisma`, protected by `PRISMA_DEBUG=true`).
+ - Add a seed script at `scripts/seed_memberships.js` (run with `node ./scripts/seed_memberships.js`).
  - Or run `prisma db push` here if you provide a branch connection string (not recommended to share secrets in chat).
