@@ -86,7 +86,7 @@ const TIERS: Tier[] = [
 ];
 
 export default function MembershipsClient() {
-  const [annual, setAnnual] = useState(true);
+  const [annual, setAnnual] = useState(false);
   const [loadingPlan, setLoadingPlan] = useState<PlanId | null>(null);
   const tiers = useMemo(() => TIERS, []);
 
