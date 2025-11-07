@@ -1,9 +1,5 @@
 import prisma from '@/lib/prisma';
-import Stripe from 'stripe';
-
-// stripe types/versions vary across installs; ignore strict typing here
-// @ts-ignore
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', { apiVersion: process.env.STRIPE_API_VERSION || '2025-10-29' });
+import { getStripe } from '@/lib/stripe';
 
 export async function POST(req: Request) {
   try {
@@ -37,7 +33,8 @@ export async function POST(req: Request) {
     const successUrl = process.env.MEMBERSHIP_SUCCESS_URL || `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/membership/success?session_id={CHECKOUT_SESSION_ID}`;
     const cancelUrl = process.env.MEMBERSHIP_CANCEL_URL || (process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000') + '/membership/cancel';
 
-    const session = await stripe.checkout.sessions.create({
+  const stripe = getStripe();
+  const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
       line_items: [

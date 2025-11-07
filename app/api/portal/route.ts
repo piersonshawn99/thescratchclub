@@ -1,7 +1,7 @@
 // --- FILE: app/api/portal/route.ts ---
 // OPTIONAL: if you later store the Stripe customer ID, you can offer a self-serve portal.
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 
 
 export async function POST(req: NextRequest) {
@@ -13,6 +13,7 @@ if (!customerId) return NextResponse.json({ error: "Missing customerId" }, { sta
 const origin = req.headers.get("origin") || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 
+const stripe = getStripe();
 const portal = await stripe.billingPortal.sessions.create({
 customer: customerId,
 return_url: `${origin}/account`,

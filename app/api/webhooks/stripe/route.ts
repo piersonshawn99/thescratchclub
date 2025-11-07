@@ -1,9 +1,7 @@
 // --- FILE: app/api/webhooks/stripe/route.ts ---
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
-
-
-export const config = { api: { bodyParser: false } } as const; // harmless in app router; kept for clarity
+import { getStripe } from "@/lib/stripe";
+import type Stripe from 'stripe';
 
 
 export async function POST(req: NextRequest) {
@@ -16,6 +14,7 @@ export async function POST(req: NextRequest) {
 
     let event;
     try {
+    const stripe = getStripe();
     event = await stripe.webhooks.constructEventAsync(payload, sig, process.env.STRIPE_WEBHOOK_SECRET as string);
     } catch (err: any) {
     console.error("Webhook signature verification failed:", err.message);

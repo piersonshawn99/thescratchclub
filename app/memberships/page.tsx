@@ -1,9 +1,6 @@
-"use client";
-import Link from "next/link";
-import { useMemo, useState } from "react";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import MembershipsClient from '@/components/memberships/MembershipsClient';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 // --- CONFIG ---
 // If you later wire Stripe/checkout, point `ctaHref` to your checkout/session route
@@ -96,129 +93,9 @@ export const metadata = {
 };
 
 export default function MembershipsPage() {
-  const [annual, setAnnual] = useState(true);
-
-  const tiers = useMemo(() => TIERS, []);
-
   return (
     <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-      {/* Hero */}
-      <section className="text-center mb-12">
-        <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200/60 bg-emerald-50 px-3 py-1 text-sm text-emerald-700">
-          <span className="h-2 w-2 rounded-full bg-emerald-500" />
-          Memberships now open
-        </div>
-        <h1 className="mt-4 text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900">
-          Train Smarter. <span className="text-emerald-700">Play Better.</span>
-        </h1>
-        <p className="mt-3 text-neutral-600 max-w-2xl mx-auto">
-          Pick the tier that fits your rhythm—casual reps, after‑work rounds, or all‑in performance. Upgrade anytime.
-        </p>
-
-        {/* Billing toggle */}
-        <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-2 py-1">
-          <button
-            onClick={() => setAnnual(false)}
-            className={`px-3 py-1.5 rounded-full text-sm ${!annual ? "bg-emerald-600 text-white" : "text-neutral-700"}`}
-          >
-            Monthly
-          </button>
-          <button
-            onClick={() => setAnnual(true)}
-            className={`px-3 py-1.5 rounded-full text-sm ${annual ? "bg-emerald-600 text-white" : "text-neutral-700"}`}
-          >
-            Annual <span className="ml-1 opacity-75">(save)</span>
-          </button>
-        </div>
-      </section>
-
-      {/* Pricing grid */}
-      <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {tiers.map((tier) => (
-          <Card
-            key={tier.id}
-            className={`relative flex flex-col border-neutral-200 ${tier.popular ? "ring-2 ring-emerald-600" : ""}`}
-          >
-            {tier.popular && (
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-emerald-600 px-3 py-1 text-xs font-medium text-white shadow">
-                Most Popular
-              </div>
-            )}
-            <CardHeader>
-              <CardTitle className="flex items-baseline justify-between">
-                <div>
-                  <div className="text-lg font-semibold tracking-tight">{tier.name}</div>
-                  {tier.tagline && (
-                    <p className="mt-1 text-sm text-neutral-600">{tier.tagline}</p>
-                  )}
-                </div>
-                <Price annual={annual} monthly={tier.priceMonthly} yearly={tier.priceYearly} />
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="mt-2 space-y-2">
-                {tier.features.map((f, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-neutral-700">
-                    <Check className="mt-0.5 h-4 w-4 text-emerald-600" />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              {tier.finePrint && (
-                <p className="mt-3 text-xs text-neutral-500">{tier.finePrint}</p>
-              )}
-            </CardContent>
-            <CardFooter className="mt-auto">
-              {tier.ctaHref.startsWith("/") ? (
-                <Link href={tier.ctaHref} className="w-full">
-                  <Button className="w-full bg-emerald-700 hover:bg-emerald-800 text-white">
-                    {tier.cta}
-                  </Button>
-                </Link>
-              ) : (
-                <a href={tier.ctaHref} className="w-full" target="_blank" rel="noreferrer">
-                  <Button className="w-full bg-emerald-700 hover:bg-emerald-800 text-white">
-                    {tier.cta}
-                  </Button>
-                </a>
-              )}
-            </CardFooter>
-          </Card>
-        ))}
-      </section>
-
-      {/* Secondary CTAs */}
-      <section className="mt-12 grid gap-4 lg:grid-cols-3">
-        <BannerCTA
-          title="Just looking to try it?"
-          body="Grab a day pass or book a bay à la carte."
-          href="/booking"
-          button="Book a Bay"
-        />
-        <BannerCTA
-          title="Questions before joining?"
-          body="Ping us and we’ll help match the right tier."
-          href="/contact"
-          button="Contact Us"
-        />
-        <BannerCTA
-          title="Team, league, or corporate?"
-          body="We’ll tailor a package for your crew."
-          href="/leagues"
-          button="Leagues & Events"
-        />
-      </section>
-
-      {/* FAQ */}
-      <section className="mt-16 border-t border-neutral-200 pt-10">
-        <h2 className="text-xl font-semibold tracking-tight">Membership FAQ</h2>
-        <dl className="mt-6 grid gap-6 md:grid-cols-2">
-          <QA q="Can I upgrade or downgrade later?" a="Yes. You can change tiers anytime; proration applies based on your billing cycle." />
-          <QA q="How do guests work?" a="Each tier includes guest allowances; beyond that, guests are welcome at the member guest rate." />
-          <QA q="Do sessions expire?" a="Unused included hours (if any) don’t roll over, but you can always book at member rates." />
-          <QA q="Coaching add‑ons?" a="Yes—book 1:1 coaching or clinics at member pricing. VIP includes office hours access." />
-        </dl>
-      </section>
+      <MembershipsClient />
     </main>
   );
 }
