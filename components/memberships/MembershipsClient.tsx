@@ -88,30 +88,46 @@ const TIERS: Tier[] = [
   },
 ];
 
-export default function MembershipsClient() {
-  const [annual, setAnnual] = useState(false);
-  const [loadingPlan, setLoadingPlan] = useState<PlanId | null>(null);
-  const [hoursPerMonth, setHoursPerMonth] = useState<number>(8); // default ~2 hrs/wk
-  const tiers = useMemo(() => TIERS, []);
+  export default function MembershipsClient() {
+    const [annual, setAnnual] = useState(false);
+    const [loadingPlan, setLoadingPlan] = useState<PlanId | null>(null);
+    const [hoursPerMonth, setHoursPerMonth] = useState<number>(8); // default ~2 hrs/wk
+    const tiers = useMemo(() => TIERS, []);
 
-  async function startCheckout(plan: PlanId) {
-    try {
-      setLoadingPlan(plan);
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan }),
-      });
-      if (!res.ok) {
-        const { error } = (await res.json().catch(() => null)) || {};
-        throw new Error(error || "Checkout failed");
+    const MEMBERSHIPS_OPEN =
+      process.env.NEXT_PUBLIC_MEMBERSHIPS_OPEN === "true";
+
+    async function startCheckout(plan: PlanId) {
+      try {
+        if (!MEMBERSHIPS_OPEN) {
+          alert("Memberships are coming soon. Join the waitlist and we’ll notify you.");
+          window.location.href = `/contact?interest=membership&plan=${encodeURIComponent(plan)}`;
+          return;
+        }
+
+        setLoadingPlan(plan);
+        const res = await fetch("/api/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ plan }),
+        });
+
+        if (!res.ok) {
+          const { error } = (await res.json().catch(() => null)) || {};
+          throw new Error(error || "Checkout failed");
+        }
+
+        const { url } = await res.json();
+        window.location.href = url; // redirect to Stripe
+      } catch (e) {
+        console.error("[checkout] error:", e);
+        alert(
+          e instanceof Error
+            ? e.message
+            : "We couldn’t start checkout. Please try again."
+        );
+        setLoadingPlan(null);
       }
-      const { url } = await res.json();
-      window.location.href = url; // redirect to Stripe
-    } catch (e) {
-      console.error("[checkout] error:", e);
-      alert(e instanceof Error ? e.message : "We couldn’t start checkout. Please try again.");
-      setLoadingPlan(null);
     }
   }
 
