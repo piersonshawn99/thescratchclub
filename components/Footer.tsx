@@ -84,12 +84,12 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-semibold text-neutral-900">Hours</h3>
             <dl className="mt-3 text-sm text-neutral-700 grid grid-cols-2 gap-y-1">
-              <dt>Mon–Thu</dt><dd className="text-right">7:00a – 11:00p</dd>
-              <dt>Fri</dt><dd className="text-right">7:00a – 12:00a</dd>
-              <dt>Sat</dt><dd className="text-right">7:00a – 12:00a</dd>
-              <dt>Sun</dt><dd className="text-right">7:00a – 11:00p</dd>
+              <dt>Mon–Thu</dt><dd className="text-right">6:00a – 11:00p</dd>
+              <dt>Fri</dt><dd className="text-right">6:00a – 12:00a</dd>
+              <dt>Sat</dt><dd className="text-right">6:00a – 12:00a</dd>
+              <dt>Sun</dt><dd className="text-right">6:00a – 11:00p</dd>
             </dl>
-            <p className="mt-3 text-xs text-neutral-500">Holiday hours may vary.</p>
+            <p className="mt-3 text-xs text-neutral-500">Holiday hours may vary. Staffed daily 7am-9pm.</p>
           </div>
         </div>
 
