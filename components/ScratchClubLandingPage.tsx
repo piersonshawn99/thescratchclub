@@ -45,7 +45,7 @@ export default function ScratchClubLandingPage() {
         </div>
       </Section>
 
-      {/* FORMULA — banded with formula.jpg (now 2 cards, same size as above) */}
+      {/* FORMULA — banded with formula.jpg (Learn → Train → Play) */}
       <Section bg="/images/bg/formula.jpg" tint="neutral" blur="backdrop-blur-[1.5px]">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
@@ -57,17 +57,22 @@ export default function ScratchClubLandingPage() {
           </p>
         </div>
 
-        {/* Two cards, matching feature-card sizing */}
-        <ol className="mt-12 grid gap-6 sm:grid-cols-2 list-none pl-0">
+        {/* Three cards, same size as Features, ordered Learn → Train → Play */}
+        <ol className="mt-12 grid gap-6 sm:grid-cols-3 list-none pl-0">
           <FlowItem
             index={1}
-            title="Trackman Data"
-            body="Know your numbers — speed, face, path, launch, spin."
+            title="Learn"
+            body="Coaching insight: turn metrics into moves with practical, personalized cues."
           />
           <FlowItem
             index={2}
-            title="Coaching Insight"
-            body="Turn metrics into moves with practical, personalized cues."
+            title="Train"
+            body="Trackman data: know your numbers — speed, face, path, launch, spin."
+          />
+          <FlowItem
+            index={3}
+            title="Play"
+            body="Course confidence: take it outside. Hit the shots you trained for."
           />
         </ol>
 
@@ -84,7 +89,7 @@ export default function ScratchClubLandingPage() {
         </div>
       </Section>
 
-      {/* MEMBERSHIPS — wood tone band, paragraph switched to white */}
+      {/* MEMBERSHIPS — wood tone band, paragraph in white for contrast */}
       <div id="memberships">
         <Section bg="/images/bg/memberships.jpg" tint="gold">
           <div className="grid items-center gap-12 lg:grid-cols-2">
