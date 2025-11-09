@@ -10,6 +10,8 @@ const CARD_BASE =
 const CARD_SIZE =
   "min-h-[200px] md:min-h-[220px] flex flex-col justify-between";
 
+const BOOK_BAY_URL = "https://www.trackman.com/login";
+
 export default function ScratchClubLandingPage() {
   return (
     <main className="min-h-screen bg-white text-neutral-900 selection:bg-emerald-200/60">
@@ -26,6 +28,7 @@ export default function ScratchClubLandingPage() {
             who want to play their best year-round.
           </p>
         </div>
+
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <FeatureCard
             title="Trackman Bays"
@@ -43,13 +46,33 @@ export default function ScratchClubLandingPage() {
             icon={IconUsers}
           />
         </div>
+
+        {/* Trackman Bays CTAs */}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href={BOOK_BAY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("book_bay_clicked", { location: "features" })}
+            className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-5 py-3 text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+          >
+            Book a Bay
+          </a>
+          <a
+            href="/trackman-bays"
+            onClick={() => track("view_bay_clicked", { location: "features" })}
+            className="inline-flex items-center justify-center rounded-xl border border-white/70 bg-white/90 px-5 py-3 text-neutral-900 shadow-sm transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+          >
+            View a Bay
+          </a>
+        </div>
       </Section>
 
-      {/* FORMULA — banded with formula.jpg (Learn → Train → Play) */}
+      {/* FORMULA — banded with formula.jpg (Learn · Train · Play) */}
       <Section bg="/images/bg/formula.jpg" tint="neutral" blur="backdrop-blur-[1.5px]">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
-            The Scratch Club Formula: Train · Learn · Play
+            The Scratch Club Formula: Learn · Train · Play
           </h2>
           <p className="mt-4 text-lg text-white/90">
             Data turns into insight. Insight turns into confidence. Confidence
@@ -112,13 +135,15 @@ export default function ScratchClubLandingPage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
-                  href={LINKS.bookNow}
+                  href={BOOK_BAY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() =>
-                    track("book_now_clicked", { location: "memberships" })
+                    track("book_bay_clicked", { location: "memberships" })
                   }
                   className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-5 py-3 text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
                 >
-                  Book Simulator Time
+                  Book a Bay
                 </a>
                 <a
                   href={LINKS.coaching}
@@ -264,11 +289,13 @@ function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <a
-              href={LINKS.bookNow}
-              onClick={() => track("book_now_clicked", { location: "hero" })}
+              href={BOOK_BAY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track("book_bay_clicked", { location: "hero" })}
               className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-6 py-3 text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
             >
-              Book Simulator Time
+              Book a Bay
             </a>
             <a
               href={LINKS.memberships}
