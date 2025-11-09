@@ -53,53 +53,56 @@ export default function ScratchClubLandingPage() {
       </Section>
 
       {/* MEMBERSHIPS — banded with memberships.jpg (wood tone + gold tint) */}
-      <Section id="memberships" bg="/images/bg/memberships.jpg" tint="gold">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-inner">
-            <Image
-              src="/images/hero/memberships.jpg"
-              alt="Member practicing in a Trackman bay"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div>
-            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">
-              Make Practice a Habit — Not a Hassle
-            </h2>
-            <p className="mt-4 text-lg text-neutral-800">
-              Memberships give you consistent access, exclusive rates, and progress that sticks. Add coaching for a personal touch that accelerates everything.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <a
-                href={LINKS.bookNow}
-                onClick={() => track("book_now_clicked", { location: "memberships" })}
-                className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-5 py-3 text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
-              >
-                Book Simulator Time
-              </a>
-              <a
-                href={LINKS.coaching}
-                onClick={() => track("meet_coaches_clicked", { location: "memberships" })}
-                className="inline-flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-5 py-3 text-neutral-900 shadow-sm transition hover:border-emerald-500 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
-              >
-                Meet the Coaches
-              </a>
+      <div id="memberships">
+        <Section bg="/images/bg/memberships.jpg" tint="gold">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-inner">
+              <Image
+                src="/images/hero/memberships.jpg"
+                alt="Member practicing in a Trackman bay"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">
+                Make Practice a Habit — Not a Hassle
+              </h2>
+              <p className="mt-4 text-lg text-neutral-800">
+                Memberships give you consistent access, exclusive rates, and progress that sticks. Add coaching for a
+                personal touch that accelerates everything.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <a
+                  href={LINKS.bookNow}
+                  onClick={() => track("book_now_clicked", { location: "memberships" })}
+                  className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-5 py-3 text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                >
+                  Book Simulator Time
+                </a>
+                <a
+                  href={LINKS.coaching}
+                  onClick={() => track("meet_coaches_clicked", { location: "memberships" })}
+                  className="inline-flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-5 py-3 text-neutral-900 shadow-sm transition hover:border-emerald-500 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                >
+                  Meet the Coaches
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </Section>
+        </Section>
+      </div>
 
-      {/* COURSES — leaving as a light neutral band for now */}
-      <section id="courses" className="bg-neutral-50 border-y border-neutral-200 py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* COURSES — banded with courses.jpg */}
+      <div id="courses">
+        <Section bg="/images/bg/courses.jpg" tint="neutral">
           <div className="grid items-start gap-10 lg:grid-cols-2">
             <div>
               <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">Train Indoors. Shine Outdoors.</h2>
-              <p className="mt-4 text-lg text-neutral-600">
+              <p className="mt-4 text-lg text-neutral-100">
                 Explore Michigan favorites and plan your next round. Your simulator work pays off where it counts.
               </p>
-              <ul className="mt-8 space-y-4 text-neutral-700">
+              <ul className="mt-8 space-y-4 text-neutral-50/90">
                 <li className="flex items-start gap-3">
                   <Bullet />
                   Pinckney · Brighton · Dexter · Whitmore Lake — curated nearby courses
@@ -116,11 +119,12 @@ export default function ScratchClubLandingPage() {
               <a
                 href={LINKS.courses}
                 onClick={() => track("view_courses_clicked", { location: "courses" })}
-                className="mt-8 inline-flex items-center gap-2 rounded-xl border border-neutral-300 bg-white px-5 py-3 text-sm font-medium shadow-sm hover:border-emerald-500 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                className="mt-8 inline-flex items-center gap-2 rounded-xl border border-white/70 bg-white/90 px-5 py-3 text-sm font-medium text-neutral-900 shadow-sm hover:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
               >
                 View Partner Courses <ArrowRight />
               </a>
             </div>
+
             <div className="aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-inner">
               <Image
                 src="/images/courses/timbertrace2.jpg"
@@ -131,8 +135,8 @@ export default function ScratchClubLandingPage() {
               />
             </div>
           </div>
-        </div>
-      </section>
+        </Section>
+      </div>
 
       {/* GOLF + LIFE — keeping your existing gradient card */}
       <section id="golf-life" className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24">
@@ -142,8 +146,8 @@ export default function ScratchClubLandingPage() {
               <div>
                 <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">Golf + Life</h2>
                 <p className="mt-4 text-lg text-neutral-700">
-                  Golf shouldn’t compete with what matters — it should connect you to it. Sharpen your game and your balance:
-                  more time with family, smarter spending, less rush, and a better way to unwind.
+                  Golf shouldn’t compete with what matters — it should connect you to it. Sharpen your game and your
+                  balance: more time with family, smarter spending, less rush, and a better way to unwind.
                 </p>
                 <a
                   href="/golf-and-life"
@@ -239,7 +243,15 @@ function Hero() {
 }
 
 /* Cards + icons (unchanged) */
-function FeatureCard({ title, body, icon: Icon }: { title: string; body: string; icon: React.FC<React.SVGProps<SVGSVGElement>> }) {
+function FeatureCard({
+  title,
+  body,
+  icon: Icon,
+}: {
+  title: string;
+  body: string;
+  icon: React.FC<React.SVGProps<SVGSVGElement>>;
+}) {
   return (
     <div className="group rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:shadow-md">
       <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700">
@@ -250,6 +262,7 @@ function FeatureCard({ title, body, icon: Icon }: { title: string; body: string;
     </div>
   );
 }
+
 function FlowItem({ index, title, body }: { index: number; title: string; body: string }) {
   return (
     <li className="relative rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
@@ -261,6 +274,7 @@ function FlowItem({ index, title, body }: { index: number; title: string; body: 
     </li>
   );
 }
+
 function IconTarget(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" className="h-6 w-6" {...props}>
@@ -270,6 +284,7 @@ function IconTarget(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
 function IconWhistle(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" className="h-6 w-6" {...props}>
@@ -278,6 +293,7 @@ function IconWhistle(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
 function IconUsers(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" className="h-6 w-6" {...props}>
@@ -287,13 +303,22 @@ function IconUsers(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
 function ArrowRight(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" className="h-4 w-4" {...props}>
-      <path d="M5 12h12M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M5 12h12M13 6l6 6-6 6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
+
 function Bullet(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" className="mt-1 h-4 w-4 flex-none text-emerald-700" {...props}>
