@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen flex flex-col bg-white text-neutral-900 pt-[env(safe-area-inset-top)]">
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+      <body className="min-h-screen flex flex-col bg-white text-neutral-900 antialiased pt-[env(safe-area-inset-top)]">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
@@ -23,4 +23,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
-

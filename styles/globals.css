@@ -1,4 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html,body{height:100%}body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+/* ----- Base polish ----- */
+html, body { height: 100%; }
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #fff; /* keep cards crisp against subtle photo bands */
+  color-scheme: light;
+}
+
+/* Highlight text selection in brand color */
+::selection {
+  @apply bg-emerald-200 text-emerald-900;
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+
+/* ----- Cards ----- */
+.card-elevated {
+  @apply rounded-2xl bg-white/85 shadow-sm ring-1 ring-black/5 backdrop-blur-sm transition;
+}
+.card-elevated:hover {
+  @apply bg-white;
+}
+
+/* Optional: slightly stronger lift if a card sits on a busy photo */
+.card-lift {
+  @apply shadow-md ring-1 ring-black/10;
+}
+
+/* Optional: clear focus ring for clickable elements on photo bands */
+.focus-visible\:ring-brand:focus-visible {
+  @apply outline-none ring-2 ring-emerald-500 ring-offset-2 ring-offset-white;
+}
