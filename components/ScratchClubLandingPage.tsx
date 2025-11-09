@@ -68,9 +68,9 @@ export default function ScratchClubLandingPage() {
               <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">
                 Make Practice a Habit — Not a Hassle
               </h2>
-              <p className="mt-4 text-lg text-neutral-800">
-                Memberships give you consistent access, exclusive rates, and progress that sticks. Add coaching for a
-                personal touch that accelerates everything.
+              <p className="mt-4 text-lg text-white">
+                Memberships give you consistent access, exclusive rates, and progress that sticks.
+                Add coaching for a personal touch that accelerates everything.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
