@@ -7,5 +7,5 @@ export const LINKS = {
   contact: "/contact", // 👈 add this
   golfLife: "/golf-life",
   signIn: "/signin",
-  bookNow: "https://scratchclubgolf.com/book", // or whatever link you use
+  bookNow: "https://portal.trackmangolf.com", 
 };

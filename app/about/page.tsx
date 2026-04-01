@@ -149,9 +149,14 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="flex gap-3">
-            <Link href="/booking" className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-5 py-3 text-white shadow hover:bg-emerald-700">
-              Book a Visit
-            </Link>
+           <a
+            href="https://portal.trackmangolf.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-5 py-3 text-white shadow hover:bg-emerald-700"
+          >
+            Book a Visit
+          </a>
             <Link href="/contact" className="inline-flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-5 py-3 text-neutral-900 hover:bg-neutral-50">
               Contact Us
             </Link>
