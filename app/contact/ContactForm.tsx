@@ -10,7 +10,8 @@ export default function ContactForm() {
     setStatus("sending");
     setMessage("");
 
-    const data = Object.fromEntries(new FormData(e.currentTarget));
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
 
     const res = await fetch("/api/contact", {
       method: "POST",
@@ -19,14 +20,41 @@ export default function ContactForm() {
     });
 
     const json = await res.json();
+
     if (res.ok) {
+      form.reset();
       setStatus("sent");
-      setMessage("Thanks—got it. We’ll be in touch soon.");
-      e.currentTarget.reset();
+      setMessage("Your message was sent successfully. Our team will contact you soon.");
     } else {
       setStatus("error");
       setMessage(json.error ?? "Something went wrong. Please try again.");
     }
+  }
+
+  if (status === "sent") {
+    return (
+      <div className="mx-auto max-w-xl rounded-2xl border border-emerald-200 bg-emerald-50 p-6 shadow-sm">
+        <h2 className="text-2xl font-semibold text-emerald-900">
+          Message sent successfully
+        </h2>
+        <p className="mt-3 text-base text-emerald-800">
+          Your message was sent successfully. Our team will contact you soon.
+        </p>
+
+        <div className="mt-6">
+          <button
+            type="button"
+            onClick={() => {
+              setStatus("idle");
+              setMessage("");
+            }}
+            className="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-4 py-2.5 text-sm font-medium text-emerald-900 hover:bg-emerald-100"
+          >
+            Send Another Message
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -80,7 +108,6 @@ export default function ContactForm() {
         </p>
       </div>
 
-      {/* Honeypot for spam bots */}
       <input name="company" tabIndex={-1} autoComplete="off" className="hidden" />
 
       <button
@@ -91,8 +118,8 @@ export default function ContactForm() {
         {status === "sending" ? "Sending…" : "Send"}
       </button>
 
-      {status !== "idle" && (
-        <p className={`pt-2 text-sm ${status === "error" ? "text-red-600" : "text-emerald-700"}`}>
+      {status === "error" && (
+        <p className="pt-2 text-sm text-red-600">
           {message}
         </p>
       )}
