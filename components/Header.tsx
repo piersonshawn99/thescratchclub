@@ -2,6 +2,7 @@
 
 import AnnouncementBar from "./AnnouncementBar";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LINKS } from "./links";
@@ -9,15 +10,6 @@ import { track } from "@/lib/analytics";
 import { useState, useEffect, useRef } from "react";
 
 /** ---------- Icons (inline, no external deps) ---------- */
-function Logo(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 32 32" aria-hidden="true" className="h-5 w-5 md:h-6 md:w-6" {...props}>
-      <circle cx="16" cy="16" r="15" className="fill-emerald-600" />
-      <path d="M10 20c4-2 8-2 12 0" className="stroke-white" strokeWidth="2" fill="none" />
-      <circle cx="16" cy="12" r="3" className="fill-white" />
-    </svg>
-  );
-}
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
@@ -57,11 +49,7 @@ function cx(...classes: (string | false | undefined)[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-const SOCIAL = [
-  { label: "Instagram", href: "https://instagram.com/scratchclubgolf", icon: InstagramIcon },
-  { label: "Facebook", href: "https://facebook.com/scratchclubgolf", icon: FacebookIcon },
-  { label: "YouTube", href: "https://youtube.com/@scratchclubgolf", icon: YoutubeIcon },
-];
+const SOCIAL = [];
 
 export default function Header() {
   const pathname = usePathname();
@@ -98,6 +86,7 @@ export default function Header() {
     { label: "Coaching", href: LINKS.coaching },
     { label: "Golf + Life", href: LINKS.golfLife }, 
     { label: "Courses", href: LINKS.courses },
+    { label: "Locations", href: "/locations" },
     { label: "Contact", href: LINKS.contact },
   ];
 
@@ -111,19 +100,9 @@ export default function Header() {
         {/* Utility strip */}
         <div className="hidden md:block border-b border-neutral-200/70 bg-neutral-50">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-9 items-center justify-between text-xs text-neutral-600">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               <span className="hidden lg:inline">Walk-ins: 6am–10pm • Members: 5am–1am</span>
-              <span className="hover:text-neutral-600">Call: (801) 830-3401</span>
-              <span className="hidden sm:inline">•</span>
-              <a
-                href="https://www.google.com/maps/search/?api=1&query=9588+Chilson+Commons+Circle+Hamburg+Twp+MI+48169"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden sm:inline hover:text-emerald-700"
-                onClick={() => track("location_click", { location: "header_top" })}
-              >
-                Lakeland, MI
-              </a>
+              <span>Call: (801) 830-3401</span>
             </div>
             <div className="flex items-center gap-3">
               {SOCIAL.map(({ label, href, icon: Icon }) => (
@@ -146,11 +125,17 @@ export default function Header() {
         {/* Main bar */}
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-12 md:h-16 items-center justify-between">
-            <Link href="/" className="flex items-center gap-2" onClick={() => track("nav_logo_click")}>
-              <Logo />
-              <span className="font-semibold tracking-tight">The Scratch Club</span>
-            </Link>
-
+          <Link href="/" className="flex items-center gap-1" onClick={() => track("nav_logo_click")}>
+            <Image
+              src="/images/logo/scratch-club-golfer-green.png"
+              alt="The Scratch Club logo"
+              width={36}
+              height={36}
+              className="h-7 w-auto md:h-9"
+              priority
+            />
+            <span className="font-semibold tracking-tight">The Scratch Club</span>
+          </Link>
             <nav className="hidden md:flex items-center gap-8 text-sm text-neutral-700">
               {nav.map((item) => {
                 const active = pathname === item.href;
