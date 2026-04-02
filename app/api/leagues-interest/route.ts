@@ -19,8 +19,8 @@ export async function POST(req: NextRequest) {
 
     // If Resend env vars exist, send an email to your inbox
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
-    const TO = process.env.LEAGUE_SIGNUPS_TO; // e.g., "info@thescratchclub.com"
-    const FROM = process.env.LEAGUE_SIGNUPS_FROM || "Scratch Club <no-reply@sc-mails.thescratchclub.com>";
+    const TO = process.env.LEAGUE_SIGNUPS_TO || "info@scratchclubgolf.com";
+    const FROM = process.env.LEAGUE_SIGNUPS_FROM || "Scratch Club <no-reply@scratchclubgolf.com>";
 
     if (RESEND_API_KEY && TO) {
       // Lazy inline call to Resend to avoid adding SDK
@@ -71,7 +71,7 @@ function escapeHtml(input: string) {
 //    Alt text: "Multiple indoor golf simulator bays in use by 4‑person teams."
 // 2) ENV needed (set in Vercel):
 //    RESEND_API_KEY=... (optional; logs instead if missing)
-//    LEAGUE_SIGNUPS_TO=leagues@thescratchclub.com
-//    LEAGUE_SIGNUPS_FROM=Scratch Club <no-reply@sc-mails.thescratchclub.com>
+//    LEAGUE_SIGNUPS_TO=info@scratchclubgolf.com
+//    LEAGUE_SIGNUPS_FROM=Scratch Club <no-reply@sc-mails.scratchclubgolf.com>
 // 3) The page intentionally lists league ideas without locking formats. When you're ready,
 //    we can split by league type with separate signup intents + waitlists.
