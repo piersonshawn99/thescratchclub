@@ -213,7 +213,21 @@ export default function ScratchClubLandingPage() {
 function Hero() {
   return (
     <section className="relative isolate">
-      <div className="grid h-[72vh] min-h-[520px] w-full grid-cols-1 md:grid-cols-2">
+      {/* Mobile: single hero image */}
+      <div className="relative h-[64vh] min-h-[500px] w-full md:hidden">
+        <Image
+          src="/images/hero/sim.jpg"
+          alt="Trackman bay at The Scratch Club"
+          fill
+          priority
+          className="object-cover object-[30%_50%]"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/35" />
+      </div>
+
+      {/* Desktop: split hero */}
+      <div className="hidden h-[72vh] min-h-[520px] w-full md:grid md:grid-cols-2">
         {/* Left: Simulator */}
         <div className="relative h-full w-full overflow-hidden">
           <Image
@@ -241,18 +255,20 @@ function Hero() {
         </div>
       </div>
 
+      {/* Desktop divider */}
       <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 bg-white/40 md:block" />
 
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-        <div className="pointer-events-auto mx-auto max-w-3xl px-6 text-center">
-          <h1 className="text-4xl font-semibold tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] sm:text-5xl md:text-6xl">
+      {/* Overlay content */}
+      <div className="pointer-events-none absolute inset-0 flex items-start justify-center pt-28 md:items-center md:pt-0">
+        <div className="pointer-events-auto mx-auto max-w-[22rem] px-5 text-center sm:max-w-2xl md:max-w-3xl md:px-6">
+          <h1 className="text-3xl font-semibold tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] sm:text-5xl md:text-6xl">
             Train Smarter. Play Better.
           </h1>
-          <p className="mt-4 text-lg text-white/90 drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)] sm:text-xl">
+          <p className="mt-3 text-base leading-8 text-white/90 drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)] sm:text-xl md:mt-4">
             Powered by Trackman and real coaching, The Scratch Club turns
             practice into confidence that carries onto the course.
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3 md:mt-8 md:gap-4">
             <a
               href={BOOK_BAY_URL}
               target="_blank"
