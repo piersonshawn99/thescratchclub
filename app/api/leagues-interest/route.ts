@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 
     // If Resend env vars exist, send an email to your inbox
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
-    const TO = process.env.LEAGUE_SIGNUPS_TO; // e.g., "leagues@thescratchclub.com"
+    const TO = process.env.LEAGUE_SIGNUPS_TO; // e.g., "info@thescratchclub.com"
     const FROM = process.env.LEAGUE_SIGNUPS_FROM || "Scratch Club <no-reply@sc-mails.thescratchclub.com>";
 
     if (RESEND_API_KEY && TO) {
