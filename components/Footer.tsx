@@ -19,8 +19,8 @@ const SECONDARY = [
 ];
 
 const LEGAL = [
-  { label: "Terms", href: "/legal/terms" },
-  { label: "Privacy", href: "/legal/privacy" },
+  { label: "Terms", href: "/terms" },
+  { label: "Privacy", href: "/privacy" },
 ];
 
 export default function Footer() {
