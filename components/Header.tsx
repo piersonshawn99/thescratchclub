@@ -48,8 +48,11 @@ function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
 function cx(...classes: (string | false | undefined)[]) {
   return classes.filter(Boolean).join(" ");
 }
-
-const SOCIAL = [];
+  const SOCIAL: {
+    label: string;
+    href: string;
+    icon: React.FC<React.SVGProps<SVGSVGElement>>;
+  }[] = [];
 
 export default function Header() {
   const pathname = usePathname();
