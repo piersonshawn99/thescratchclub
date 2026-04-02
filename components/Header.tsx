@@ -96,10 +96,11 @@ export default function Header() {
   const ctaHref = LINKS.bookNow ?? LINKS.memberships ?? LINKS.contact;
 
   return (
-    <>
-      <AnnouncementBar />
+   <>
+      <div className="fixed top-0 left-0 right-0 z-[100]">
+        <AnnouncementBar />
 
-      <header className="sticky top-0 z-40 w-full border-b border-neutral-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+        <header className="w-full border-b border-neutral-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
         {/* Utility strip */}
         <div className="hidden md:block border-b border-neutral-200/70 bg-neutral-50">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-9 items-center justify-between text-xs text-neutral-600">
@@ -127,16 +128,22 @@ export default function Header() {
         {/* Main bar */}
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-12 md:h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-1" onClick={() => track("nav_logo_click")}>
+         <Link
+            href="/"
+            className="flex items-center gap-2"
+            onClick={() => track("nav_logo_click")}
+          >
             <Image
               src="/images/logo/scratch-club-golfer-green.png"
               alt="The Scratch Club logo"
-              width={36}
-              height={36}
-              className="h-7 w-auto md:h-9"
+              width={52}
+              height={52}
+              className="h-10 w-auto md:h-12"
               priority
             />
-            <span className="font-semibold tracking-tight">The Scratch Club</span>
+            <span className="text-lg font-semibold tracking-tight md:text-2xl">
+              The Scratch Club
+            </span>
           </Link>
             <nav className="hidden md:flex items-center gap-8 text-sm text-neutral-700">
               {nav.map((item) => {
@@ -229,6 +236,9 @@ export default function Header() {
           </div>
         </div>
       </header>
-    </>
-  );
+    </div>
+
+    <div className="h-[72px] md:h-[133px]" />
+  </>
+);
 }
