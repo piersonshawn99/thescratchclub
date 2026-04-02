@@ -105,7 +105,6 @@ export default function Header() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-9 items-center justify-between text-xs text-neutral-600">
             <div className="flex items-center gap-6">
               <span className="hidden lg:inline">Walk-ins: 6am–10pm • Members: 5am–1am</span>
-              <span>Call: (801) 830-3401</span>
             </div>
             <div className="flex items-center gap-3">
               {SOCIAL.map(({ label, href, icon: Icon }) => (

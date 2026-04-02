@@ -12,10 +12,11 @@ const PRIMARY = [
 ];
 
 const SECONDARY = [
-  { label: "About", href: LINKS.about },
-  { label: "Leagues", href: "/leagues" },
-  { label: "Gift Cards", href: LINKS.courses },
   { label: "Contact", href: LINKS.contact },
+  { label: "Leagues", href: "/leagues" },
+  { label: "About", href: LINKS.about },
+  
+  
 ];
 
 const LEGAL = [
@@ -39,9 +40,9 @@ export default function Footer() {
               coaches who actually coach.
             </p>
             <div className="mt-4 text-sm text-neutral-700">
-              <a className="block hover:text-emerald-700" href="tel:+18018303401">(801) 830-3401</a>
               <a className="block hover:text-emerald-700" href="mailto:info@scratchclubgolf.com">info@scratchclubgolf.com</a>
-              <span className="block">Howell, MI</span>
+              <p>9588 Chilson Commons Circle</p>
+              <span className="block">Hamburg, MI 48169</span>
             </div>
           </div>
 
