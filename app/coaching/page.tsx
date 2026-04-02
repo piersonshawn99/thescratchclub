@@ -157,8 +157,8 @@ export default function CoachingPage() {
         </h3>
         <p className="mt-2 max-w-2xl mx-auto text-neutral-700 text-center">
           We're building a team of instructors who love the game, live for progress, and
-          bring out the best in every golfer they meet. If that sounds like you, send us your
-          resume and a quick note.
+          bring out the best in every golfer they meet. If that sounds like you, contact us
+          or email your resume and a quick note.
         </p>
 
         <div className="mt-4 mx-auto max-w-xl text-left text-sm text-neutral-700">
@@ -171,13 +171,7 @@ export default function CoachingPage() {
           </ul>
         </div>
 
-        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href={`mailto:coaching@scratchclubgolf.com?subject=${encodeURIComponent("Coaching Application – The Scratch Club")}`}
-            className="inline-flex rounded-xl bg-emerald-700 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
-          >
-            Email Your Resume
-          </a>
+        <div className="mt-6 flex justify-center">
           <Link
             href="/contact"
             className="inline-flex rounded-xl border border-emerald-700 px-6 py-2 text-sm font-medium text-emerald-800 hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
