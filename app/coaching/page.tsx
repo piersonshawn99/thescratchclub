@@ -89,7 +89,7 @@ export default function CoachingPage() {
           </div>
 
           <Link
-            href="/booking"
+            href="/contact"
             className="hidden sm:inline-flex items-center rounded-xl border border-emerald-700 px-4 py-2 text-sm font-medium text-emerald-800 hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
           >
             Book a session
@@ -173,7 +173,7 @@ export default function CoachingPage() {
 
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
-            href={`mailto:coaching@scratchclubgolf.com?subject=${encodeURIComponent("Coaching Application – The Scratch Club")}&body=${encodeURIComponent("Hi Scratch Club team,%0D%0A%0D%0AMy name is [Your Name]. I'm interested in coaching at The Scratch Club.%0D%0A%0D%0AHighlights:%0D%0A• Certifications: [PGA/LPGA, TPI, Trackman]%0D%0A• Coaching focus: [e.g., women & juniors, advanced player development]%0D%0A• Availability: [e.g., evenings/weekends]%0D%0A%0D%0AResume attached.%0D%0A%0D%0AThanks!%0D%0A[Your Name]%0D%0A[Phone]")}`}
+            href={`mailto:coaching@scratchclubgolf.com?subject=${encodeURIComponent("Coaching Application – The Scratch Club")}`}
             className="inline-flex rounded-xl bg-emerald-700 px-6 py-2 text-sm font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
           >
             Email Your Resume
@@ -195,7 +195,7 @@ export default function CoachingPage() {
 
       <div className="sm:hidden mt-10">
         <Link
-          href="/booking"
+          href="/contact"
           className="block w-full text-center rounded-xl bg-emerald-700 px-4 py-3 text-sm font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
         >
           Book a session
