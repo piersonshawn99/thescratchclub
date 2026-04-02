@@ -1,21 +1,22 @@
 import Link from "next/link";
+import Image from "next/image";
 import ClientLink from "./ClientLink";
 import { LINKS } from "./links";
 
 const YEAR = new Date().getFullYear();
 
 const PRIMARY = [
-  { label: "Memberships", href: LINKS.memberships },
   { label: "Coaching", href: LINKS.coaching },
   { label: "Courses", href: LINKS.courses },
-  { label: "Book a Bay", href: LINKS.bookNow ?? LINKS.memberships ?? LINKS.contact, isCta: true },
+  { label: "Leagues", href: "/leagues" },
+  { label: "Memberships", href: LINKS.memberships },
+  
 ];
 
 const SECONDARY = [
-  { label: "Contact", href: LINKS.contact },
-  { label: "Leagues", href: "/leagues" },
   { label: "About", href: LINKS.about },
-  
+  { label: "Contact", href: LINKS.contact },
+  { label: "Book a Bay", href: LINKS.bookNow ?? LINKS.memberships ?? LINKS.contact, isCta: true },
   
 ];
 
@@ -32,8 +33,16 @@ export default function Footer() {
           {/* Brand + blurb */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2">
-              <Logo className="h-7 w-7" />
-              <span className="font-semibold tracking-tight">The Scratch Club</span>
+              <Image
+                src="/images/logo/scratch-club-golfer-green.png"
+                alt="The Scratch Club logo"
+                width={40}
+                height={40}
+                className="h-8 w-auto"
+              />
+              <span className="text-xl font-semibold tracking-tight text-neutral-900">
+                The Scratch Club
+              </span>
             </div>
             <p className="mt-3 text-sm text-neutral-600">
               Indoor golf, coaching, and leagues—year-round. Bright screens, true ball data, and
@@ -82,15 +91,18 @@ export default function Footer() {
           </div>
 
           {/* Hours */}
-          <div>
-            <h3 className="text-sm font-semibold text-neutral-900">Hours</h3>
-            <dl className="mt-3 text-sm text-neutral-700 grid grid-cols-2 gap-y-1">
-              <dt>Mon–Thu</dt><dd className="text-right">6:00a – 11:00p</dd>
-              <dt>Fri</dt><dd className="text-right">6:00a – 12:00a</dd>
-              <dt>Sat</dt><dd className="text-right">6:00a – 12:00a</dd>
-              <dt>Sun</dt><dd className="text-right">6:00a – 11:00p</dd>
-            </dl>
-            <p className="mt-3 text-xs text-neutral-500">Holiday hours may vary. Staffed daily 7am-9pm.</p>
+          <div className="space-y-3 text-sm text-neutral-700">
+            <div>
+              <div className="font-medium text-neutral-900">Walk-ins</div>
+              <div>6:00am – 10:00pm</div>
+            </div>
+            <div>
+              <div className="font-medium text-neutral-900">Members</div>
+              <div>5:00am – 1:00am</div>
+            </div>
+            <p className="pt-2 text-xs text-neutral-500">
+              Hours may vary for holidays, events, or maintenance.
+            </p>
           </div>
         </div>
 
