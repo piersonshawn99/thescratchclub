@@ -112,10 +112,18 @@ export default function Header() {
         <div className="hidden md:block border-b border-neutral-200/70 bg-neutral-50">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-9 items-center justify-between text-xs text-neutral-600">
             <div className="flex items-center gap-4">
-              <span className="hidden lg:inline">Open daily • 7am–11pm</span>
-              <a href="tel:+18018303401" className="hover:text-emerald-700">Call: (801) 830-3401</a>
+              <span className="hidden lg:inline">Walk-ins: 6am–10pm • Members: 5am–1am</span>
+              <span className="hover:text-neutral-600">Call: (801) 830-3401</span>
               <span className="hidden sm:inline">•</span>
-              <Link href={LINKS.contact} className="hidden sm:inline hover:text-emerald-700">Pinckney, MI</Link>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=9588+Chilson+Commons+Circle+Hamburg+Twp+MI+48169"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:inline hover:text-emerald-700"
+                onClick={() => track("location_click", { location: "header_top" })}
+              >
+                Lakeland, MI
+              </a>
             </div>
             <div className="flex items-center gap-3">
               {SOCIAL.map(({ label, href, icon: Icon }) => (
