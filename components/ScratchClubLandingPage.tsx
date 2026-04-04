@@ -248,7 +248,7 @@ function Hero() {
             alt="Michigan golf course fairway"
             fill
             priority
-            className="object-cover object-[40%_50%]"
+            className="object-cover object-[52%_78%]"
             sizes="(min-width: 768px) 50vw, 100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-l from-black/30 via-black/10 to-transparent md:from-black/20" />
