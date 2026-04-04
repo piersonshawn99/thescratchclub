@@ -62,15 +62,13 @@ export default function Footer() {
               {PRIMARY.map((i) => (
                 <li key={i.label}>
                   <ClientLink
-                        href={i.href}
-                        className={i.isCta
-                          ? "inline-flex items-center rounded-lg border border-emerald-600 bg-emerald-600 px-3 py-1.5 font-semibold text-white hover:bg-emerald-700"
-                          : "hover:text-emerald-700"}
-                        trackEvent="footer_click"
-                        trackPayload={{ label: i.label }}
-                      >
-                        {i.label}
-                      </ClientLink>
+                    href={i.href}
+                    className="hover:text-emerald-700"
+                    trackEvent="footer_click"
+                    trackPayload={{ label: i.label }}
+                  >
+                    {i.label}
+                  </ClientLink>
                 </li>
               ))}
             </ul>
