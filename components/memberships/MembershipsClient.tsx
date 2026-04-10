@@ -221,7 +221,7 @@ export default function MembershipsClient() {
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
 
         {/* Hero */}
-        <section className="pt-10 pb-6 text-center">
+        <section className="pt-16 pb-6 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200/60 bg-emerald-50 px-3 py-1 text-sm text-emerald-700">
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
             Founding Member Pricing · Limited launch spots available
@@ -378,6 +378,17 @@ export default function MembershipsClient() {
               ))}
             </div>
           </div>
+
+          <p className="mt-2 text-xs text-neutral-500">
+            Prefer no commitment?{" "}
+            <Link
+              href="/contact?interest=membership&plan=month-to-month"
+              className="text-emerald-700 underline underline-offset-2 hover:text-emerald-800"
+            >
+              Month-to-month is available
+            </Link>{" "}
+            at $129 / $239 / $369 per month depending on tier — contact us to get started.
+          </p>
         </section>
 
         {/* Step 3: Savings Spotlight */}
@@ -412,7 +423,7 @@ export default function MembershipsClient() {
                   </span>
                 </div>
               </div>
-              <p className="mt-2 text-xs text-neutral-400">
+              <p className="mt-2 text-xs text-neutral-600">
                 Walk-in rate: {formatCurrency(WALK_IN_RATE)}/hr · That&apos;s{" "}
                 {formatCurrency(hoursPerMonth * WALK_IN_RATE)}/month, or{" "}
                 {formatCurrency(walkInTotal)} over {selectedMonths} months at walk-in prices.

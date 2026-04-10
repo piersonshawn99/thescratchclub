@@ -48,17 +48,33 @@ function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
 function cx(...classes: (string | false | undefined)[]) {
   return classes.filter(Boolean).join(" ");
 }
-  const SOCIAL: {
-    label: string;
-    href: string;
-    icon: React.FC<React.SVGProps<SVGSVGElement>>;
-  }[] = [];
+
+const SOCIAL: {
+  label: string;
+  href: string;
+  icon: React.FC<React.SVGProps<SVGSVGElement>>;
+}[] = [];
 
 export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function updateSpacer() {
+      const spacer = document.getElementById("header-spacer");
+      if (headerRef.current && spacer) {
+        spacer.style.height = headerRef.current.clientHeight + "px";
+      }
+    }
+    updateSpacer();
+    setTimeout(updateSpacer, 50);
+    setTimeout(updateSpacer, 200);
+    window.addEventListener("resize", updateSpacer);
+    return () => window.removeEventListener("resize", updateSpacer);
+  }, []);
 
   useEffect(() => {
     setOpen(false);
@@ -87,7 +103,7 @@ export default function Header() {
     { label: "About", href: LINKS.about },
     { label: "Memberships", href: LINKS.memberships },
     { label: "Coaching", href: LINKS.coaching },
-    { label: "Golf + Life", href: LINKS.golfLife }, 
+    { label: "Golf + Life", href: LINKS.golfLife },
     { label: "Courses", href: LINKS.courses },
     { label: "Locations", href: "/locations" },
     { label: "Contact", href: LINKS.contact },
@@ -96,105 +112,18 @@ export default function Header() {
   const ctaHref = LINKS.bookNow ?? LINKS.memberships ?? LINKS.contact;
 
   return (
-   <>
-      <div className="fixed top-0 left-0 right-0 z-[100]">
+    <>
+      <div ref={headerRef} className="fixed top-0 left-0 right-0 z-[100]">
         <AnnouncementBar />
 
         <header className="w-full border-b border-neutral-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
-        {/* Utility strip */}
-        <div className="hidden md:block border-b border-neutral-200/70 bg-neutral-50">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-9 items-center justify-between text-xs text-neutral-600">
-            <div className="flex items-center gap-6">
-              <span className="hidden lg:inline">Walk-ins: 6am–10pm • Members: 5am–1am</span>
-            </div>
-            <div className="flex items-center gap-3">
-              {SOCIAL.map(({ label, href, icon: Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="p-1 rounded hover:text-emerald-700"
-                  onClick={() => track("social_click", { label, location: "header_top" })}
-                >
-                  <Icon className="h-4 w-4" />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Main bar */}
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-12 md:h-16 items-center justify-between">
-         <Link
-            href="/"
-            className="flex items-center gap-2"
-            onClick={() => track("nav_logo_click")}
-          >
-            <Image
-              src="/images/logo/scratch-club-golfer-green.png"
-              alt="The Scratch Club logo"
-              width={52}
-              height={52}
-              className="h-10 w-auto md:h-12"
-              priority
-            />
-            <span className="text-lg font-semibold tracking-tight md:text-2xl">
-              The Scratch Club
-            </span>
-          </Link>
-            <nav className="hidden md:flex items-center gap-8 text-sm text-neutral-700">
-              {nav.map((item) => {
-                const active = pathname === item.href;
-                return (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    aria-current={active ? "page" : undefined}
-                    className={cx("transition-colors hover:text-emerald-700", active && "text-emerald-700 font-medium")}
-                    onClick={() => track("nav_click", { label: item.label })}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            <div className="hidden md:flex items-center gap-3">
-              <Link
-                href={ctaHref}
-                className="inline-flex items-center rounded-xl border border-emerald-600 bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2"
-                onClick={() => track("cta_click", { label: "Book a Bay", location: "header" })}
-              >
-                Book a Bay
-              </Link>
-            </div>
-
-            <button
-              ref={menuButtonRef}
-              className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-neutral-700 hover:bg-neutral-100"
-              aria-label="Open menu"
-              aria-expanded={open}
-              onClick={() => setOpen((v) => !v)}
-            >
-              <MenuIcon className="h-6 w-6" />
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile menu (collapsible) */}
-        <div
-          ref={menuRef}
-          className={cx(
-            "md:hidden border-top border-neutral-200 bg-white shadow-lg overflow-hidden transition-[max-height,opacity] duration-300",
-            open ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0"
-          )}
-        >
-          <div className={cx("mx-auto max-w-7xl px-4 sm:px-6 lg:px-8", open ? "py-4" : "py-0")}>
-            <div className="flex items-center justify-between">
-              <div className="flex gap-3">
+          {/* Utility strip */}
+          <div className="hidden md:block border-b border-neutral-200/70 bg-neutral-50">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-9 items-center justify-between text-xs text-neutral-600">
+              <div className="flex items-center gap-6">
+                <span className="hidden lg:inline">Walk-ins: 6am–10pm • Members: 5am–1am</span>
+              </div>
+              <div className="flex items-center gap-3">
                 {SOCIAL.map(({ label, href, icon: Icon }) => (
                   <a
                     key={label}
@@ -202,43 +131,130 @@ export default function Header() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="p-2 rounded hover:bg-neutral-100"
-                    onClick={() => track("social_click", { label, location: "header_mobile" })}
+                    className="p-1 rounded hover:text-emerald-700"
+                    onClick={() => track("social_click", { label, location: "header_top" })}
                   >
-                    <Icon className="h-5 w-5" />
+                    <Icon className="h-4 w-4" />
                   </a>
                 ))}
               </div>
-              <Link
-                href={ctaHref}
-                className="inline-flex items-center rounded-xl border border-emerald-600 bg-emerald-600 px-3 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
-                onClick={() => track("cta_click", { label: "Book a Bay", location: "header_mobile" })}
-              >
-                Book a Bay
-              </Link>
             </div>
-            <nav className="mt-4 grid gap-2">
-              {nav.map((item) => {
-                const active = pathname === item.href;
-                return (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    aria-current={active ? "page" : undefined}
-                    className={cx("rounded-lg px-3 py-2 text-sm hover:bg-neutral-100", active && "bg-neutral-100 font-medium text-emerald-700")}
-                    onClick={() => track("nav_click", { label: item.label, location: "header_mobile" })}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </nav>
           </div>
-        </div>
-      </header>
-    </div>
 
-    <div className="h-[72px] md:h-[133px]" />
-  </>
-);
+          {/* Main bar */}
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex h-12 md:h-16 items-center justify-between">
+              <Link
+                href="/"
+                className="flex items-center gap-2"
+                onClick={() => track("nav_logo_click")}
+              >
+                <Image
+                  src="/images/logo/scratch-club-golfer-green.png"
+                  alt="The Scratch Club logo"
+                  width={52}
+                  height={52}
+                  className="h-10 w-auto md:h-12"
+                  priority
+                />
+                <span className="text-lg font-semibold tracking-tight md:text-2xl">
+                  The Scratch Club
+                </span>
+              </Link>
+              <nav className="hidden md:flex items-center gap-8 text-sm text-neutral-700">
+                {nav.map((item) => {
+                  const active = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      aria-current={active ? "page" : undefined}
+                      className={cx("transition-colors hover:text-emerald-700", active && "text-emerald-700 font-medium")}
+                      onClick={() => track("nav_click", { label: item.label })}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </nav>
+
+              <div className="hidden md:flex items-center gap-3">
+                <Link
+                  href={ctaHref}
+                  className="inline-flex items-center rounded-xl border border-emerald-600 bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2"
+                  onClick={() => track("cta_click", { label: "Book a Bay", location: "header" })}
+                >
+                  Book a Bay
+                </Link>
+              </div>
+
+              <button
+                ref={menuButtonRef}
+                className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-neutral-700 hover:bg-neutral-100"
+                aria-label="Open menu"
+                aria-expanded={open}
+                onClick={() => setOpen((v) => !v)}
+              >
+                <MenuIcon className="h-6 w-6" />
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile menu (collapsible) */}
+          <div
+            ref={menuRef}
+            className={cx(
+              "md:hidden border-top border-neutral-200 bg-white shadow-lg overflow-hidden transition-[max-height,opacity] duration-300",
+              open ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0"
+            )}
+          >
+            <div className={cx("mx-auto max-w-7xl px-4 sm:px-6 lg:px-8", open ? "py-4" : "py-0")}>
+              <div className="flex items-center justify-between">
+                <div className="flex gap-3">
+                  {SOCIAL.map(({ label, href, icon: Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="p-2 rounded hover:bg-neutral-100"
+                      onClick={() => track("social_click", { label, location: "header_mobile" })}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </a>
+                  ))}
+                </div>
+                <Link
+                  href={ctaHref}
+                  className="inline-flex items-center rounded-xl border border-emerald-600 bg-emerald-600 px-3 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
+                  onClick={() => track("cta_click", { label: "Book a Bay", location: "header_mobile" })}
+                >
+                  Book a Bay
+                </Link>
+              </div>
+              <nav className="mt-4 grid gap-2">
+                {nav.map((item) => {
+                  const active = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      aria-current={active ? "page" : undefined}
+                      className={cx("rounded-lg px-3 py-2 text-sm hover:bg-neutral-100", active && "bg-neutral-100 font-medium text-emerald-700")}
+                      onClick={() => track("nav_click", { label: item.label, location: "header_mobile" })}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </nav>
+            </div>
+          </div>
+        </header>
+      </div>
+
+      <div id="header-spacer" className="h-[112px] md:h-[173px]" />
+    </>
+  );
 }
