@@ -28,7 +28,7 @@ function classesFor(variant: Variant = "emerald") {
     case "neutral":
       return "bg-neutral-900 text-white [--link:rgba(255,255,255,0.9)]";
     default:
-      return "bg-emerald-700 text-white [--link:rgba(255,255,255,0.95)]";
+      return "bg-emerald-900 animate-brand-pulse text-white [--link:rgba(255,255,255,0.95)]";
   }
 }
 

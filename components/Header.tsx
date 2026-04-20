@@ -116,7 +116,7 @@ export default function Header() {
       <div ref={headerRef} className="fixed top-0 left-0 right-0 z-[100]">
         <AnnouncementBar />
 
-        <header className="w-full border-b border-neutral-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+        <header className="w-full border-b border-neutral-200 backdrop-blur animate-header-pulse">
           {/* Utility strip */}
           <div className="hidden md:block border-b border-neutral-200/70 bg-neutral-50">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-9 items-center justify-between text-xs text-neutral-600">
@@ -253,6 +253,8 @@ export default function Header() {
           </div>
         </header>
       </div>
+
+      <div id="header-spacer" className="h-[112px] md:h-[173px]" />
     </>
   );
 }
