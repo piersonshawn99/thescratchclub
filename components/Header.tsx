@@ -253,8 +253,6 @@ export default function Header() {
           </div>
         </header>
       </div>
-
-      <div id="header-spacer" className="h-[112px] md:h-[173px]" />
     </>
   );
 }

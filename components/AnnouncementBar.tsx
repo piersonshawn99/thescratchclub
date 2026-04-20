@@ -44,7 +44,7 @@ export default function AnnouncementBar({
   config?: AnnouncementConfig | null;
 }) {
   const [visible, setVisible] = useState(false);
-  const [expanded, setExpanded] = useState(false);
+  const [hiding, setHiding] = useState(false);
 
   const key = useMemo(() => {
     if (!config) return null;
@@ -72,7 +72,25 @@ export default function AnnouncementBar({
       const dismissed = localStorage.getItem(key);
       if (dismissed === "1") return;
     }
+
+    // Show the bar
     setVisible(true);
+
+    // After 5 seconds, start the slide-up fade-out
+    const hideTimer = setTimeout(() => {
+      setHiding(true);
+    }, 5000);
+
+    // After animation completes (600ms), fully remove it
+    const removeTimer = setTimeout(() => {
+      setVisible(false);
+      setHiding(false);
+    }, 5600);
+
+    return () => {
+      clearTimeout(hideTimer);
+      clearTimeout(removeTimer);
+    };
   }, [config, key]);
 
   if (!config || !visible) return null;
@@ -82,7 +100,6 @@ export default function AnnouncementBar({
     href,
     ctaLabel = "Learn more",
     variant = "emerald",
-    dismissible = false,
   } = config;
 
   const pinIcon = (
@@ -90,7 +107,7 @@ export default function AnnouncementBar({
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
-      className="h-4 w-4 text-amber-400 mr-2 inline-block"
+      className="h-4 w-4 text-amber-400 mr-2 inline-block shrink-0"
     >
       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
     </svg>
@@ -127,9 +144,20 @@ export default function AnnouncementBar({
   );
 
   return (
-  
-    <div className={`${classesFor(variant)} print:hidden border-b-2 border-amber-400/80`}>
-        <div className="hidden sm:block">{full}</div>
+    <div
+      className={`
+        ${classesFor(variant)}
+        print:hidden border-b-2 border-amber-400/80
+        overflow-hidden
+        transition-all duration-600 ease-in-out
+        ${hiding
+          ? "max-h-0 opacity-0 border-b-0"
+          : "max-h-20 opacity-100"
+        }
+      `}
+      style={{ transitionDuration: "600ms" }}
+    >
+      <div className="hidden sm:block">{full}</div>
       <div className="block sm:hidden">{mobileCollapsed}</div>
     </div>
   );

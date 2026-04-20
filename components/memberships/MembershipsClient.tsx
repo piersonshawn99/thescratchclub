@@ -221,7 +221,7 @@ export default function MembershipsClient() {
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
 
         {/* Hero */}
-        <section className="pt-16 pb-6 text-center">
+        <section className="pt-10 pb-6 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200/60 bg-emerald-50 px-3 py-1 text-sm text-emerald-700">
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
             Founding Member Pricing · Limited launch spots available
