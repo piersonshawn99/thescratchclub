@@ -102,6 +102,7 @@ export default function Header() {
     { label: "Home", href: "/" },
     { label: "About", href: LINKS.about },
     { label: "Memberships", href: LINKS.memberships },
+    { label: "Gift Cards", href: LINKS.giftCards },
     { label: "Coaching", href: LINKS.coaching },
     { label: "Golf + Life", href: LINKS.golfLife },
     { label: "Courses", href: LINKS.courses },
@@ -109,19 +110,19 @@ export default function Header() {
     { label: "Contact", href: LINKS.contact },
   ];
 
-  const ctaHref = LINKS.bookNow ?? LINKS.memberships ?? LINKS.contact;
+  const ctaHref = LINKS.memberships;
 
   return (
     <>
       <div ref={headerRef} className="fixed top-0 left-0 right-0 z-[100]">
         <AnnouncementBar />
 
-        <header className="w-full border-b border-neutral-200 backdrop-blur animate-header-pulse">
+        <header className="w-full border-b border-neutral-200 backdrop-blur bg-white/95">
           {/* Utility strip */}
           <div className="hidden md:block border-b border-neutral-200/70 bg-neutral-50">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-9 items-center justify-between text-xs text-neutral-600">
               <div className="flex items-center gap-6">
-                <span className="hidden lg:inline">Walk-ins: 6am–10pm • Members: 5am–1am</span>
+                <span className="hidden lg:inline">The Pursuit of Better Golf</span>
               </div>
               <div className="flex items-center gap-3">
                 {SOCIAL.map(({ label, href, icon: Icon }) => (
@@ -131,7 +132,7 @@ export default function Header() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="p-1 rounded hover:text-emerald-700"
+                    className="p-1 rounded hover:text-[#143029]"
                     onClick={() => track("social_click", { label, location: "header_top" })}
                   >
                     <Icon className="h-4 w-4" />
@@ -169,7 +170,7 @@ export default function Header() {
                       key={item.label}
                       href={item.href}
                       aria-current={active ? "page" : undefined}
-                      className={cx("transition-colors hover:text-emerald-700", active && "text-emerald-700 font-medium")}
+                      className={cx("transition-colors hover:text-[#143029]", active && "text-[#143029] font-medium")}
                       onClick={() => track("nav_click", { label: item.label })}
                     >
                       {item.label}
@@ -181,10 +182,10 @@ export default function Header() {
               <div className="hidden md:flex items-center gap-3">
                 <Link
                   href={ctaHref}
-                  className="inline-flex items-center rounded-xl border border-emerald-600 bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2"
-                  onClick={() => track("cta_click", { label: "Book a Bay", location: "header" })}
+                  className="inline-flex items-center rounded-xl border border-[#143029] bg-[#143029] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#285247] focus:outline-none focus:ring-2 focus:ring-[#143029] focus:ring-offset-2"
+                  onClick={() => track("cta_click", { label: "Explore Memberships", location: "header" })}
                 >
-                  Book a Bay
+                  Explore Memberships
                 </Link>
               </div>
 
@@ -227,10 +228,10 @@ export default function Header() {
                 </div>
                 <Link
                   href={ctaHref}
-                  className="inline-flex items-center rounded-xl border border-emerald-600 bg-emerald-600 px-3 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
-                  onClick={() => track("cta_click", { label: "Book a Bay", location: "header_mobile" })}
+                  className="inline-flex items-center rounded-xl border border-[#143029] bg-[#143029] px-3 py-2 text-sm font-semibold text-white hover:bg-[#285247]"
+                  onClick={() => track("cta_click", { label: "Explore Memberships", location: "header_mobile" })}
                 >
-                  Book a Bay
+                  Explore Memberships
                 </Link>
               </div>
               <nav className="mt-4 grid gap-2">
@@ -241,7 +242,7 @@ export default function Header() {
                       key={item.label}
                       href={item.href}
                       aria-current={active ? "page" : undefined}
-                      className={cx("rounded-lg px-3 py-2 text-sm hover:bg-neutral-100", active && "bg-neutral-100 font-medium text-emerald-700")}
+                      className={cx("rounded-lg px-3 py-2 text-sm hover:bg-neutral-100", active && "bg-neutral-100 font-medium text-[#143029]")}
                       onClick={() => track("nav_click", { label: item.label, location: "header_mobile" })}
                     >
                       {item.label}
