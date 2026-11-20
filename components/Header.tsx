@@ -151,16 +151,13 @@ export default function Header() {
                 onClick={() => track("nav_logo_click")}
               >
                 <Image
-                  src="/images/logo/scratch-club-golfer-green.png"
-                  alt="The Scratch Club logo"
-                  width={52}
-                  height={52}
-                  className="h-10 w-auto md:h-12"
+                  src="/images/brand/sc_logo_horizontal_green.png"
+                  alt="The Scratch Club"
+                  width={220}
+                  height={48}
+                  className="h-8 w-auto max-w-[180px] object-contain md:h-10 md:max-w-[220px]"
                   priority
                 />
-                <span className="text-lg font-semibold tracking-tight md:text-2xl">
-                  The Scratch Club
-                </span>
               </Link>
               <nav className="hidden md:flex items-center gap-8 text-sm text-neutral-700">
                 {nav.map((item) => {
