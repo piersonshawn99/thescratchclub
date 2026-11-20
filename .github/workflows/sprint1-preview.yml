@@ -1,0 +1,33 @@
+name: Sprint 1 Preview Validation
+on:
+  push:
+    branches: [feature/launch-foundation]
+  pull_request:
+    branches: [main]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.20.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: pnpm
+      - name: Install dependencies (refresh lockfile in runner)
+        run: pnpm install --no-frozen-lockfile
+      - name: Check types
+        run: pnpm exec tsc --noEmit
+      - name: Production build
+        run: pnpm build
+      - name: Check changed membership and gift routes
+        run: |
+          test -f app/memberships/page.tsx
+          test -f app/gift-cards/page.tsx
+          test ! -f app/api/checkout/route.ts
+          test ! -f app/api/webhooks/stripe/route.ts

@@ -50,7 +50,7 @@ export default function LeaguesPage() {
             className="object-cover object-top"
           />
           {/* Emerald brand overlay for consistency */}
-          <div className="absolute inset-0 bg-emerald-900/40 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-[#143029]/40 mix-blend-multiply" />
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white/90 to-transparent" />
         </div>
 
@@ -84,7 +84,7 @@ export default function LeaguesPage() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Jordan Smith"
-                      className="mt-1 w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-neutral-900 placeholder-neutral-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-600"
+                      className="mt-1 w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-neutral-900 placeholder-neutral-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#143029]"
                     />
                   </div>
                   <div>
@@ -96,20 +96,20 @@ export default function LeaguesPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@example.com"
-                      className="mt-1 w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-neutral-900 placeholder-neutral-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-600"
+                      className="mt-1 w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-neutral-900 placeholder-neutral-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#143029]"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="inline-flex items-center rounded-lg bg-emerald-700 px-4 py-2 text-white shadow-sm transition hover:bg-emerald-800 disabled:opacity-60"
+                    className="inline-flex items-center rounded-lg bg-[#143029] px-4 py-2 text-white shadow-sm transition hover:bg-[#143029] disabled:opacity-60"
                   >
                     {status === "loading" ? "Submitting…" : "Notify me"}
                   </button>
 
                   {status !== "idle" && (
-                    <p className={`text-sm mt-2 ${status === "success" ? "text-emerald-700" : status === "error" ? "text-red-600" : "text-neutral-600"}`}>
+                    <p className={`text-sm mt-2 ${status === "success" ? "text-[#143029]" : status === "error" ? "text-red-600" : "text-neutral-600"}`}>
                       {message}
                     </p>
                   )}

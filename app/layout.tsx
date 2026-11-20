@@ -4,12 +4,16 @@ import "../styles/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://thescratchclub.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://scratchclubgolf.com";
 
 export const metadata: Metadata = {
   title: "The Scratch Club",
-  description: "Train Smarter. Play Better.",
+  description: "Practice With Purpose. Play With Confidence.",
   metadataBase: new URL(siteUrl),
+  icons: {
+    icon: "/images/brand/sc_logomark_green.png",
+    apple: "/images/brand/sc_logomark_green.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

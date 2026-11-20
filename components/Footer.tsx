@@ -10,13 +10,14 @@ const PRIMARY = [
   { label: "Courses", href: LINKS.courses },
   { label: "Leagues", href: "/leagues" },
   { label: "Memberships", href: LINKS.memberships },
+  { label: "Gift Cards", href: LINKS.giftCards },
   
 ];
 
 const SECONDARY = [
   { label: "About", href: LINKS.about },
   { label: "Contact", href: LINKS.contact },
-  { label: "Book a Bay", href: LINKS.bookNow ?? LINKS.memberships ?? LINKS.contact, isCta: true },
+  { label: "Explore Memberships", href: LINKS.memberships, isCta: true },
   
 ];
 
@@ -32,24 +33,21 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand + blurb */}
           <div className="md:col-span-1">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center">
               <Image
-                src="/images/logo/scratch-club-golfer-green.png"
-                alt="The Scratch Club logo"
-                width={40}
-                height={40}
-                className="h-8 w-auto"
+                src="/images/brand/sc_logo_horizontal_green.png"
+                alt="The Scratch Club"
+                width={220}
+                height={48}
+                className="h-10 w-auto max-w-[220px] object-contain"
               />
-              <span className="text-xl font-semibold tracking-tight text-neutral-900">
-                The Scratch Club
-              </span>
             </div>
             <p className="mt-3 text-sm text-neutral-600">
               Indoor golf, coaching, and leagues—year-round. Bright screens, true ball data, and
               coaches who actually coach.
             </p>
             <div className="mt-4 text-sm text-neutral-700">
-              <a className="block hover:text-emerald-700" href="mailto:info@scratchclubgolf.com">info@scratchclubgolf.com</a>
+              <a className="block hover:text-[#143029]" href="mailto:info@scratchclubgolf.com">info@scratchclubgolf.com</a>
               <p>9588 Chilson Commons Circle</p>
               <span className="block">Hamburg, MI 48169</span>
             </div>
@@ -63,7 +61,7 @@ export default function Footer() {
                 <li key={i.label}>
                   <ClientLink
                     href={i.href}
-                    className="hover:text-emerald-700"
+                    className="hover:text-[#143029]"
                     trackEvent="footer_click"
                     trackPayload={{ label: i.label }}
                   >
@@ -80,7 +78,7 @@ export default function Footer() {
             <ul className="mt-3 space-y-2 text-sm">
               {SECONDARY.map((i) => (
                 <li key={i.label}>
-                  <ClientLink href={i.href} className="hover:text-emerald-700" trackEvent="footer_click" trackPayload={{ label: i.label }}>
+                  <ClientLink href={i.href} className="hover:text-[#143029]" trackEvent="footer_click" trackPayload={{ label: i.label }}>
                     {i.label}
                   </ClientLink>
                 </li>
@@ -88,19 +86,11 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Hours */}
+          {/* Brand philosophy */}
           <div className="space-y-3 text-sm text-neutral-700">
-            <div>
-              <div className="font-medium text-neutral-900">Walk-ins</div>
-              <div>6:00am – 10:00pm</div>
-            </div>
-            <div>
-              <div className="font-medium text-neutral-900">Members</div>
-              <div>5:00am – 1:00am</div>
-            </div>
-            <p className="pt-2 text-xs text-neutral-500">
-              Hours may vary for holidays, events, or maintenance.
-            </p>
+            <h3 className="font-serif text-xl text-[#143029]">The Pursuit of Better Golf.</h3>
+            <p>Practice With Purpose. Play With Confidence.</p>
+            <p className="text-xs">Contact the club for current access and opening information.</p>
           </div>
         </div>
 
@@ -108,7 +98,7 @@ export default function Footer() {
           <p>© {YEAR} The Scratch Club. All rights reserved.</p>
           <nav className="flex items-center gap-4">
             {LEGAL.map((i) => (
-              <ClientLink key={i.label} href={i.href} className="hover:text-emerald-700" trackEvent="footer_click" trackPayload={{ label: i.label }}>
+              <ClientLink key={i.label} href={i.href} className="hover:text-[#143029]" trackEvent="footer_click" trackPayload={{ label: i.label }}>
                 {i.label}
               </ClientLink>
             ))}
@@ -116,15 +106,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  );
-}
-
-function Logo(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 32 32" aria-hidden="true" {...props}>
-      <circle cx="16" cy="16" r="15" className="fill-emerald-600" />
-      <path d="M10 20c4-2 8-2 12 0" className="stroke-white" strokeWidth="2" fill="none" />
-      <circle cx="16" cy="12" r="3" className="fill-white" />
-    </svg>
   );
 }

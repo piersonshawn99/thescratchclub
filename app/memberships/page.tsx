@@ -4,7 +4,7 @@ import MembershipsClient from "@/components/memberships/MembershipsClient";
 export const metadata = {
   title: "Memberships | The Scratch Club",
   description:
-    "Train Smarter. Play Better. Choose an indoor golf membership tier that fits your game.",
+    "Discover Player, Performance, and Pursuit memberships at The Scratch Club. Practice With Purpose. Play With Confidence.",
 };
 
 export default function Page() {

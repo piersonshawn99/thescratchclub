@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+:root { --brand-green: #143029; --brand-gold: #DBB158; --brand-cream: #F8F5EC; }
+
 /* ----- Base polish ----- */
 html, body { height: 100%; }
 body {
@@ -13,7 +15,8 @@ body {
 
 /* Highlight text selection in brand color */
 ::selection {
-  @apply bg-emerald-200 text-emerald-900;
+  background: #DBB158;
+  color: #143029;
 }
 
 /* Respect users who prefer less motion */

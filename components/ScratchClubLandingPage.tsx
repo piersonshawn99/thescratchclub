@@ -10,7 +10,7 @@ const CARD_BASE =
 const CARD_SIZE =
   "min-h-[200px] md:min-h-[220px] flex flex-col justify-between";
 
-const BOOK_BAY_URL = "https://portal.trackmangolf.com/";
+const BOOK_BAY_URL = LINKS.bookNow;
 
 export default function ScratchClubLandingPage() {
   return (

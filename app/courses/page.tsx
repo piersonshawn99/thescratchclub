@@ -52,7 +52,7 @@ export default function CoursesPage() {
                   href={c.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center rounded-xl border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-800 hover:border-emerald-500 hover:text-emerald-700"
+                  className="inline-flex items-center rounded-xl border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-800 hover:border-[#F8F5EC]0 hover:text-[#143029]"
                 >
                   Visit Course Website →
                 </a>
