@@ -16,7 +16,7 @@ export type AnnouncementConfig = {
 };
 
 export const DEFAULT_ANNOUNCEMENT: AnnouncementConfig = {
-  message: "📍 Hamburg location opening early 2026!",
+  message: "Hamburg location — Opening November 2026",
   variant: "emerald",
   dismissible: false,
 };
