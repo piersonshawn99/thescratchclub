@@ -130,7 +130,7 @@ export default function TermsPage() {
           If you have questions about these Terms of Use, please contact us at{" "}
           <a
             href="mailto:info@scratchclubgolf.com"
-            className="font-medium text-emerald-700 hover:text-emerald-800"
+            className="font-medium text-[#143029] hover:text-[#143029]"
           >
             info@scratchclubgolf.com
           </a>
