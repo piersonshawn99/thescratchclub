@@ -33,17 +33,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand + blurb */}
           <div className="md:col-span-1">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center">
               <Image
-                src="/images/logo/scratch-club-golfer-green.png"
-                alt="The Scratch Club logo"
-                width={40}
-                height={40}
-                className="h-8 w-auto"
+                src="/images/brand/sc_logo_horizontal_green.png"
+                alt="The Scratch Club"
+                width={220}
+                height={48}
+                className="h-10 w-auto max-w-[220px] object-contain"
               />
-              <span className="text-xl font-semibold tracking-tight text-neutral-900">
-                The Scratch Club
-              </span>
             </div>
             <p className="mt-3 text-sm text-neutral-600">
               Indoor golf, coaching, and leagues—year-round. Bright screens, true ball data, and
@@ -109,15 +106,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  );
-}
-
-function Logo(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 32 32" aria-hidden="true" {...props}>
-      <circle cx="16" cy="16" r="15" className="fill-[#143029]" />
-      <path d="M10 20c4-2 8-2 12 0" className="stroke-white" strokeWidth="2" fill="none" />
-      <circle cx="16" cy="12" r="3" className="fill-white" />
-    </svg>
   );
 }
