@@ -5,10 +5,10 @@ import { ReactNode } from "react";
 type Tint = "emerald" | "neutral" | "gold" | "dusk" | "none";
 
 const TINTS: Record<Tint, string> = {
-  emerald: "bg-emerald-900/45",
+  emerald: "bg-[#143029]/45",
   neutral: "bg-neutral-900/35",
-  gold: "bg-yellow-900/25",
-  dusk: "bg-cyan-950/45",
+  gold: "bg-[#846321]/25",
+  dusk: "bg-[#143029]/45",
   none: "bg-black/0",
 };
 
