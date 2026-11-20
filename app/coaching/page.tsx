@@ -90,7 +90,7 @@ export default function CoachingPage() {
 
           <Link
             href="/contact"
-            className="hidden sm:inline-flex items-center rounded-xl border border-emerald-700 px-4 py-2 text-sm font-medium text-emerald-800 hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
+            className="hidden sm:inline-flex items-center rounded-xl border border-[#143029] px-4 py-2 text-sm font-medium text-[#143029] hover:bg-[#F8F5EC] focus:outline-none focus:ring-2 focus:ring-[#143029]/30"
           >
             Book a session
           </Link>
@@ -131,13 +131,13 @@ export default function CoachingPage() {
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <h2 className="text-xl font-semibold tracking-tight text-neutral-900">{coach.name}</h2>
-                      {coach.role && <p className="mt-0.5 text-sm text-emerald-800">{coach.role}</p>}
+                      {coach.role && <p className="mt-0.5 text-sm text-[#143029]">{coach.role}</p>}
                     </div>
 
                     {coach.links && coach.links.length > 0 && (
                       <div className="flex shrink-0 items-center gap-3">
                         {coach.links.map((l) => (
-                          <Link key={`${coach.id}-${l.href}`} href={l.href} className="text-sm text-emerald-800 hover:underline">
+                          <Link key={`${coach.id}-${l.href}`} href={l.href} className="text-sm text-[#143029] hover:underline">
                             {l.label}
                           </Link>
                         ))}
@@ -151,7 +151,7 @@ export default function CoachingPage() {
         })}
       </section>
 
-      <div className="mt-16 rounded-2xl border border-neutral-200 bg-emerald-50 p-6">
+      <div className="mt-16 rounded-2xl border border-neutral-200 bg-[#F8F5EC] p-6">
         <h3 className="text-center text-xl font-semibold text-neutral-900">
           Interested in Coaching at The Scratch Club?
         </h3>
@@ -174,7 +174,7 @@ export default function CoachingPage() {
         <div className="mt-6 flex justify-center">
           <Link
             href="/contact"
-            className="inline-flex rounded-xl border border-emerald-700 px-6 py-2 text-sm font-medium text-emerald-800 hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
+            className="inline-flex rounded-xl border border-[#143029] px-6 py-2 text-sm font-medium text-[#143029] hover:bg-[#F8F5EC] focus:outline-none focus:ring-2 focus:ring-[#143029]/30"
           >
             Questions? Contact Us
           </Link>
@@ -190,7 +190,7 @@ export default function CoachingPage() {
       <div className="sm:hidden mt-10">
         <Link
           href="/contact"
-          className="block w-full text-center rounded-xl bg-emerald-700 px-4 py-3 text-sm font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
+          className="block w-full text-center rounded-xl bg-[#143029] px-4 py-3 text-sm font-medium text-white hover:bg-[#143029] focus:outline-none focus:ring-2 focus:ring-[#143029]/30"
         >
           Book a session
         </Link>
