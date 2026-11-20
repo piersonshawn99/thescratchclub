@@ -109,7 +109,7 @@ export default function Header() {
     { label: "Contact", href: LINKS.contact },
   ];
 
-  const ctaHref = LINKS.memberships;
+  const ctaHref = LINKS.bookNow;
 
   return (
     <>
@@ -179,9 +179,9 @@ export default function Header() {
                 <Link
                   href={ctaHref}
                   className="inline-flex items-center rounded-xl border border-[#143029] bg-[#143029] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#285247] focus:outline-none focus:ring-2 focus:ring-[#143029] focus:ring-offset-2"
-                  onClick={() => track("cta_click", { label: "Explore Memberships", location: "header" })}
+                  onClick={() => track("cta_click", { label: "Book a Bay", location: "header" })}
                 >
-                  Explore Memberships
+                  Book a Bay
                 </Link>
               </div>
 
@@ -225,9 +225,9 @@ export default function Header() {
                 <Link
                   href={ctaHref}
                   className="inline-flex items-center rounded-xl border border-[#143029] bg-[#143029] px-3 py-2 text-sm font-semibold text-white hover:bg-[#285247]"
-                  onClick={() => track("cta_click", { label: "Explore Memberships", location: "header_mobile" })}
+                  onClick={() => track("cta_click", { label: "Book a Bay", location: "header_mobile" })}
                 >
-                  Explore Memberships
+                  Book a Bay
                 </Link>
               </div>
               <nav className="mt-4 grid gap-2">
