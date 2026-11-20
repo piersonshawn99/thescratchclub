@@ -33,11 +33,11 @@ export default function ContactForm() {
 
   if (status === "sent") {
     return (
-      <div className="mx-auto max-w-xl rounded-2xl border border-emerald-200 bg-emerald-50 p-6 shadow-sm">
-        <h2 className="text-2xl font-semibold text-emerald-900">
+      <div className="mx-auto max-w-xl rounded-2xl border border-[#C5D5CD] bg-[#F8F5EC] p-6 shadow-sm">
+        <h2 className="text-2xl font-semibold text-[#143029]">
           Message sent successfully
         </h2>
-        <p className="mt-3 text-base text-emerald-800">
+        <p className="mt-3 text-base text-[#143029]">
           Your message was sent successfully. Our team will contact you soon.
         </p>
 
@@ -48,7 +48,7 @@ export default function ContactForm() {
               setStatus("idle");
               setMessage("");
             }}
-            className="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-4 py-2.5 text-sm font-medium text-emerald-900 hover:bg-emerald-100"
+            className="inline-flex items-center justify-center rounded-xl border border-[#94B0A1] bg-white px-4 py-2.5 text-sm font-medium text-[#143029] hover:bg-[#E6EDE8]"
           >
             Send Another Message
           </button>
@@ -66,7 +66,7 @@ export default function ContactForm() {
           placeholder="John Smith"
           required
           minLength={2}
-          className="mt-1 w-full rounded-lg border border-neutral-300 p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+          className="mt-1 w-full rounded-lg border border-neutral-300 p-3 focus:outline-none focus:ring-2 focus:ring-[#F8F5EC]0/40"
         />
         <p className="mt-1 text-xs text-neutral-500">Please enter your full name.</p>
       </div>
@@ -78,7 +78,7 @@ export default function ContactForm() {
           type="email"
           placeholder="you@example.com"
           required
-          className="mt-1 w-full rounded-lg border border-neutral-300 p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+          className="mt-1 w-full rounded-lg border border-neutral-300 p-3 focus:outline-none focus:ring-2 focus:ring-[#F8F5EC]0/40"
         />
         <p className="mt-1 text-xs text-neutral-500">We’ll only use this to reply to you.</p>
       </div>
@@ -89,7 +89,7 @@ export default function ContactForm() {
           name="phone"
           placeholder="(555) 123-4567"
           pattern="^[0-9 ()+-]*$"
-          className="mt-1 w-full rounded-lg border border-neutral-300 p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+          className="mt-1 w-full rounded-lg border border-neutral-300 p-3 focus:outline-none focus:ring-2 focus:ring-[#F8F5EC]0/40"
         />
       </div>
 
@@ -101,7 +101,7 @@ export default function ContactForm() {
           placeholder="Tell us what’s on your mind..."
           required
           minLength={10}
-          className="mt-1 w-full rounded-lg border border-neutral-300 p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+          className="mt-1 w-full rounded-lg border border-neutral-300 p-3 focus:outline-none focus:ring-2 focus:ring-[#F8F5EC]0/40"
         />
         <p className="mt-1 text-xs text-neutral-500">
           Please include any details that help us understand your question.
