@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 export default function ThanksPage() {
   return (
     <main className="mx-auto max-w-3xl py-20 text-center">
-      <h1 className="text-3xl font-semibold text-emerald-700">
+      <h1 className="text-3xl font-semibold text-[#143029]">
         Welcome to The Scratch Club!
       </h1>
 
@@ -18,14 +18,14 @@ export default function ThanksPage() {
 
       <div className="mt-8 flex justify-center gap-4">
         <Link href="/" passHref>
-          <Button className="bg-emerald-700 hover:bg-emerald-800 text-white">
+          <Button className="bg-[#143029] hover:bg-[#143029] text-white">
             Return Home
           </Button>
         </Link>
         <Link href="/account" passHref>
           <Button
             variant="outline"
-            className="border-emerald-600 text-emerald-700 hover:bg-emerald-50"
+            className="border-[#143029] text-[#143029] hover:bg-[#F8F5EC]"
           >
             Manage Billing
           </Button>
