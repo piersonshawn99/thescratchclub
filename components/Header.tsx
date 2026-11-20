@@ -99,13 +99,13 @@ export default function Header() {
   }, []);
 
   const nav = [
-    { label: "About", href: LINKS.about },
     { label: "Memberships", href: LINKS.memberships },
     { label: "Gift Cards", href: LINKS.giftCards },
     { label: "Coaching", href: LINKS.coaching },
     { label: "Golf + Life", href: LINKS.golfLife },
     { label: "Courses", href: LINKS.courses },
     { label: "Locations", href: "/locations" },
+    { label: "About", href: LINKS.about },
     { label: "Contact", href: LINKS.contact },
   ];
 
