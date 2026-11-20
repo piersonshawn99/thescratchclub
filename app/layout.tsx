@@ -10,6 +10,10 @@ export const metadata: Metadata = {
   title: "The Scratch Club",
   description: "Practice With Purpose. Play With Confidence.",
   metadataBase: new URL(siteUrl),
+  icons: {
+    icon: "/images/brand/sc_logomark_green.png",
+    apple: "/images/brand/sc_logomark_green.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
