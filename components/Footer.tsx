@@ -10,13 +10,14 @@ const PRIMARY = [
   { label: "Courses", href: LINKS.courses },
   { label: "Leagues", href: "/leagues" },
   { label: "Memberships", href: LINKS.memberships },
+  { label: "Gift Cards", href: LINKS.giftCards },
   
 ];
 
 const SECONDARY = [
   { label: "About", href: LINKS.about },
   { label: "Contact", href: LINKS.contact },
-  { label: "Book a Bay", href: LINKS.bookNow ?? LINKS.memberships ?? LINKS.contact, isCta: true },
+  { label: "Explore Memberships", href: LINKS.memberships, isCta: true },
   
 ];
 
@@ -88,19 +89,11 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Hours */}
+          {/* Brand philosophy */}
           <div className="space-y-3 text-sm text-neutral-700">
-            <div>
-              <div className="font-medium text-neutral-900">Walk-ins</div>
-              <div>6:00am – 10:00pm</div>
-            </div>
-            <div>
-              <div className="font-medium text-neutral-900">Members</div>
-              <div>5:00am – 1:00am</div>
-            </div>
-            <p className="pt-2 text-xs text-neutral-500">
-              Hours may vary for holidays, events, or maintenance.
-            </p>
+            <h3 className="font-serif text-xl text-[#143029]">The Pursuit of Better Golf.</h3>
+            <p>Practice With Purpose. Play With Confidence.</p>
+            <p className="text-xs">Contact the club for current access and opening information.</p>
           </div>
         </div>
 
