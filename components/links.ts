@@ -8,5 +8,5 @@ export const LINKS = {
   contact: "/contact", // 👈 add this
   golfLife: "/golf-life",
   signIn: "/signin",
-  bookNow: "https://portal.trackmangolf.com", 
+  bookNow: "https://booking.trackmangolf.com/venues/the-scratch-club/booking/simulator-bays", 
 };
