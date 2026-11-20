@@ -28,7 +28,7 @@ function classesFor(variant: Variant = "emerald") {
     case "neutral":
       return "bg-neutral-900 text-white [--link:rgba(255,255,255,0.9)]";
     default:
-      return "bg-emerald-900 animate-brand-pulse text-white [--link:rgba(255,255,255,0.95)]";
+      return "bg-[#143029] animate-brand-pulse text-white [--link:rgba(255,255,255,0.95)]";
   }
 }
 
@@ -107,7 +107,7 @@ export default function AnnouncementBar({
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
-      className="h-4 w-4 text-amber-400 mr-2 inline-block shrink-0"
+      className="h-4 w-4 text-[#DBB158] mr-2 inline-block shrink-0"
     >
       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
     </svg>
@@ -147,7 +147,7 @@ export default function AnnouncementBar({
     <div
       className={`
         ${classesFor(variant)}
-        print:hidden border-b-2 border-amber-400/80
+        print:hidden border-b-2 border-[#DBB158]/80
         overflow-hidden
         transition-all duration-600 ease-in-out
         ${hiding
