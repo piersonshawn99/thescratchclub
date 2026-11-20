@@ -1,6 +1,7 @@
 export const LINKS = {
   about: "/about",
   memberships: "/memberships",
+  giftCards: "/gift-cards",
   coaching: "/coaching",
   leagues: "/leagues",
   courses: "/courses",
