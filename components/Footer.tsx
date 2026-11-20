@@ -50,7 +50,7 @@ export default function Footer() {
               coaches who actually coach.
             </p>
             <div className="mt-4 text-sm text-neutral-700">
-              <a className="block hover:text-emerald-700" href="mailto:info@scratchclubgolf.com">info@scratchclubgolf.com</a>
+              <a className="block hover:text-[#143029]" href="mailto:info@scratchclubgolf.com">info@scratchclubgolf.com</a>
               <p>9588 Chilson Commons Circle</p>
               <span className="block">Hamburg, MI 48169</span>
             </div>
@@ -64,7 +64,7 @@ export default function Footer() {
                 <li key={i.label}>
                   <ClientLink
                     href={i.href}
-                    className="hover:text-emerald-700"
+                    className="hover:text-[#143029]"
                     trackEvent="footer_click"
                     trackPayload={{ label: i.label }}
                   >
@@ -81,7 +81,7 @@ export default function Footer() {
             <ul className="mt-3 space-y-2 text-sm">
               {SECONDARY.map((i) => (
                 <li key={i.label}>
-                  <ClientLink href={i.href} className="hover:text-emerald-700" trackEvent="footer_click" trackPayload={{ label: i.label }}>
+                  <ClientLink href={i.href} className="hover:text-[#143029]" trackEvent="footer_click" trackPayload={{ label: i.label }}>
                     {i.label}
                   </ClientLink>
                 </li>
@@ -101,7 +101,7 @@ export default function Footer() {
           <p>© {YEAR} The Scratch Club. All rights reserved.</p>
           <nav className="flex items-center gap-4">
             {LEGAL.map((i) => (
-              <ClientLink key={i.label} href={i.href} className="hover:text-emerald-700" trackEvent="footer_click" trackPayload={{ label: i.label }}>
+              <ClientLink key={i.label} href={i.href} className="hover:text-[#143029]" trackEvent="footer_click" trackPayload={{ label: i.label }}>
                 {i.label}
               </ClientLink>
             ))}
@@ -115,7 +115,7 @@ export default function Footer() {
 function Logo(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 32 32" aria-hidden="true" {...props}>
-      <circle cx="16" cy="16" r="15" className="fill-emerald-600" />
+      <circle cx="16" cy="16" r="15" className="fill-[#143029]" />
       <path d="M10 20c4-2 8-2 12 0" className="stroke-white" strokeWidth="2" fill="none" />
       <circle cx="16" cy="12" r="3" className="fill-white" />
     </svg>
