@@ -36,7 +36,7 @@ export default function AboutPage() {
     <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
       {/* Hero */}
       <section className="text-center">
-        <p className="text-sm font-medium tracking-wide text-emerald-700">Locally owned in Livingston County</p>
+        <p className="text-sm font-medium tracking-wide text-[#143029]">Locally owned in Livingston County</p>
         <h1 className="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">About The Scratch Club</h1>
         <p className="mx-auto mt-4 max-w-3xl text-lg text-neutral-600">
           We’re building a place where golfers of every level can train smarter, play better, and belong — year‑round.
@@ -92,7 +92,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission */}
-      <section className="mt-16 rounded-2xl bg-emerald-50 p-8 ring-1 ring-emerald-100">
+      <section className="mt-16 rounded-2xl bg-[#F8F5EC] p-8 ring-1 ring-[#E6EDE8]">
         <h2 className="text-2xl font-semibold">Our Mission</h2>
         <p className="mt-3 max-w-3xl text-neutral-800">
           Make golf more accessible, personal, and rewarding by blending world‑class technology with real human coaching and a
@@ -110,19 +110,19 @@ export default function AboutPage() {
         </p>
         <ul className="mt-6 grid gap-4 sm:grid-cols-2">
           <li className="flex items-center gap-3 rounded-xl border border-neutral-200 bg-white p-4">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-white">1</span>
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#143029] text-white">1</span>
             <span>Year‑round leagues and skills challenges</span>
           </li>
           <li className="flex items-center gap-3 rounded-xl border border-neutral-200 bg-white p-4">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-white">2</span>
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#143029] text-white">2</span>
             <span>Coaching that meets you where you are</span>
           </li>
           <li className="flex items-center gap-3 rounded-xl border border-neutral-200 bg-white p-4">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-white">3</span>
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#143029] text-white">3</span>
             <span>Tech that makes progress visible and fun</span>
           </li>
           <li className="flex items-center gap-3 rounded-xl border border-neutral-200 bg-white p-4">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-white">4</span>
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#143029] text-white">4</span>
             <span>Locally owned & operated</span>
           </li>
         </ul>
@@ -153,7 +153,7 @@ export default function AboutPage() {
             href="https://portal.trackmangolf.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-5 py-3 text-white shadow hover:bg-emerald-700"
+            className="inline-flex items-center justify-center rounded-xl bg-[#143029] px-5 py-3 text-white shadow hover:bg-[#143029]"
           >
             Book a Visit
           </a>
