@@ -34,7 +34,7 @@ export default function LocationsPage() {
             href="https://www.google.com/maps/search/?api=1&query=9588+Chilson+Commons+Circle+Hamburg+Twp+MI+48169"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center rounded-xl bg-emerald-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-emerald-700"
+            className="inline-flex items-center rounded-xl bg-[#143029] px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-[#143029]"
           >
             Open in Google Maps
           </a>
