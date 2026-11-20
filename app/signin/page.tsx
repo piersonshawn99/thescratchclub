@@ -19,7 +19,7 @@ export default function SignInPage() {
               id="email"
               type="email"
               placeholder="you@example.com"
-              className="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+              className="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#F8F5EC]0/30"
             />
           </div>
 
@@ -31,13 +31,13 @@ export default function SignInPage() {
               id="password"
               type="password"
               placeholder="••••••••"
-              className="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+              className="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#F8F5EC]0/30"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full rounded-xl bg-emerald-600 px-4 py-2.5 font-medium text-white transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+            className="w-full rounded-xl bg-[#143029] px-4 py-2.5 font-medium text-white transition hover:bg-[#143029] focus:outline-none focus:ring-2 focus:ring-[#F8F5EC]0/30"
             disabled
             title="Coming soon"
           >
@@ -47,14 +47,14 @@ export default function SignInPage() {
 
         <div className="mt-6 space-y-3">
           <button
-            className="w-full rounded-xl border border-neutral-300 bg-white px-4 py-2.5 text-sm font-medium hover:border-emerald-500 hover:text-emerald-700"
+            className="w-full rounded-xl border border-neutral-300 bg-white px-4 py-2.5 text-sm font-medium hover:border-[#F8F5EC]0 hover:text-[#143029]"
             disabled
             title="Coming soon"
           >
             Continue with Google (coming soon)
           </button>
           <button
-            className="w-full rounded-xl border border-neutral-300 bg-white px-4 py-2.5 text-sm font-medium hover:border-emerald-500 hover:text-emerald-700"
+            className="w-full rounded-xl border border-neutral-300 bg-white px-4 py-2.5 text-sm font-medium hover:border-[#F8F5EC]0 hover:text-[#143029]"
             disabled
             title="Coming soon"
           >
