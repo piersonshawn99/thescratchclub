@@ -75,17 +75,17 @@ function LifeCard({
 }) {
   return (
     <div className="rounded-3xl border border-neutral-200 bg-white p-8 shadow-sm transition hover:shadow-md">
-      <p className="mb-3 text-xs uppercase tracking-[0.2em] text-emerald-700/80">
+      <p className="mb-3 text-xs uppercase tracking-[0.2em] text-[#143029]/80">
         {title}
       </p>
-      <h2 className="text-2xl font-semibold tracking-tight text-emerald-800 leading-snug">
+      <h2 className="font-serif text-2xl tracking-tight text-[#143029] leading-snug">
         {headline}
       </h2>
       <p className="mt-3 text-lg italic text-neutral-600">{pain}</p>
       <ul className="mt-6 space-y-3 text-neutral-700">
         {solution.map((point, i) => (
           <li key={i} className="flex gap-3">
-            <span className="mt-2 h-2 w-2 flex-none rounded-full bg-emerald-600" />
+            <span className="mt-2 h-2 w-2 flex-none rounded-full bg-[#143029]" />
             <span>{point}</span>
           </li>
         ))}
@@ -98,12 +98,12 @@ export default function GolfLifePage() {
   return (
     <main className="bg-white text-neutral-800">
       {/* Hero */}
-      <section className="bg-emerald-700 px-6 pb-16 pt-24 text-white md:px-8 md:pb-20 md:pt-28">
+      <section className="bg-[#143029] px-6 pb-16 pt-24 text-white md:px-8 md:pb-20 md:pt-28">
         <div className="mx-auto max-w-4xl text-center">
-          <p className="text-sm font-medium uppercase tracking-[0.25em] text-emerald-100/90">
+          <p className="text-sm font-medium uppercase tracking-[0.25em] text-[#E6EDE8]/90">
             Golf + Life
           </p>
-          <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
+          <h1 className="mt-4 font-serif text-4xl tracking-tight sm:text-5xl">
             Protect What Matters Most
           </h1>
           <p className="mx-auto mt-5 max-w-3xl text-lg text-white/90 sm:text-xl">
@@ -114,7 +114,7 @@ export default function GolfLifePage() {
           <div className="mt-8">
             <a
               href="/memberships"
-              className="inline-flex items-center rounded-xl bg-amber-400 px-6 py-3 font-semibold text-emerald-950 shadow hover:bg-amber-300 active:translate-y-px transition"
+              className="inline-flex items-center rounded-xl bg-[#DBB158] px-6 py-3 font-semibold text-[#143029] shadow hover:bg-[#E6C77F] active:translate-y-px transition"
             >
               Explore Memberships
             </a>
@@ -152,7 +152,7 @@ export default function GolfLifePage() {
       {/* Promise */}
       <section className="bg-neutral-100 px-6 py-16 md:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl font-semibold tracking-tight text-emerald-800">
+          <h2 className="text-3xl font-semibold tracking-tight text-[#143029]">
             The Scratch Club Promise
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-neutral-700">
@@ -162,13 +162,13 @@ export default function GolfLifePage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <a
               href="/memberships"
-              className="inline-flex items-center rounded-xl bg-emerald-700 px-6 py-3 font-semibold text-white shadow hover:bg-emerald-800 active:translate-y-px transition"
+              className="inline-flex items-center rounded-xl bg-[#143029] px-6 py-3 font-semibold text-white shadow hover:bg-[#143029] active:translate-y-px transition"
             >
               Join Now
             </a>
             <a
               href="/coaching"
-              className="inline-flex items-center rounded-xl border border-emerald-700 px-6 py-3 font-semibold text-emerald-800 hover:bg-emerald-50 active:translate-y-px transition"
+              className="inline-flex items-center rounded-xl border border-[#143029] px-6 py-3 font-semibold text-[#143029] hover:bg-[#F8F5EC] active:translate-y-px transition"
             >
               Explore Coaching
             </a>
