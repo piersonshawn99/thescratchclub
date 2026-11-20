@@ -99,7 +99,6 @@ export default function Header() {
   }, []);
 
   const nav = [
-    { label: "Home", href: "/" },
     { label: "About", href: LINKS.about },
     { label: "Memberships", href: LINKS.memberships },
     { label: "Gift Cards", href: LINKS.giftCards },
@@ -144,10 +143,10 @@ export default function Header() {
 
           {/* Main bar */}
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-12 md:h-16 items-center justify-between">
+            <div className="flex h-12 md:h-16 items-center justify-between gap-4 lg:gap-8">
               <Link
                 href="/"
-                className="flex items-center gap-2"
+                className="flex shrink-0 items-center"
                 onClick={() => track("nav_logo_click")}
               >
                 <Image
@@ -159,7 +158,7 @@ export default function Header() {
                   priority
                 />
               </Link>
-              <nav className="hidden md:flex items-center gap-8 text-sm text-neutral-700">
+              <nav className="hidden md:flex flex-1 items-center justify-center gap-3 text-sm text-neutral-700 lg:gap-5 xl:gap-6">
                 {nav.map((item) => {
                   const active = pathname === item.href;
                   return (
@@ -176,7 +175,7 @@ export default function Header() {
                 })}
               </nav>
 
-              <div className="hidden md:flex items-center gap-3">
+              <div className="hidden md:flex shrink-0 items-center gap-3">
                 <Link
                   href={ctaHref}
                   className="inline-flex items-center rounded-xl border border-[#143029] bg-[#143029] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#285247] focus:outline-none focus:ring-2 focus:ring-[#143029] focus:ring-offset-2"
